@@ -1,0 +1,25 @@
+{
+  "name": "tiny-table",
+  "version": "0.0.1",
+  "description": "A tiny dataframe implemented in JavaScript. Not inspired by, but by accident similar to Arquero.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stuwilmur/Tiny-table.git"
+  },
+  "keywords": [
+    "Dataframe"
+  ],
+  "author": "Stu Murray",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stuwilmur/Tiny-table/issues"
+  },
+  "homepage": "https://github.com/stuwilmur/Tiny-table#readme",
+  "devDependencies": {
+    "jest": "^29.2.2"
+  }
+}
