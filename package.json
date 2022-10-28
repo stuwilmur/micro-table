@@ -4,7 +4,7 @@
   "description": "A tiny dataframe implemented in JavaScript. Not inspired by, but by accident similar to Arquero.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -14,7 +14,7 @@
     "Dataframe"
   ],
   "author": "Stu Murray",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/stuwilmur/Tiny-table/issues"
   },
