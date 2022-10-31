@@ -1,5 +1,5 @@
 {
-    "parser": "babel-eslint",
+    "parser": "@babel/eslint-parser",
     "parserOptions": {
       "sourceType": "module",
       "allowImportExportEverywhere": true,
@@ -7,8 +7,9 @@
     },
     "env": {
         "browser": true,
-        "commonjs": false,
-        "es2021": true
+        "node":true,
+        "jest": true,
+        "es6": true
     },
     "extends": "google",
     "overrides": [
