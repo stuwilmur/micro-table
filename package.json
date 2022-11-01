@@ -1,8 +1,9 @@
 {
   "name": "tiny-table",
+  "type": "module",
   "version": "0.0.1",
   "description": "A tiny dataframe implemented in JavaScript. Not inspired by, but by accident similar to Arquero.",
-  "main": "src/index.cjs",
+  "main": "src/index.js",
   "scripts": {
     "test": "jest"
   },
