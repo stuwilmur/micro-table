@@ -11,23 +11,24 @@ function aggregate(v, listOfAggregators) {
 
 const curry = (listOfAggregators) => (v) => aggregate(v, listOfAggregators);
 
+function mergeRolledUpList(list, keys) {
+  const rollupObject = list[keys.length];
+  const keysObject = {};
+
+  keys.forEach((key, index) => {
+    keysObject[key] = list[index];
+  });
+  return {...keysObject, ...rollupObject};
+}
+
 export function aggregateOn(data, listOfAggregators, ...keys) {
   const curriedAggregators = curry(listOfAggregators);
   const keyFunctions = keys.map((key) => (d) => d[key]);
   const rolledUpData = flatRollup(data, curriedAggregators, ...keyFunctions);
-  const listOfRowObjects = [];
 
-  rolledUpData.forEach((row) => {
-    const rollupObject = row[keys.length];
-    const keysObject = {};
-
-    keys.forEach((key, index) => {
-      keysObject[key] = row[index];
-    });
-    const mergedObject = {...keysObject, ...rollupObject};
-
-    listOfRowObjects.push(mergedObject);
-  });
+  const listOfRowObjects = rolledUpData.map((element) =>
+    mergeRolledUpList(element, keys),
+  );
 
   return listOfRowObjects;
 }
