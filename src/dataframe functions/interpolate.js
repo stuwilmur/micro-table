@@ -35,17 +35,28 @@ function keyFunctions(groupProperties) {
   return groupProperties.map((k) => (d) => d[k]);
 }
 
+function groupAndFlatten(data, indexProperty, ...groupProperties) {
+  if (groupProperties.length > 0) {
+    return flatGroup(
+      data.sort(compareBy(indexProperty)),
+      ...keyFunctions(groupProperties),
+    );
+  } else {
+    return [[clone(data)]];
+  }
+}
+
 export function interpolate(
   data,
   indexProperty,
   interpolatedProperty,
   ...groupProperties
 ) {
-  const grouped = flatGroup(
-    data.sort(compareBy(indexProperty)),
-    ...keyFunctions(groupProperties),
-  );
-  const groupedInterpolated = grouped.map((d) =>
+  const groupedInterpolated = groupAndFlatten(
+    data,
+    indexProperty,
+    ...groupProperties,
+  ).map((d) =>
     interpolateGroup(
       d[groupProperties.length],
       indexProperty,

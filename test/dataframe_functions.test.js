@@ -3,6 +3,8 @@ import {deleteColumn} from '../src/dataframe functions/delete_column';
 import {setColumnValue} from '../src/dataframe functions/set_column_value';
 import {areObjectsEqual} from '../src/util/utils';
 
+// Test data
+
 const dataframe = [
   {id: 0, a: 1, b: 2},
   {id: 1, a: 2, b: 4},
@@ -11,6 +13,9 @@ const dataframe = [
   {id: 4, a: 5, b: 10},
 ];
 
+/*
+setColumnValue
+ */
 const dataframeWithXEqualZero = [
   {id: 0, a: 1, b: 2, x: 0},
   {id: 1, a: 2, b: 4, x: 0},
@@ -19,6 +24,9 @@ const dataframeWithXEqualZero = [
   {id: 4, a: 5, b: 10, x: 0},
 ];
 
+/*
+deleteColumn
+ */
 const dataframeWithADeleted = [
   {id: 0, b: 2},
   {id: 1, b: 4},
@@ -29,6 +37,9 @@ const dataframeWithADeleted = [
 
 const dataframeEmptyObjects = [{}, {}, {}, {}, {}];
 
+/*
+calculateColumn
+ */
 const dataframeBEqualsASquared = [
   {id: 0, a: 1, b: 1},
   {id: 1, a: 2, b: 4},
@@ -52,6 +63,8 @@ const dataframeBEqualsPreviousA = [
   {id: 3, a: 4, b: 3},
   {id: 4, a: 5, b: 4},
 ];
+
+// Tests
 
 /*
 setColumnValue
