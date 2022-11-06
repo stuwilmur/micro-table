@@ -1,9 +1,13 @@
 import {areObjectsEqual, clone, purge, pick} from '../src/util/utils.js';
 
+// Test data
+
 const simpleObject = {a: 1, b: 'two'};
 const simpleObjectDoppelganger = {a: 1, b: 'two'};
 const simpleObjectAOnly = {a: 1};
 const simpleObjectBOnly = {b: 'two'};
+
+// Tests
 
 /*
 areObjectsEqual
