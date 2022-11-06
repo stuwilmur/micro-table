@@ -1,3 +1,5 @@
+import {flatGroup} from 'd3';
+
 export function clone(obj) {
   return JSON.parse(JSON.stringify(obj));
 }
@@ -20,4 +22,20 @@ export function pick(obj, ...properties) {
     copy[property] = obj[property];
   });
   return copy;
+}
+
+function keyFunctions(groupProperties) {
+  return groupProperties.map((k) => (d) => d[k]);
+}
+
+export function groupAndFlatten(data, indexProperty, ...groupProperties) {
+  if (groupProperties.length > 0) {
+    return flatGroup(data, ...keyFunctions(groupProperties));
+  } else {
+    return [[clone(data)]];
+  }
+}
+
+export function compareBy(property) {
+  return (a, b) => a[property] - b[property];
 }

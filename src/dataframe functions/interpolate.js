@@ -1,10 +1,5 @@
 import linearInterpolator from 'linear-interpolator';
-import {flatGroup} from 'd3';
-import {clone} from '../util/utils';
-
-function compareBy(property) {
-  return (a, b) => a[property] - b[property];
-}
+import {clone, groupAndFlatten} from '../util/utils';
 
 function getSeriesFromObjectList(list, indexProperty, valueProperty) {
   return list.map((obj) => [obj[indexProperty], obj[valueProperty]]);
@@ -29,18 +24,6 @@ function interpolateGroup(group, indexProperty, interpolatedProperty) {
     e[interpolatedProperty] = interpolator(e[indexProperty]);
     return e;
   });
-}
-
-function keyFunctions(groupProperties) {
-  return groupProperties.map((k) => (d) => d[k]);
-}
-
-function groupAndFlatten(data, indexProperty, ...groupProperties) {
-  if (groupProperties.length > 0) {
-    return flatGroup(data, ...keyFunctions(groupProperties));
-  } else {
-    return [[clone(data)]];
-  }
 }
 
 export function interpolate(
