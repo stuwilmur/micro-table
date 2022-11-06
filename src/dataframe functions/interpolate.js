@@ -37,10 +37,7 @@ function keyFunctions(groupProperties) {
 
 function groupAndFlatten(data, indexProperty, ...groupProperties) {
   if (groupProperties.length > 0) {
-    return flatGroup(
-      data.sort(compareBy(indexProperty)),
-      ...keyFunctions(groupProperties),
-    );
+    return flatGroup(data, ...keyFunctions(groupProperties));
   } else {
     return [[clone(data)]];
   }
