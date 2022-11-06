@@ -1,5 +1,6 @@
 import {calculateColumn} from '../src/dataframe functions/calculate_column';
-import {deleteColumns} from '../src/dataframe functions/delete_column';
+import {deleteColumns} from '../src/dataframe functions/delete_columns';
+import {selectColumns} from '../src/dataframe functions/select_columns';
 import {setColumnValue} from '../src/dataframe functions/set_column_value';
 import {areObjectsEqual} from '../src/util/utils';
 
@@ -25,7 +26,7 @@ const dataframeWithXEqualZero = [
 ];
 
 /*
-deleteColumn
+deleteColumns, selectColumns
  */
 const dataframeWithADeleted = [
   {id: 0, b: 2},
@@ -36,6 +37,8 @@ const dataframeWithADeleted = [
 ];
 
 const dataframeEmptyObjects = [{}, {}, {}, {}, {}];
+
+const dataframeAOnly = [{a: 1}, {a: 2}, {a: 3}, {a: 4}, {a: 5}];
 
 /*
 calculateColumn
@@ -85,7 +88,7 @@ test('checks that adding column with the same value has no effect', () => {
 });
 
 /*
-deleteColumn
+deleteColumns
  */
 test('checks that deleting column a gives the expected result', () => {
   expect(
@@ -108,6 +111,33 @@ test('tests deleting all columns in a single operation', () => {
       deleteColumns(dataframe, 'a', 'b', 'id'),
       dataframeEmptyObjects,
     ),
+  ).toBeTruthy();
+});
+
+/*
+selectColumns
+ */
+test('checks that selecting columns id and b gives the expected result', () => {
+  expect(
+    areObjectsEqual(selectColumns(dataframe, 'id', 'b'), dataframeWithADeleted),
+  ).toBeTruthy();
+});
+
+test('tests selecting all columns in a single operation', () => {
+  expect(
+    areObjectsEqual(selectColumns(dataframe, 'id', 'a', 'b'), dataframe),
+  ).toBeTruthy();
+});
+
+test('tests selecting column a', () => {
+  expect(
+    areObjectsEqual(selectColumns(dataframe, 'a'), dataframeAOnly),
+  ).toBeTruthy();
+});
+
+test('tests selecting no columns', () => {
+  expect(
+    areObjectsEqual(selectColumns(dataframe), dataframeEmptyObjects),
   ).toBeTruthy();
 });
 
