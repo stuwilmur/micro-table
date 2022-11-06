@@ -1,5 +1,5 @@
 import {calculateColumn} from '../src/dataframe functions/calculate_column';
-import {deleteColumn} from '../src/dataframe functions/delete_column';
+import {deleteColumns} from '../src/dataframe functions/delete_column';
 import {setColumnValue} from '../src/dataframe functions/set_column_value';
 import {areObjectsEqual} from '../src/util/utils';
 
@@ -89,14 +89,23 @@ deleteColumn
  */
 test('checks that deleting column a gives the expected result', () => {
   expect(
-    areObjectsEqual(deleteColumn(dataframe, 'a'), dataframeWithADeleted),
+    areObjectsEqual(deleteColumns(dataframe, 'a'), dataframeWithADeleted),
   ).toBeTruthy();
 });
 
-test('checks that deleting all columns give the expected result', () => {
+test('tests deleting all columns sequentially', () => {
   expect(
     areObjectsEqual(
-      deleteColumn(deleteColumn(deleteColumn(dataframe, 'a'), 'b'), 'id'),
+      deleteColumns(deleteColumns(deleteColumns(dataframe, 'a'), 'b'), 'id'),
+      dataframeEmptyObjects,
+    ),
+  ).toBeTruthy();
+});
+
+test('tests deleting all columns in a single operation', () => {
+  expect(
+    areObjectsEqual(
+      deleteColumns(dataframe, 'a', 'b', 'id'),
       dataframeEmptyObjects,
     ),
   ).toBeTruthy();
