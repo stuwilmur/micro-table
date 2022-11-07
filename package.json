@@ -29,8 +29,7 @@
   },
   "dependencies": {
     "d3": "^7.6.1",
-    "linear-interpolator": "^1.0.2",
-    "package.json": "^2.0.1"
+    "linear-interpolator": "^1.0.2"
   },
   "overrides": {
     "got": "^12.1.0"
