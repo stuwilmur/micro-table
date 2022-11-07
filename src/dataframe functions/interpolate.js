@@ -32,16 +32,13 @@ export function interpolate(
   interpolatedProperty,
   ...groupProperties
 ) {
-  const groupedInterpolated = groupAndFlatten(
-    data,
-    indexProperty,
-    ...groupProperties,
-  ).map((d) =>
-    interpolateGroup(
-      d[groupProperties.length],
-      indexProperty,
-      interpolatedProperty,
-    ),
+  const groupedInterpolated = groupAndFlatten(data, ...groupProperties).map(
+    (d) =>
+      interpolateGroup(
+        d[groupProperties.length],
+        indexProperty,
+        interpolatedProperty,
+      ),
   );
 
   return groupedInterpolated.flat();

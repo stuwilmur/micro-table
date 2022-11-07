@@ -24,11 +24,11 @@ export function pick(obj, ...properties) {
   return copy;
 }
 
-function keyFunctions(groupProperties) {
+export function keyFunctions(groupProperties) {
   return groupProperties.map((k) => (d) => d[k]);
 }
 
-export function groupAndFlatten(data, indexProperty, ...groupProperties) {
+export function groupAndFlatten(data, ...groupProperties) {
   if (groupProperties.length > 0) {
     return flatGroup(data, ...keyFunctions(groupProperties));
   } else {
