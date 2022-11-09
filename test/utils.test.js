@@ -1,4 +1,10 @@
-import {areObjectsEqual, clone, purge, pick} from '../src/util/utils.js';
+import {
+  areObjectsEqual,
+  clone,
+  purge,
+  pick,
+  compareBy,
+} from '../src/util/utils.js';
 
 // Test data
 
@@ -6,6 +12,24 @@ const simpleObject = {a: 1, b: 'two'};
 const simpleObjectDoppelganger = {a: 1, b: 'two'};
 const simpleObjectAOnly = {a: 1};
 const simpleObjectBOnly = {b: 'two'};
+const listToSort = [
+  {a: 1, b: 3},
+  {a: 0, b: 2},
+  {a: 3, b: 1},
+  {a: 2, b: 0},
+];
+const listSortedOnA = [
+  {a: 0, b: 2},
+  {a: 1, b: 3},
+  {a: 2, b: 0},
+  {a: 3, b: 1},
+];
+const listSortedOnB = [
+  {a: 2, b: 0},
+  {a: 3, b: 1},
+  {a: 0, b: 2},
+  {a: 1, b: 3},
+];
 
 // Tests
 
@@ -80,5 +104,20 @@ test('checks pick simple object returns expected value', () => {
 test('checks pick simple object returns expected value', () => {
   expect(
     areObjectsEqual(simpleObject, pick(simpleObject, 'a', 'b')),
+  ).toBeTruthy();
+});
+
+/*
+compareBy
+ */
+test('checks sorting a list on property "a" using compareBy', () => {
+  expect(
+    areObjectsEqual(listSortedOnA, listToSort.sort(compareBy('a'))),
+  ).toBeTruthy();
+});
+
+test('checks sorting a list on property "b" using compareBy', () => {
+  expect(
+    areObjectsEqual(listSortedOnB, listToSort.sort(compareBy('b'))),
   ).toBeTruthy();
 });
