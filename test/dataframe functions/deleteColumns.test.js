@@ -21,9 +21,8 @@ const dataframeWithADeleted = [
 
 const dataframeEmptyObjects = [{}, {}, {}, {}, {}];
 
-/*
-deleteColumns
- */
+// Tests
+
 test('checks that deleting column a gives the expected result', () => {
   expect(
     areObjectsEqual(deleteColumns(dataframe, 'a'), dataframeWithADeleted),

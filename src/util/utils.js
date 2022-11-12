@@ -39,3 +39,7 @@ export function groupAndFlatten(data, ...groupProperties) {
 export function compareBy(property) {
   return (a, b) => a[property] - b[property];
 }
+
+export const prop = (property) => (obj) => obj[property];
+export const map = (f) => (list) => list.map(f);
+export const compose = (f, g) => (x) => f(g(x));

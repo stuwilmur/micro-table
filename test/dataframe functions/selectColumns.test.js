@@ -23,6 +23,8 @@ const dataframeEmptyObjects = [{}, {}, {}, {}, {}];
 
 const dataframeAOnly = [{a: 1}, {a: 2}, {a: 3}, {a: 4}, {a: 5}];
 
+// Tests
+
 test('checks that selecting columns id and b gives the expected result', () => {
   expect(
     areObjectsEqual(selectColumns(dataframe, 'id', 'b'), dataframeWithADeleted),

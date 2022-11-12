@@ -37,9 +37,6 @@ const dataframeBEqualsPreviousA = [
 
 // Tests
 
-/*
-calculateColumn
- */
 test('checks calculating column b as the square of columne a', () => {
   expect(
     areObjectsEqual(
