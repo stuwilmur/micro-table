@@ -1,4 +1,3 @@
-import {group} from 'd3';
 import {groupBy} from '../../src/dataframe functions/group_by';
 import {map, areObjectsEqual, prop} from '../../src/util/utils';
 
