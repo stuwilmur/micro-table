@@ -1,4 +1,5 @@
 import {flatGroup} from 'd3';
+export {prop} from './object.js';
 
 export function clone(obj) {
   return JSON.parse(JSON.stringify(obj));
@@ -40,6 +41,5 @@ export function compareBy(property) {
   return (a, b) => a[property] - b[property];
 }
 
-export const prop = (property) => (obj) => obj[property];
 export const map = (f) => (list) => list.map(f);
 export const compose = (f, g) => (x) => f(g(x));
