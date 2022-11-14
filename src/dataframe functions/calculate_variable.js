@@ -1,6 +1,6 @@
 import {clone} from '../util/utils';
 
-export function calculateColumn(table, name, func) {
+export function calculateVariable(table, name, func) {
   const newTable = clone(table);
 
   function getRowAboveCurrentIndex(currentRowIndex, rowsAbove) {

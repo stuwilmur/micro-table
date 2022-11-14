@@ -1,4 +1,5 @@
-import {setColumnValue} from '../../src/dataframe functions/set_column_value';
+// eslint-disable-next-line max-len
+import {setVariableValue} from '../../src/dataframe functions/set_variable_value';
 import {areObjectsEqual} from '../../src/util/utils';
 
 // Test data
@@ -21,16 +22,19 @@ const dataframeWithXEqualZero = [
 
 // Tests
 
-test('checks that adding a column x with value 0 gives expected result', () => {
+test('checks that adding a var x with value 0 gives expected result', () => {
   expect(
-    areObjectsEqual(setColumnValue(dataframe, 'x', 0), dataframeWithXEqualZero),
+    areObjectsEqual(
+      setVariableValue(dataframe, 'x', 0),
+      dataframeWithXEqualZero,
+    ),
   ).toBeTruthy();
 });
 
-test('checks that adding column with the same value has no effect', () => {
+test('checks that adding variable with the same value has no effect', () => {
   expect(
     areObjectsEqual(
-      setColumnValue(setColumnValue(dataframe, 'x', 0), 'x', 0),
+      setVariableValue(setVariableValue(dataframe, 'x', 0), 'x', 0),
       dataframeWithXEqualZero,
     ),
   ).toBeTruthy();

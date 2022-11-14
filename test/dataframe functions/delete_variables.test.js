@@ -1,4 +1,4 @@
-import {deleteColumns} from '../../src/dataframe functions/delete_columns';
+import {deleteVariables} from '../../src/dataframe functions/delete_variables';
 import {areObjectsEqual} from '../../src/util/utils';
 
 // Test data
@@ -23,25 +23,28 @@ const dataframeEmptyObjects = [{}, {}, {}, {}, {}];
 
 // Tests
 
-test('checks that deleting column a gives the expected result', () => {
+test('checks that deleting variable a gives the expected result', () => {
   expect(
-    areObjectsEqual(deleteColumns(dataframe, 'a'), dataframeWithADeleted),
+    areObjectsEqual(deleteVariables(dataframe, 'a'), dataframeWithADeleted),
   ).toBeTruthy();
 });
 
-test('tests deleting all columns sequentially', () => {
+test('tests deleting all variables sequentially', () => {
   expect(
     areObjectsEqual(
-      deleteColumns(deleteColumns(deleteColumns(dataframe, 'a'), 'b'), 'id'),
+      deleteVariables(
+        deleteVariables(deleteVariables(dataframe, 'a'), 'b'),
+        'id',
+      ),
       dataframeEmptyObjects,
     ),
   ).toBeTruthy();
 });
 
-test('tests deleting all columns in a single operation', () => {
+test('tests deleting all variables in a single operation', () => {
   expect(
     areObjectsEqual(
-      deleteColumns(dataframe, 'a', 'b', 'id'),
+      deleteVariables(dataframe, 'a', 'b', 'id'),
       dataframeEmptyObjects,
     ),
   ).toBeTruthy();

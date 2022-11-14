@@ -1,4 +1,5 @@
-import {calculateColumn} from '../../src/dataframe functions/calculate_column';
+// eslint-disable-next-line max-len
+import {calculateVariable} from '../../src/dataframe functions/calculate_variable';
 import {areObjectsEqual} from '../../src/util/utils';
 
 // Test data
@@ -37,10 +38,10 @@ const dataframeBEqualsPreviousA = [
 
 // Tests
 
-test('checks calculating column b as the square of columne a', () => {
+test('checks calculating variable b as the square of variablee a', () => {
   expect(
     areObjectsEqual(
-      calculateColumn(dataframe, 'b', (r) => {
+      calculateVariable(dataframe, 'b', (r) => {
         return r.a * r.a;
       }),
       dataframeBEqualsASquared,
@@ -48,10 +49,10 @@ test('checks calculating column b as the square of columne a', () => {
   ).toBeTruthy();
 });
 
-test('checks calculating column a as the square of columne a', () => {
+test('checks calculating variable a as the square of variablee a', () => {
   expect(
     areObjectsEqual(
-      calculateColumn(dataframe, 'a', (r) => {
+      calculateVariable(dataframe, 'a', (r) => {
         return r.a * r.a;
       }),
       dataframeAEqualsASquared,
@@ -59,10 +60,10 @@ test('checks calculating column a as the square of columne a', () => {
   ).toBeTruthy();
 });
 
-test('checks calculating column b as previous value of a', () => {
+test('checks calculating variable b as previous value of a', () => {
   expect(
     areObjectsEqual(
-      calculateColumn(dataframe, 'b', (r, getPrev) => {
+      calculateVariable(dataframe, 'b', (r, getPrev) => {
         const prev = getPrev(1);
         return prev === undefined ? undefined : prev.a;
       }),
