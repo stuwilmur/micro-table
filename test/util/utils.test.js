@@ -4,7 +4,7 @@ import {
   purge,
   pick,
   compareBy,
-} from '../src/util/utils.js';
+} from '../../src/util/utils.js';
 
 // Test data
 

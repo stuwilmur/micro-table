@@ -49,3 +49,7 @@ test('tests deleting all variables in a single operation', () => {
     ),
   ).toBeTruthy();
 });
+
+test('tests deleting no variables', () => {
+  expect(areObjectsEqual(deleteVariables(dataframe), dataframe)).toBeTruthy();
+});

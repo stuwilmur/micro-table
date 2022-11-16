@@ -146,7 +146,7 @@ test('Test aggregate by two properties', () => {
   ).toBeTruthy();
 });
 
-test('Test aggregate by two properties', () => {
+test('Test aggregate by missing (i.e. no aggregation) property', () => {
   expect(
     areObjectsEqual(
       aggregateBy(athletes, aggregators, 'none'),
