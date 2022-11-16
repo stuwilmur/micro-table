@@ -1,3 +1,3 @@
-export function clone(obj) {
-  return JSON.parse(JSON.stringify(obj));
-}
+import {compose} from '../function';
+
+export const clone = compose(JSON.parse, JSON.stringify);

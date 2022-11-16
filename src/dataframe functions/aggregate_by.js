@@ -9,8 +9,6 @@ function aggregate(v, listOfAggregators) {
   return obj;
 }
 
-const curry = (listOfAggregators) => (v) => aggregate(v, listOfAggregators);
-
 function mergeRolledUpList(list, keys) {
   const rollupObject = list[keys.length];
   const keysObject = {};
@@ -22,7 +20,7 @@ function mergeRolledUpList(list, keys) {
 }
 
 export function aggregateBy(data, listOfAggregators, ...keys) {
-  const curriedAggregators = curry(listOfAggregators);
+  const curriedAggregators = (v) => aggregate(v, listOfAggregators);
   const keyFunctions = keys.map((key) => (d) => d[key]);
   const rolledUpData = flatRollup(data, curriedAggregators, ...keyFunctions);
 

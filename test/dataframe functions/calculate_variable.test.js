@@ -36,6 +36,14 @@ const dataframeBEqualsPreviousA = [
   {id: 4, a: 5, b: 4},
 ];
 
+const dataframeBEqualsRunningTotalOfA = [
+  {id: 0, a: 1, b: 1},
+  {id: 1, a: 2, b: 3},
+  {id: 2, a: 3, b: 6},
+  {id: 3, a: 4, b: 10},
+  {id: 4, a: 5, b: 15},
+];
+
 // Tests
 
 test('checks calculating variable b as the square of variablee a', () => {
@@ -68,6 +76,19 @@ test('checks calculating variable b as previous value of a', () => {
         return prev === undefined ? undefined : prev.a;
       }),
       dataframeBEqualsPreviousA,
+    ),
+  ).toBeTruthy();
+});
+
+test('checks calculating variable b as running total of a', () => {
+  expect(
+    areObjectsEqual(
+      calculateVariable(dataframe, 'b', (r, getPrev) => {
+        const prev = getPrev(1);
+        const prevB = prev === undefined ? 0 : prev.b;
+        return r.a + prevB;
+      }),
+      dataframeBEqualsRunningTotalOfA,
     ),
   ).toBeTruthy();
 });

@@ -14,10 +14,6 @@ function compareKeys(a, b, ...keys) {
   return cmp;
 }
 
-// prettier-ignore
-const curry = (...keys) => (a, b) => compareKeys(a, b, ...keys);
-
 export function stableSort(data, ...keys) {
-  const sortFunction = curry(...keys);
-  return data.sort(sortFunction);
+  return data.sort((a, b) => compareKeys(a, b, ...keys));
 }
