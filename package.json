@@ -11,7 +11,12 @@
     "test": "jest --coverage",
     "make-badges": "istanbul-badges-readme",
     "watch": "parcel watch",
-    "build": "parcel build"
+    "build": "parcel build",
+    "lint": "eslint src/*.js",
+
+    "prepublish": "npm run build",
+    "prebuild": "npm run test",
+    "pretest": "npm run lint"
   },
   "repository": {
     "type": "git",

@@ -18,5 +18,5 @@
         "require-jsdoc" : 0,
         "indent": [2, 2, { "SwitchCase": 1}]
     },
-    "ignorePatterns": ["dist/*"]
+    "ignorePatterns": ["dist/*", "src/scratch.js"]
 }
