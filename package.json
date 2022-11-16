@@ -16,7 +16,8 @@
 
     "prepublish": "npm run build",
     "prebuild": "npm run test",
-    "pretest": "npm run lint"
+    "pretest": "npm run lint",
+    "posttest": "npm run make-badges"
   },
   "repository": {
     "type": "git",
