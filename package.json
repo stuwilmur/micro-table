@@ -13,9 +13,10 @@
     "watch": "parcel watch",
     "build": "parcel build",
     "lint": "eslint src/*.js",
+    "clean": "rm -rf dist/*",
 
     "prepublish": "npm run build",
-    "prebuild": "npm run test",
+    "prebuild": "npm run test && npm run clean",
     "pretest": "npm run lint",
     "posttest": "npm run make-badges"
   },
