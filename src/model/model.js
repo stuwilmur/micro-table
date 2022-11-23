@@ -9,6 +9,7 @@ import {
 } from '../transformers/index';
 import {CalcVarBuilder} from './builders/calc_var_builder';
 import {InterpolateBuilder} from './builders/interpolate_builder';
+import {AggregatorBuilder} from './builders/aggregator_builder';
 
 const addOne = (x) => x + 1;
 
@@ -32,6 +33,9 @@ const modelPrototype = {
   },
   interpolate() {
     return new InterpolateBuilder(this.data, modelmaker);
+  },
+  aggregate() {
+    return new AggregatorBuilder(this.data, modelmaker);
   },
   add() {
     return new Model(compose(addOne, this.data));
