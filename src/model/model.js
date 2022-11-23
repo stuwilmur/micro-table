@@ -7,6 +7,7 @@ import {
   selectVariables,
   stableSort,
 } from '../transformers/index';
+import {CalcVarBuilder} from './builders/calc_var_builder';
 
 const addOne = (x) => x + 1;
 
@@ -24,6 +25,9 @@ const modelPrototype = {
   },
   setVar() {
     return new SetVarBuilder(this.data, modelmaker);
+  },
+  calcVar() {
+    return new CalcVarBuilder(this.data, modelmaker);
   },
   add() {
     return new Model(compose(addOne, this.data));
