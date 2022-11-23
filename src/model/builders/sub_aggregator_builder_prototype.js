@@ -7,7 +7,7 @@ export const subAggregatorBuilderPrototype = {
     this.func = func;
     return this;
   },
-  name(name) {
+  called(name) {
     this.name = name;
     return this;
   },

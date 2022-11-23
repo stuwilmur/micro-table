@@ -9,6 +9,7 @@ const transform =
 
 export const aggregatorBuilderPrototype = {
   aggregators: [],
+  keys: [null],
 
   with() {
     return new SubAggregatorBuilder(this);
