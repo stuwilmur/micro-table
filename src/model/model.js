@@ -50,6 +50,9 @@ const modelPrototype = {
   group(...args) {
     return transformModel(this.data, groupBy, ...args);
   },
+  transform(transform) {
+    return transformModel(this.data, transform);
+  },
 };
 
 Object.assign(Model.prototype, modelPrototype);
