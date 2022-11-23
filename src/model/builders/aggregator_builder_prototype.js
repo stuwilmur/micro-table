@@ -11,7 +11,7 @@ export const aggregatorBuilderPrototype = {
   aggregators: [],
   keys: [null],
 
-  with() {
+  withAggregator() {
     return new SubAggregatorBuilder(this);
   },
 
