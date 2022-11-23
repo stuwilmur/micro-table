@@ -8,6 +8,7 @@ import {
   stableSort,
 } from '../transformers/index';
 import {CalcVarBuilder} from './builders/calc_var_builder';
+import {InterpolateBuilder} from './builders/interpolate_builder';
 
 const addOne = (x) => x + 1;
 
@@ -28,6 +29,9 @@ const modelPrototype = {
   },
   calcVar() {
     return new CalcVarBuilder(this.data, modelmaker);
+  },
+  interpolate() {
+    return new InterpolateBuilder(this.data, modelmaker);
   },
   add() {
     return new Model(compose(addOne, this.data));
