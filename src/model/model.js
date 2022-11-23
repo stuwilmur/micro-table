@@ -1,14 +1,16 @@
 import {identity, compose, curry} from '../util/utils';
-import {SetVarBuilder} from './builders/set_var_builder';
 import {
   deleteVariables,
   groupBy,
   selectVariables,
   stableSort,
 } from '../transformers/index';
-import {CalcVarBuilder} from './builders/calc_var_builder';
-import {InterpolateBuilder} from './builders/interpolate_builder';
-import {AggregatorBuilder} from './builders/aggregator_builder';
+import {
+  CalcVarBuilder,
+  AggregatorBuilder,
+  InterpolateBuilder,
+  SetVarBuilder,
+} from './builders/index';
 
 const addOne = (x) => x + 1;
 
