@@ -1,7 +1,9 @@
 export function pick(obj, ...properties) {
   const copy = {};
   properties.forEach((property) => {
-    copy[property] = obj[property];
+    if (property in obj) {
+      copy[property] = obj[property];
+    }
   });
   return copy;
 }

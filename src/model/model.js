@@ -1,5 +1,6 @@
 import {identity, compose, curry} from '../util/utils';
 import {LinBuilder} from './builders/lin_builder';
+import {SetVarBuilder} from './builders/set_var_builder';
 import {
   deleteVariables,
   groupBy,
@@ -20,6 +21,9 @@ function transformModel(model, transform, ...args) {
 const modelPrototype = {
   lin() {
     return new LinBuilder(this.data, modelmaker);
+  },
+  setVar() {
+    return new SetVarBuilder(this.data, modelmaker);
   },
   add() {
     return new Model(compose(addOne, this.data));
