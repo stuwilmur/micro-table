@@ -1,5 +1,5 @@
 // eslint-disable-next-line max-len
-import {setVariableValue} from '../../src/dataframe functions/set_variable_value';
+import {setVariableValue} from '../../src/transformers/index';
 import {areObjectsEqual} from '../../src/util/utils';
 
 // Test data

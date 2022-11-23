@@ -1,4 +1,4 @@
-import {deleteVariables} from '../../src/dataframe functions/delete_variables';
+import {deleteVariables} from '../../src/transformers/index';
 import {areObjectsEqual} from '../../src/util/utils';
 
 // Test data

@@ -1,3 +1,1 @@
-export function add(a, b) {
-  return a + b + 3;
-}
+export * from './model/model';

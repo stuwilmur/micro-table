@@ -1,5 +1,5 @@
-import {linBuilderPrototype} from './lin_builder_prototype.js';
-import {Builder} from './builder.js';
+import {linBuilderPrototype} from './lin_builder_prototype';
+import {Builder} from './builder';
 
 export function LinBuilder(...args) {
   Builder.call(this, ...args);

@@ -1,4 +1,4 @@
-import {aggregateBy} from '../../src/dataframe functions/aggregate_by';
+import {aggregateBy} from '../../src/transformers/index';
 import {areObjectsEqual} from '../../src/util/utils';
 import {sum, max} from 'd3';
 

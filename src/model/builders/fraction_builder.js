@@ -1,4 +1,4 @@
-import {fractionBuilderPrototype} from './fraction_builder_prototype.js';
+import {fractionBuilderPrototype} from './fraction_builder_prototype';
 import {SubBuilder} from './sub_builder';
 
 export function FractionBuilder(...args) {

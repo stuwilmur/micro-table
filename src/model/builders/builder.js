@@ -1,4 +1,4 @@
-import {builderPrototype} from './builder_prototype.js';
+import {builderPrototype} from './builder_prototype';
 
 export function Builder(model, makeModel) {
   this.model = model;

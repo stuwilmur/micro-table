@@ -1,4 +1,4 @@
-import {clone} from '../util/utils.js';
+import {clone} from '../util/utils';
 
 export function setVariableValue(table, variableName, value) {
   const newTable = clone(table);

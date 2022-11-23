@@ -1,4 +1,4 @@
-import {selectVariables} from '../../src/dataframe functions/select_variables';
+import {selectVariables} from '../../src/transformers/index';
 import {areObjectsEqual} from '../../src/util/utils';
 
 // Test data
