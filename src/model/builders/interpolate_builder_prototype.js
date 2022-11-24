@@ -9,8 +9,8 @@ const transform =
       ...groupProperties);
 
 export const InterpolateBuilderPrototype = {
-  y(y) {
-    this.interpolatedProperty = y;
+  y(...y) {
+    this.interpolatedPropertyList = y;
     return this;
   },
 
@@ -27,7 +27,7 @@ export const InterpolateBuilderPrototype = {
   _do() {
     return transform(
       this.indexProperty,
-      this.interpolatedProperty,
+      this.interpolatedPropertyList,
       ...this.groupProperties,
     );
   },
