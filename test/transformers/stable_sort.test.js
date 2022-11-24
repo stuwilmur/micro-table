@@ -1,4 +1,4 @@
-import {stableSort} from '../../src/transformers/index';
+import {stableSort} from '../../src/model/transformers/index';
 import {map, areObjectsEqual, prop} from '../../src/util/utils';
 
 const getNames = map(prop('name'));

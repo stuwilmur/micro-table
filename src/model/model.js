@@ -4,7 +4,7 @@ import {
   groupBy,
   selectVariables,
   stableSort,
-} from '../transformers/index';
+} from './transformers/index';
 import {
   CalcVarBuilder,
   AggregatorBuilder,

@@ -1,4 +1,4 @@
-import {aggregateBy} from '../../transformers';
+import {aggregateBy} from '../transformers/index';
 import {SubAggregatorBuilder} from './sub_aggregator_builder';
 
 // prettier-ignore

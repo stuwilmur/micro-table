@@ -1,4 +1,4 @@
-import {setVariableValue} from '../../transformers';
+import {setVariableValue} from '../transformers/index';
 
 const transform = (name, value) => (data) =>
   setVariableValue(data, name, value);
