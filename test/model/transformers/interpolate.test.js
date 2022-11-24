@@ -1,5 +1,5 @@
-import {areObjectsEqual} from '../../src/util/object';
-import {interpolate} from '../../src/model/transformers';
+import {areObjectsEqual} from '../../../src/util/object';
+import {interpolate} from '../../../src/model/transformers';
 
 // Test data
 

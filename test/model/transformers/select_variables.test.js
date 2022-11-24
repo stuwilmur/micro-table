@@ -1,5 +1,5 @@
-import {selectVariables} from '../../src/model/transformers/index';
-import {areObjectsEqual} from '../../src/util/utils';
+import {selectVariables} from '../../../src/model/transformers/index';
+import {areObjectsEqual} from '../../../src/util/utils';
 
 // Test data
 
