@@ -25,7 +25,13 @@
     "url": "git+https://github.com/stuwilmur/Tiny-table.git"
   },
   "keywords": [
-    "Dataframe"
+    "dataframe",
+    "database",
+    "model",
+    "statistics",
+    "query",
+    "transformation",
+    "spreadsheet"
   ],
   "author": "Stu Murray",
   "license": "MIT",
