@@ -12,8 +12,6 @@ import {
   SetVarBuilder,
 } from './builders/index';
 
-const addOne = (x) => x + 1;
-
 function Model(data) {
   this.data = data;
 }
@@ -34,9 +32,6 @@ const modelPrototype = {
   },
   aggregate() {
     return new AggregatorBuilder(this.data, modelmaker);
-  },
-  add() {
-    return new Model(compose(addOne, this.data));
   },
   drop(...args) {
     return transformModel(this.data, deleteVariables, ...args);
