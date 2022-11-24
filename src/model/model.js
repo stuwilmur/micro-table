@@ -27,10 +27,10 @@ const modelPrototype = {
   calcVar() {
     return new CalcVarBuilder(this.data, modelmaker);
   },
-  interpolate() {
+  interp() {
     return new InterpolateBuilder(this.data, modelmaker);
   },
-  aggregate() {
+  lump() {
     return new AggregatorBuilder(this.data, modelmaker);
   },
   drop(...args) {
