@@ -25,11 +25,13 @@
     "url": "git+https://github.com/stuwilmur/Tiny-table.git"
   },
   "keywords": [
-    "dataframe",
     "database",
+    "dataframe",
+    "datatable",
     "model",
-    "statistics",
     "query",
+    "statistics",
+    "table",
     "transformation",
     "spreadsheet"
   ],

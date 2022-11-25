@@ -21,10 +21,10 @@ function transformModel(model, transform, ...args) {
 }
 
 const modelPrototype = {
-  setVar() {
+  set() {
     return new SetVarBuilder(this.data, modelmaker);
   },
-  calcVar() {
+  calc() {
     return new CalcVarBuilder(this.data, modelmaker);
   },
   interp() {
