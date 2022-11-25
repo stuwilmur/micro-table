@@ -9,7 +9,7 @@ Tiny-table is a small JavaScript library for performing data handling tasks on a
 It was not inspired by, but by accident has some similarities with Arquero.
 
 ## Resources
-* [API Reference]()
+* [API Reference](https://github.com/stuwilmur/Tiny-table/blob/main/API.md)
 
 ## Installing
 Using npm, run `npm install Tiny-table`.
