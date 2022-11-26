@@ -16,30 +16,30 @@ In addition to applying transformations to data in individual steps, Tiny-table 
 
 ## Some simple examples
 ### One transformation: sorting
-Suppose we want to sort the data by rainfall, from least to greatest. We can create a model using the [sort](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#sort) transformation like so:
-```
+Suppose we want to sort the data by rainfall, from least to greatest. We can create a model which implements a single [sort](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#sort) transformation like so:
+```javascript
 const m = tt.model().sort('inches'); // Creates a model, m
 ```
 Now we can apply this model to our data by calling its method, [data](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#data), passing in our data to be transformed as an argument:
-```
+```javascript
 const result = m.data(rainfall);
 
-// result = [
+/* result = [
   { country: 'England', month: 'Feb', inches: 2.6 },
   { country: 'England', month: 'Jan', inches: 3.27 },
   { country: 'Scotland', month: 'Fan', inches: 5.54 },
   { country: 'Scotland', month: 'Jan', inches: 7.01 }
-]
+]*/
 ```
 The newly-sorted data is returned; the data supplied to the model is always left analtered. We can now go on and apply the same model `m` to other data.
 
 If the model is not needed again, then the construction and processing of data may be combined into a single statement:
-```
+```javascript
 const result = tt.model().sort('inches').data(rainfall); // same result as earlier
 ```
 ### One transformation: adding a calculated column
 In this example we will add a column for rainfall in millimetres, calculated for each row from the value of rainfall in inches. To do this we will call the [calc](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#calc) transformation method:
-```
+```javascript
 const m = tt.model()
   .calc()
   .called('millimetres')
@@ -53,7 +53,7 @@ In this example we will apply two data transformations already seen:
 1. add a column for rainfall calculated in millimetres;
 2. sort the data by the new value of rainfall in millimetres.
 Construction of models that apply multiple transformations is done by *chaining* methods:
-```
+```javascript
 const result = model()
   .calc()
   .called('millimetres')
@@ -62,7 +62,7 @@ const result = model()
   .sort('millimetres')
   .data(rainfall);
 
-  // result = [
+  /* result = [
   {
     country: 'England',
     month: 'Feb',
@@ -87,7 +87,7 @@ const result = model()
     inches: 7.01,
     millimetres: 178.05399999999997
   }
-]
+]*/
 ```
 
 ## Data transformations
