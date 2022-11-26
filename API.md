@@ -6,7 +6,7 @@ const rainfall = [
   {country: 'England', month: 'Jan', inches: 3.27},
   {country: 'England', month: 'Feb', inches: 2.60},
   {country: 'Scotland', month: 'Jan', inches: 7.01},
-  {country: 'Scotland', month: 'Fan', inches: 5.54},
+  {country: 'Scotland', month: 'Feb', inches: 5.54},
 ];
 ```
 ## Principles
@@ -28,7 +28,7 @@ const result1 = m.data(rainfall);
 result1 = [
   { country: 'England', month: 'Feb', inches: 2.6 },
   { country: 'England', month: 'Jan', inches: 3.27 },
-  { country: 'Scotland', month: 'Fan', inches: 5.54 },
+  { country: 'Scotland', month: 'Feb', inches: 5.54 },
   { country: 'Scotland', month: 'Jan', inches: 7.01 }
 ]
 */
@@ -125,7 +125,7 @@ const result5 = model()
   },
   {
     country: 'Scotland',
-    month: 'Fan',
+    month: 'Feb',
     inches: 5.54,
     millimetres: 140.71599999999998
   },
