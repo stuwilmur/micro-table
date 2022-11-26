@@ -12,10 +12,12 @@ const rainfall = [
 ## Principles
 Tiny-table allows you to select data *transformations*, which will be *applied* to a *data table*. An example of a transformation might be adding a column of data; we could *add* a column to our `rainfall` table that gives the average rainfall in millimetres instead of inches. Other example transformations might be be sorting the table from least to greatest rainfall, or aggregating  the total rainfall for each country. Any of these transformations could be applied to the table above, or indeed any other table with the same columns.
 
-In addition to applying transformations to data in individual steps, Tiny-table allows one or more data transformations to be combined to create a more sophisticated transformation, called a *model*, which can then be applied to a data table in a single step. For example, suppose we wished to apply two data transformations: 
+In addition to applying transformations to data in individual steps, Tiny-table allows one or more data transformations to be combined to create a more sophisticated transformation, called a *model*, which can then be applied to a data table in a single step. For example, suppose we wished to apply two data transformations *f* and *g* to a data table in succession; rather than applying *g*, and then taking the result and applying *g*, both transformations can be combined into a single model, and applied to our data in a single step, or retained and applied to other similar data.
+
+## A simple example
+In this example we will apply two data transformations:
 1. add a column for rainfall calculated in millimetres;
-2. aggregate the data by calculating the total rainfall for each country, in both inches and millimetres
-These two transformations can be combined into a single model, and applied to our data (or retained and applied to other similar data).
+2. aggregate the data by calculating the total rainfall for each country, in both inches and millimetres.
 
 ## Data transformations
 * [calc](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#calc)
@@ -44,7 +46,7 @@ These two transformations can be combined into a single model, and applied to ou
 
 <a name="select" href="#calc"># </a>model.*select*()
 
-<a name="set" href="#calc"># </a>model.*sec*()
+<a name="set" href="#calc"># </a>model.*set*()
 
 <a name="sort" href="#calc"># </a>model.*calc*()
 
