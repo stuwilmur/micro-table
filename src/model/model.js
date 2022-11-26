@@ -21,11 +21,14 @@ function transformModel(model, transform, ...args) {
 }
 
 const modelPrototype = {
-  set() {
-    return new SetVarBuilder(this.data, modelmaker);
-  },
   calc() {
     return new CalcVarBuilder(this.data, modelmaker);
+  },
+  drop(...args) {
+    return transformModel(this.data, deleteVariables, ...args);
+  },
+  group(...args) {
+    return transformModel(this.data, groupBy, ...args);
   },
   interp() {
     return new InterpolateBuilder(this.data, modelmaker);
@@ -33,17 +36,14 @@ const modelPrototype = {
   lump() {
     return new AggregatorBuilder(this.data, modelmaker);
   },
-  drop(...args) {
-    return transformModel(this.data, deleteVariables, ...args);
-  },
-  sort(...args) {
-    return transformModel(this.data, stableSort, ...args);
-  },
   select(...args) {
     return transformModel(this.data, selectVariables, ...args);
   },
-  group(...args) {
-    return transformModel(this.data, groupBy, ...args);
+  set() {
+    return new SetVarBuilder(this.data, modelmaker);
+  },
+  sort(...args) {
+    return transformModel(this.data, stableSort, ...args);
   },
   transform(transform) {
     return transformModel(this.data, transform);

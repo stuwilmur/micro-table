@@ -19,7 +19,26 @@ These two transformations can be combined into a single model, and applied to ou
 
 ## Data transformations
 * [calc](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#calc)
+* [drop](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#drop)
+* [group](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#group)
+* [interp](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#interp)
+* [lump](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#lump)
+* [select](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#select)
+* [set](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#set)
+* [sort](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#sort)
+* [transform](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#transform)
 ## API
-<a name="calc" href="#calc">#</a>model.*calc*()
+<a name="model" href = "#model"># </a>*model*()
+<a name="data" href = "#data"># </a>model.*data*()
+<a name="calc" href="#calc"># </a>model.*calc*()
+<a name="drop" href="#calc"># </a>model.*drop*()
+<a name="group" href="#calc"># </a>model.*group*()
+<a name="interp" href="#calc"># </a>model.*interp*()
+<a name="lump" href="#calc"># </a>model.*lump*()
+<a name="select" href="#calc"># </a>model.*select*()
+<a name="set" href="#calc"># </a>model.*sec*()
+<a name="sort" href="#calc"># </a>model.*calc*()
+<a name="transform" href="#calc"># </a>model.*transform*()
+
 
 
