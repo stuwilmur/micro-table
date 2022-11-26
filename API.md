@@ -99,7 +99,7 @@ In this example we will apply two data transformations already seen:
 1. add a column for rainfall calculated in millimetres;
 2. sort the data by the new value of rainfall in millimetres.
 
-Construction of models that apply multiple transformations is done by *chaining* methods:
+Construction of models that apply multiple transformations is done by *chaining* transformations when defining a model:
 ```javascript
 const result5 = model()
   .calc()
@@ -137,6 +137,7 @@ const result5 = model()
   }
 ]*/
 ```
+Transformations are applied in the order that they are specified when defining a model: in this case, the new column is added first, and then the resulting table is sorted by this new column. Remember, the input data is left unchanged by any model transformations.
 
 ## Data transformations
 * [calc](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#calc)
