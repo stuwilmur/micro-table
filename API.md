@@ -98,6 +98,7 @@ const result4 = tt.model()
 In this example we will apply two data transformations already seen:
 1. add a column for rainfall calculated in millimetres;
 2. sort the data by the new value of rainfall in millimetres.
+
 Construction of models that apply multiple transformations is done by *chaining* methods:
 ```javascript
 const result5 = model()
