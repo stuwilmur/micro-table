@@ -10,9 +10,9 @@ const rainfall = [
 ];
 ```
 ## Principles
-Tiny-table allows you to select data *transformations*, which will be *applied* to a *data table*. An example of a transformation might be adding a column of data; we could *add* a column to our `rainfall` table that gives the average rainfall in millimetres instead of inches. Other example transformations might be be sorting the table from least to greatest rainfall, or aggregating  the total rainfall for each country. Any of these transformations could be applied to the table above, or indeed any other table with the same columns.
+Tiny-table implements data *transformations*, which may be *applied* to a data table. An example of a transformation might be adding a column of data: we could *add* a column to our `rainfall` table that gives the average rainfall in millimetres instead of inches. Other example transformations might be be sorting the table from least to greatest rainfall, or aggregating  the total rainfall for each country. Any of these transformations could be applied to the table above, or indeed any other table with the same columns.
 
-In addition to applying transformations to data in individual steps, Tiny-table allows one or more data transformations to be combined to create a more sophisticated transformation, called a *model*, which can then be applied to a data table in a single step. For example, suppose we wished to apply two data transformations *f* and *g* to a data table in succession; rather than applying *g*, and then taking the result and applying *g*, both transformations can be combined into a single model, and applied to our data in a single step, or retained and applied to other similar data.
+In addition to applying transformations to data in individual steps, Tiny-table allows one or more data transformations to be combined to create a more sophisticated transformation, called a *model*, which can then be applied to a data table in a single step. For example, suppose we wished to apply two data transformations *f* and *g* to a data table in succession; rather than applying *f*, and then taking the result and applying *g*, both transformations can be combined into a single model, and applied to our data in a single step, or retained and applied to other similar data.
 
 ## A simple example
 In this example we will apply two data transformations:
