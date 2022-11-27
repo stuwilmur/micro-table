@@ -1,5 +1,6 @@
 import {stableSort} from '../../../src/model/transformers/index';
 import {map, areObjectsEqual, prop} from '../../../src/util/utils';
+import {makeSortKey} from '../../../src/model/types/index';
 
 const getNames = map(prop('name'));
 
@@ -97,7 +98,7 @@ const namesSortedByNationSportAndEarnings = [
 test('Test sort on one property', () => {
   expect(
     areObjectsEqual(
-      getNames(stableSort(athletes, 'earnings')),
+      getNames(stableSort(athletes, makeSortKey('earnings'))),
       namesSortedByEarnings,
     ),
   ).toBeTruthy();
@@ -106,7 +107,9 @@ test('Test sort on one property', () => {
 test('Test sort on two properties', () => {
   expect(
     areObjectsEqual(
-      getNames(stableSort(athletes, 'nation', 'earnings')),
+      getNames(
+        stableSort(athletes, makeSortKey('nation'), makeSortKey('earnings')),
+      ),
       namesSortedByNationAndEarnings,
     ),
   ).toBeTruthy();
@@ -115,7 +118,14 @@ test('Test sort on two properties', () => {
 test('Test sort on three properties', () => {
   expect(
     areObjectsEqual(
-      getNames(stableSort(athletes, 'nation', 'sport', 'earnings')),
+      getNames(
+        stableSort(
+          athletes,
+          makeSortKey('nation'),
+          makeSortKey('sport'),
+          makeSortKey('earnings'),
+        ),
+      ),
       namesSortedByNationSportAndEarnings,
     ),
   ).toBeTruthy();
@@ -128,8 +138,8 @@ test('Test sort on nothing', () => {
 test('Test sorting keys are order-independent', () => {
   expect(
     areObjectsEqual(
-      stableSort(athletes, 'sport', 'nation'),
-      stableSort(athletes, 'nation', 'sport'),
+      stableSort(athletes, makeSortKey('sport'), makeSortKey('nation')),
+      stableSort(athletes, makeSortKey('nation'), makeSortKey('sport')),
     ),
   ).toBeTruthy();
 });

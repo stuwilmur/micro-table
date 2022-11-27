@@ -11,6 +11,7 @@ import {
   InterpolateBuilder,
   SetVarBuilder,
 } from './builders/index';
+import {SortBuilder} from './builders/sort_builder';
 
 function Model(data) {
   this.data = data;
@@ -42,8 +43,8 @@ const modelPrototype = {
   set() {
     return new SetVarBuilder(this.data, modelmaker);
   },
-  sort(...args) {
-    return transformModel(this.data, stableSort, ...args);
+  sort() {
+    return new SortBuilder(this.data, modelmaker);
   },
   transform(transform) {
     return transformModel(this.data, transform);

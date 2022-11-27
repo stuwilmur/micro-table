@@ -1,7 +1,8 @@
-import {ascending} from 'd3';
+import {ascending, descending} from 'd3';
 
 function compareAscending(a, b, key) {
-  return ascending(a[key], b[key]);
+  const comparator = key.ascending ? ascending : descending;
+  return comparator(a[key.property], b[key.property]);
 }
 
 function compareKeys(a, b, ...keys) {
