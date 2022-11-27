@@ -10,8 +10,13 @@ const transform =
 export const SortBuilderPrototype = {
   sortKeyList: [],
 
-  by(property, ascending = true) {
-    this.sortKeyList.push(makeSortKey(property, ascending));
+  inc(property) {
+    this.sortKeyList.push(makeSortKey(property, true));
+    return this;
+  },
+
+  dec(property) {
+    this.sortKeyList.push(makeSortKey(property, false));
     return this;
   },
 

@@ -18,7 +18,7 @@ In addition to applying transformations to data in individual steps, Tiny-table 
 ### One transformation: sorting
 Suppose we want to sort the data by rainfall, from least to greatest. We can create a model which implements a single [sort](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#sort) transformation like so:
 ```javascript
-const m = tt.model().sort().by('inches').end(); // Creates a model, m, sorting on 'inches'
+const m = tt.model().sort().inc('inches').end(); // Creates a model, m, sorting on 'inches'
 ```
 Now we can apply this model to our data by calling its method, [data](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#data), passing in our data to be transformed as an argument:
 ```javascript
@@ -52,7 +52,7 @@ result2 = [
 ```
 If the model is not needed again, then the construction and processing of data may be combined into a single statement:
 ```javascript
-const result3 = tt.model().sort().by('inches').end().data(rainfall); // gives same as result1
+const result3 = tt.model().sort().inc('inches').end().data(rainfall); // gives same as result1
 ```
 ### One transformation: adding a calculated column
 In this example we will add a column for rainfall in millimetres, calculated for each row from the value of rainfall in inches. To do this we will call the [calc](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#calc) transformation method:
@@ -107,7 +107,7 @@ const result5 = model()
   .formula((r) => r.inches * 25.4)
   .end()
   .sort()
-  .by('millimetres')
+  .inc('millimetres')
   .end()
   .data(rainfall);
 
