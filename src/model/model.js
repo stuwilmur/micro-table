@@ -1,10 +1,5 @@
 import {identity, compose, curry} from '../util/utils';
-import {
-  deleteVariables,
-  groupBy,
-  selectVariables,
-  stableSort,
-} from './transformers/index';
+import {deleteVariables, groupBy, selectVariables} from './transformers/index';
 import {
   CalcVarBuilder,
   AggregatorBuilder,
