@@ -1,4 +1,4 @@
-import {compose, identity} from '../../util/function';
+import {compose, identity} from '../../util';
 
 export const builderPrototype = {
   end() {

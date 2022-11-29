@@ -1,4 +1,4 @@
-import {areObjectsEqual} from '../../../src/util/object';
+import {areObjectsEqual} from '../../../src/util';
 import {interpolate} from '../../../src/model/transformations';
 
 // Test data
