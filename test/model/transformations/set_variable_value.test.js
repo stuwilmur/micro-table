@@ -1,5 +1,5 @@
 // eslint-disable-next-line max-len
-import {setVariableValue} from '../../../src/model/transformations/index';
+import {setVariableValue} from '../../../src/model/transformations';
 import {areObjectsEqual} from '../../../src/util/utils';
 
 // Test data

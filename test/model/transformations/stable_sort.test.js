@@ -1,6 +1,6 @@
-import {stableSort} from '../../../src/model/transformations/index';
+import {stableSort} from '../../../src/model/transformations';
 import {map, areObjectsEqual, prop} from '../../../src/util/utils';
-import {makeSortKey} from '../../../src/model/types/index';
+import {makeSortKey} from '../../../src/model/types';
 
 const getNames = map(prop('name'));
 

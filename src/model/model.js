@@ -1,15 +1,11 @@
 import {identity, compose, curry} from '../util/utils';
-import {
-  deleteVariables,
-  groupBy,
-  selectVariables,
-} from './transformations/index';
+import {deleteVariables, groupBy, selectVariables} from './transformations';
 import {
   CalcVarBuilder,
   AggregatorBuilder,
   InterpolateBuilder,
   SetVarBuilder,
-} from './builders/index';
+} from './builders';
 import {SortBuilder} from './builders/sort_builder';
 
 function Model(data) {

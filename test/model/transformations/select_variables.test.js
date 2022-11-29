@@ -1,4 +1,4 @@
-import {selectVariables} from '../../../src/model/transformations/index';
+import {selectVariables} from '../../../src/model/transformations';
 import {areObjectsEqual} from '../../../src/util/utils';
 
 // Test data

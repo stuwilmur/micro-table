@@ -1,4 +1,4 @@
-import {interpolate} from '../transformations/index';
+import {interpolate} from '../transformations';
 
 // prettier-ignore
 const transform =

@@ -1,5 +1,5 @@
 import {identity} from '../../util/function';
-import {Aggregator} from '../types/index';
+import {Aggregator} from '../types';
 
 export const subAggregatorBuilderPrototype = {
   func: identity,
