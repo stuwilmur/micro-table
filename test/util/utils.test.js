@@ -1,10 +1,4 @@
-import {
-  areObjectsEqual,
-  clone,
-  purge,
-  pick,
-  compareBy,
-} from '../../src/util/utils';
+import {areObjectsEqual, clone, purge, pick, compareBy} from '../../src/util';
 
 // Test data
 
