@@ -1,4 +1,4 @@
-import {groupAndFlatten} from '../../util/utils';
+import {groupAndFlatten} from '../../util';
 
 export function groupBy(data, ...groupProperties) {
   return groupAndFlatten(data, ...groupProperties)

@@ -1,4 +1,4 @@
-import {clone} from '../../util/utils';
+import {clone} from '../../util';
 
 export function calculateVariable(table, name, func) {
   const newTable = clone(table);

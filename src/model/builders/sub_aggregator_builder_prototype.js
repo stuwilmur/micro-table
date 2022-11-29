@@ -1,4 +1,4 @@
-import {identity} from '../../util/function';
+import {identity} from '../../util';
 import {Aggregator} from '../types';
 
 export const subAggregatorBuilderPrototype = {

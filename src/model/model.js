@@ -1,4 +1,4 @@
-import {identity, compose, curry} from '../util/utils';
+import {identity, compose, curry} from '../util';
 import {deleteVariables, groupBy, selectVariables} from './transformations';
 import {
   CalcVarBuilder,

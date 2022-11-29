@@ -1,5 +1,5 @@
 import {aggregateBy} from '../../../src/model/transformations';
-import {areObjectsEqual} from '../../../src/util/utils';
+import {areObjectsEqual} from '../../../src/util';
 import {sum, max} from 'd3';
 
 // Test data
