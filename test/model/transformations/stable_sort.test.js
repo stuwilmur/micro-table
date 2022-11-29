@@ -1,4 +1,4 @@
-import {stableSort} from '../../../src/model/transformers/index';
+import {stableSort} from '../../../src/model/transformations/index';
 import {map, areObjectsEqual, prop} from '../../../src/util/utils';
 import {makeSortKey} from '../../../src/model/types/index';
 

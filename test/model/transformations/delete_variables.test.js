@@ -1,4 +1,4 @@
-import {deleteVariables} from '../../../src/model/transformers/index';
+import {deleteVariables} from '../../../src/model/transformations/index';
 import {areObjectsEqual} from '../../../src/util/utils';
 
 // Test data

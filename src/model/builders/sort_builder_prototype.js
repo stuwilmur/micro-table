@@ -1,4 +1,4 @@
-import {stableSort} from '../transformers/index';
+import {stableSort} from '../transformations/index';
 import {makeSortKey} from '../types';
 
 // prettier-ignore

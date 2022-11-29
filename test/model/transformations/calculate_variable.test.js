@@ -1,5 +1,5 @@
 // eslint-disable-next-line max-len
-import {calculateVariable} from '../../../src/model/transformers/index';
+import {calculateVariable} from '../../../src/model/transformations/index';
 import {areObjectsEqual} from '../../../src/util/utils';
 
 // Test data

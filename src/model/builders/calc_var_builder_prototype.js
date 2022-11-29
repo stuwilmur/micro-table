@@ -1,4 +1,4 @@
-import {calculateVariable} from '../transformers/index';
+import {calculateVariable} from '../transformations/index';
 import {identity} from '../../util/function';
 
 const transform = (name, func) => (data) => calculateVariable(data, name, func);

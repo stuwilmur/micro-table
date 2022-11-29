@@ -1,4 +1,4 @@
-import {aggregateBy} from '../../../src/model/transformers/index';
+import {aggregateBy} from '../../../src/model/transformations/index';
 import {areObjectsEqual} from '../../../src/util/utils';
 import {sum, max} from 'd3';
 

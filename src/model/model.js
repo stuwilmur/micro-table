@@ -1,5 +1,9 @@
 import {identity, compose, curry} from '../util/utils';
-import {deleteVariables, groupBy, selectVariables} from './transformers/index';
+import {
+  deleteVariables,
+  groupBy,
+  selectVariables,
+} from './transformations/index';
 import {
   CalcVarBuilder,
   AggregatorBuilder,

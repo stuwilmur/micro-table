@@ -1,4 +1,4 @@
-import {groupBy} from '../../../src/model/transformers/index';
+import {groupBy} from '../../../src/model/transformations/index';
 import {map, areObjectsEqual, prop} from '../../../src/util/utils';
 
 const getNames = map(prop('name'));
