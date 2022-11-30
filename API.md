@@ -176,7 +176,7 @@ const result = tt.model().select('x', 'y',).data(dataIn); // Selects columns 'x'
 Other transformations such as [calc](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#calc), [interp](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#interp), [lump](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#lump), [const](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#const) and [sort](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#sort) do not take arguments; instead, their definition is built up in stages, where at each stage one piece of information is added to their specification. As an example, the [const](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#const) transformation will create a new column with a single fixed value in each row. The transformation requires:
 - the column name
 - the value
-These are specified using two sub-methods of `calc()`: `calc().called()` and `calc().value()`, respectively:
+These are specified using two sub-methods of `const()`: `const().called()` and `const().value()`, respectively:
 ```javascript
 const model = tt.model()
                 .const()
