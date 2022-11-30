@@ -207,34 +207,37 @@ const model = tt.model()
 * [transform](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#transform)
 
 ## API
-<a name="model" href = "#model"># </a>tt.*model*()
+<a name="model" href = "#model"># </a>tt.**model**()
+
 Returns a new model object, which implements the identity transformation (i.e., when applied to some data, returns a copy of the data unchanged).
 
-<a name="data" href = "#data"># </a>tt.model().*data*(table)
+<a name="data" href = "#data"># </a>tt.*model*.**data**(table)
+
 Returns the result of applying a model created using `tt.model()` to some data, `table`. The input data in `table` is not mutated.
 
-<a name="calc" href="#calc"># </a>tt.model().*calc*()
+<a name="calc" href="#calc"># </a>tt.*model*.**calc**()
+
 Starts the definition of the calc transformation, whose behaviour is further defined by [calc().called()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#calc.called) and [calc().does()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#calc.does).
 
 The calc transformation adds a column to the data table (i.e. to each object in the list, it adds a given property) which is calculated from data in the table. A calculated columnn may depend on data in the original table, or values of the newly-calculated column in previous rows.
 
-<a name="calc.called" href="#calc.called"># </a>tt.model().calc().*called*()
+<a name="calc.called" href="#calc.called"># </a>tt.*model.calc*.**called**()
 
-<a name="calc.does" href="#calc.does"># </a>tt.model().calc().*does*()
+<a name="calc.does" href="#calc.does"># </a>tt.*model.calc*.**does**()
 
-<a name="drop" href="#drop"># </a>tt.model().*drop*()
+<a name="drop" href="#drop"># </a>tt.*model*.**drop**()
 
-<a name="group" href="#group"># </a>tt.model().*group*()
+<a name="group" href="#group"># </a>tt.*model*.**group**()
 
-<a name="interp" href="#interp"># </a>tt.model().*interp*()
+<a name="interp" href="#interp"># </a>tt.*model*.**interp**()
 
-<a name="lump" href="#lump"># </a>tt.model().*lump*()
+<a name="lump" href="#lump"># </a>tt.*model*.**lump**()
 
-<a name="select" href="#select"># </a>tt.model().*select*()
+<a name="select" href="#select"># </a>tt.*model*.**select**()
 
-<a name="set" href="#set"># </a>tt.model().*set*()
+<a name="set" href="#set"># </a>tt.*model*.**set**()
 
-<a name="sort" href="#sort"># </a>tt.model().*calc*()
+<a name="sort" href="#sort"># </a>tt.*model*.**calc**()
 
 <a name="transform" href="#transform"># </a>tt.model().*transform*()
 
