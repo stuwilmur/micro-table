@@ -249,11 +249,15 @@ The parameter *n* specifies the row to return by its position: a postive\[negati
 
 No checking is performed on the value of *n*.
 
+<a name="calc.end" href="#calc.end"># </a>tt.*model.calc*.**end**()
+
 <a name="const" href="#const"># </a>tt.*model*.**const**()
 
 <a name="const.called" href="#const.called"># </a>tt.*model.const*.**called**(*name*)
 
 <a name="const.value" href="#const.value"># </a>tt.*model.const*.**value**(*value*)
+
+<a name="const.end" href="#const.end"># </a>tt.*model.const*.**end**()
 
 <a name="drop" href="#drop"># </a>tt.*model*.**drop**(*property1, ... , propertyN*)
 
@@ -308,6 +312,8 @@ const series = [
 ```
 The data defines a time series for each country. To interpolate correctly within each time series, *groupBy()* must be called with the parameter `'country'`.
 
+<a name="interp.end" href="#interp.end"># </a>tt.*model.interp*.**end**()
+
 <a name="lump" href="#lump"># </a>tt.*model*.**lump**()
 
 <a name="lump.add" href="#lump.add"># </a>tt.*model.lump*.**add**()
@@ -316,7 +322,11 @@ The data defines a time series for each country. To interpolate correctly within
 
 <a name="lump.add.does" href="#lump.add.does"># </a>tt.*model.lump.add*.**does**(*func*)
 
+<a name="lump.add.end" href="#lump.add.end"># </a>tt.*model.lump.add*.**end**()
+
 <a name="lump.groupby" href="#lump.groupby"># </a>tt.*model.lump*.**groupBy**(*property1, ..., propertyN*)
+
+<a name="lump.end" href="#lump.end"># </a>tt.*model.lump*.**end**()
 
 <a name="select" href="#select"># </a>tt.*model*.**select**(*property1, ... propertyN*)
 
@@ -325,6 +335,8 @@ The data defines a time series for each country. To interpolate correctly within
 <a name="sort.inc" href="#sort.inc"># </a>tt.*model.sort*.**inc**(*property*)
 
 <a name="sort.dec" href="#sort.dec"># </a>tt.*model.sort*.**dec**(*property*)
+
+<a name="sort.end" href="#sort.end"># </a>tt.*model.sort*.**end**()
 
 <a name="transform" href="#transform"># </a>tt.*model*.**transform**(*func*)
 
