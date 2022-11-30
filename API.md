@@ -193,6 +193,7 @@ const model = tt.model()
                 .value(-1)
                 .called('w')
                 .end(); // defines exactly the same model as the previous example
+```
 
 ## Data transformations
 * [calc](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#calc)
