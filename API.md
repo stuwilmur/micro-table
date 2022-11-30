@@ -153,7 +153,12 @@ Note: it is permissible to define a model without *any* transformations: such a 
 ## Model building syntax
 As discussed, a model is created with [model](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#model) and applied using [data](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#data):
 ```javascript
-const dataIn = [{x: 1, y = 4, z = 1}, {x: 2, y = 3, z = 0}, {x: 3, y = 2, z = 1}, {x: 4, y = 1, z = 0}]; // Some simple data
+const dataIn = [
+  {x: 1, y = 4, z = 1}, // Some simple data
+  {x: 2, y = 3, z = 0}, 
+  {x: 3, y = 2, z = 1}, 
+  {x: 4, y = 1, z = 0}
+  ]; 
 const model = tt.model(); // Constructed without transformations: will do nothing
 const dataOut = model.data(rainfall); // returns copy of dataIn
 ```
