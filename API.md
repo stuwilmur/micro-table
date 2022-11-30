@@ -207,27 +207,17 @@ const model = tt.model()
 * [transform](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#transform)
 
 ## API
-<a name="model" href = "#model"># </a>tt.*model*()
-
-<a name="data" href = "#data"># </a>tt.model.*data*()
-
-<a name="calc" href="#calc"># </a>tt.model.*calc*()
-
-<a name="drop" href="#calc"># </a>tt.model.*drop*()
-
-<a name="group" href="#calc"># </a>tt.model.*group*()
-
-<a name="interp" href="#calc"># </a>tt.model.*interp*()
-
-<a name="lump" href="#calc"># </a>tt.model.*lump*()
-
-<a name="select" href="#calc"># </a>tt.model.*select*()
-
-<a name="set" href="#calc"># </a>tt.model.*set*()
-
-<a name="sort" href="#calc"># </a>tt.model.*calc*()
-
-<a name="transform" href="#calc"># </a>tt.model.*transform*()
+### <a name="model" href = "#model"># </a>tt.*model*()
+### <a name="data" href = "#data"># </a>tt.model.*data*()
+### <a name="calc" href="#calc"># </a>tt.model.*calc*()
+### <a name="drop" href="#calc"># </a>tt.model.*drop*()
+### <a name="group" href="#calc"># </a>tt.model.*group*()
+### <a name="interp" href="#calc"># </a>tt.model.*interp*()
+### <a name="lump" href="#calc"># </a>tt.model.*lump*()
+### <a name="select" href="#calc"># </a>tt.model.*select*()
+### <a name="set" href="#calc"># </a>tt.model.*set*()
+### <a name="sort" href="#calc"># </a>tt.model.*calc*()
+### <a name="transform" href="#calc"># </a>tt.model.*transform*()
 
 
 
