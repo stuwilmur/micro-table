@@ -35,7 +35,7 @@ const modelPrototype = {
   select(...args) {
     return transformModel(this.data, selectVariables, ...args);
   },
-  set() {
+  const() {
     return new SetVarBuilder(this.data, modelmaker);
   },
   sort() {

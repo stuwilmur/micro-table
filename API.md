@@ -1,8 +1,8 @@
 # Tiny-table API reference
 ## Introduction
-Tiny-table is a small JavaScript library for performing data handling tasks on a data table. It is implemented as an ES2015 module. A *data table* (equivalently referred to as a data frame) comprises a number of *observations* (think rows of a table) and *variables* (think columns of a table). Tiny-table works with a data table constructed as an array of JavaScript objects with consistent properties (i.e. all objects in the array share exactly the same properties). Each array element is an object which represents an observation; each property of one of these objects represents a variable. 
+Tiny-table is a small JavaScript library for performing data handling tasks on a data table. It is implemented as an ES2015 module. A *data table* (or data frame) comprises a number of *rows* correspondings to *observations*, and *columns* corresponding to variables. Tiny-table works with a data table constructed as an array of objects with consistent properties: all objects in the array must share exactly the same properties. Each object represents an observation; each property of one of these objects represents a variable.
 
-As an example, the following array is an example of a data frame/data table that describes the average monthly rainfall for two countries over three months. 
+The following array is an example of a data frame/data table that describes the average monthly rainfall for two countries over three months. 
 ```javascript
 const rainfall = [
   {country: 'England', month: 'Jan', inches: 3.27},
@@ -173,13 +173,13 @@ Some transformation methods such as [drop](https://github.com/stuwilmur/Tiny-tab
 ```javascript
 const result = tt.model().select('x', 'y',).data(dataIn); // Selects columns 'x' and 'y'
 ```
-Other transformations such as [calc](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#calc), [interp](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#interp), [lump](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#lump), [set](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#set) and [sort](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#sort) do not take arguments; instead, their definition is built up in stages, where at each stage one piece of information is added to their specification. As an example, the [set](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#set) transformation will create a new column with a single fixed value in each row. The transformation requires:
+Other transformations such as [calc](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#calc), [interp](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#interp), [lump](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#lump), [const](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#const) and [sort](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#sort) do not take arguments; instead, their definition is built up in stages, where at each stage one piece of information is added to their specification. As an example, the [const](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#const) transformation will create a new column with a single fixed value in each row. The transformation requires:
 - the column name
 - the value
 These are specified using two sub-methods of `calc()`: `calc().called()` and `calc().value()`, respectively:
 ```javascript
 const model = tt.model()
-                .set()
+                .const()
                 .called('w')
                 .value(-1)
                 .end();
@@ -189,7 +189,7 @@ The statement above defines a model which adds a new column `w` with the value -
 2. The order of the stages is always unimportant. For example:
 ```javascript
 const model = tt.model()
-                .set()
+                .const()
                 .value(-1)
                 .called('w')
                 .end(); // defines exactly the same model as the previous example
@@ -197,12 +197,12 @@ const model = tt.model()
 
 ## Data transformations
 * [calc](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#calc)
+* [const](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#const)
 * [drop](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#drop)
 * [group](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#group)
 * [interp](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#interp)
 * [lump](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#lump)
 * [select](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#select)
-* [set](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#set)
 * [sort](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#sort)
 * [transform](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#transform)
 
@@ -213,33 +213,115 @@ Returns a new model object, which implements the identity transformation (i.e., 
 
 <a name="data" href = "#data"># </a>tt.*model*.**data**(table)
 
-Returns the result of applying a model created using `tt.model()` to some data, `table`. The input data in `table` is not mutated.
+Returns the result of applying a model created using `tt.model()` to some data, *table*. The input data in *table* is not mutated.
 
 <a name="calc" href="#calc"># </a>tt.*model*.**calc**()
 
-Starts the definition of the calc transformation, whose behaviour is further defined by [calc().called()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#calc.called) and [calc().does()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#calc.does).
+Starts the definition of a calc transformation, whose behaviour is further defined by [calc.called()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#calc.called) and [calc.does()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#calc.does).
 
-The calc transformation adds a column to the data table (i.e. to each object in the list, it adds a given property) which is calculated from data in the table. A calculated columnn may depend on data in the original table, or values of the newly-calculated column in previous rows.
+The calc transformation adds a variable (column) to the data table (i.e. to each object in the list, it adds a given property) which is calculated from data in the table. A calculated columnn may depend on data in the original table, or values of the newly-calculated column in previous rows.
 
-<a name="calc.called" href="#calc.called"># </a>tt.*model.calc*.**called**()
+<a name="calc.called" href="#calc.called"># </a>tt.*model.calc*.**called**(*name*)
 
-<a name="calc.does" href="#calc.does"># </a>tt.*model.calc*.**does**()
+Takes a string *name* used to specify the name of the variable (column) being added.
 
-<a name="drop" href="#drop"># </a>tt.*model*.**drop**()
+<a name="calc.does" href="#calc.does"># </a>tt.*model.calc*.**does**(*func*)
 
-<a name="group" href="#group"># </a>tt.*model*.**group**()
+Defines the callback function *func*, used to calculate the value of the new variable. This callback is applied to each row consecutively, starting from the beginning of the table. The callback is of the form
+
+**func**(*r, [getRow]*)
+
+and should return a value. 
+- The parameter *r* is the current row object;
+- The parameter  *getRow* is a function object, which may be used to return a row object other than the current row. This function itself may be described as follows:
+
+**getRow**(*n*)
+
+The parameter *n* specifies the row to return by its position: a postive\[negative\] value of *n* specifies a row *n* places above\[below\] the current row. For example
+- a value of n=1 returns the row immediately above the current row;
+- a value of n=0 returns the current row;
+- a value of n=-1 returns the row immediately below the current row.
+
+No checking is performed on the value of *n*.
+
+<a name="const" href="#const"># </a>tt.*model*.**const**()
+
+<a name="const.called" href="#const.called"># </a>tt.*model.const*.**called**(*name*)
+
+<a name="const.value" href="#const.value"># </a>tt.*model.const*.**value**(*value*)
+
+<a name="drop" href="#drop"># </a>tt.*model*.**drop**(*property1, ... , propertyN*)
+
+Deletes all variables (columns) specified by the parameters *property1, ..., propertyN*.
+
+<a name="group" href="#group"># </a>tt.*model*.**group**(*property1, ..., propertyN*)
+
+Reorders rows of the table such that they are grouped by *property1*, these groups being futher subgrouped by *property2* and so on. Note that groups are arranged in the order that order that each unique property value appears in the table.
 
 <a name="interp" href="#interp"># </a>tt.*model*.**interp**()
 
+Starts the definition of an *interp* transformation, whose behaviour is further defined by [interp.x()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#interp.x), [interp.y()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#interp.y) and [interp().groupBy()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#interp.groupby).
+
+The interp transformation interpolates missing values, whose table entries are either `NaN` or `null`. Simple linear interpolation is used between two extant data points, while linear extrapolation is used beyond the range of available data.
+
+<a name="interp.x" href="#interp.x"># </a>tt.*model.interp*.**x**(*property*)
+
+Specificy the index property (i.e. the *x*-value) on which to interpolate, using the parameter *property*. For example, consider some simple time series data:
+```javascript
+const series = [
+  {year:2000, population: 100000},
+  {year:2010, population: null},
+  {year:2020, population: 200000}
+]
+```
+To interpolate population for the missing year 2010, the index property specified as a parameter would be `'year'`.
+
+<a name="interp.y" href="#interp.y"># </a>tt.*model.interp*.**y**(*property1, ..., propertyN*)
+
+Specificy the result properties (i.e. the *y*-values) to interpolate, using the parameters *property1, ..., propertyN*. For example, consider some simple time series data:
+```javascript
+const series = [
+  {year:2000, population: 100000},
+  {year:2010, population: null},
+  {year:2020, population: 200000}
+]
+```
+To interpolate population for the missing year 2010, the property specified as a parameter would be `'population'`.
+
+<a name="interp.groupby" href="#interp.groupby"># </a>tt.*model.interp*.**groupBy**(*property1, ..., propertyN*)
+
+Specify grouping properties, *property1, ..., propertyN* by which the data will be grouped ready for interpolation. This is useful for flat data which otherwise describes nested groups of series. As an example, consider the following time series data, typical of the sort of flat data structure that may be encountered:
+```javascript
+const series = [
+  {year:2000, country = 'Brazil', gdp: 655.4},
+  {year:2000, country = 'China',  gdp: 1211},
+  {year:2001, country = 'Brazil', gdp: NaN},
+  {year:2001, country = 'China',  gdp: 1339},
+  {year:2002, country = 'Brazil', gdp: 509.8},
+  {year:2002, country = 'China',  gdp: 1471},
+]
+```
+The data defines a time series for each country. To interpolate correctly within each time series, *groupBy()* must be called with the parameter `'country'`.
+
 <a name="lump" href="#lump"># </a>tt.*model*.**lump**()
 
-<a name="select" href="#select"># </a>tt.*model*.**select**()
+<a name="lump.add" href="#lump.add"># </a>tt.*model.lump*.**add**()
 
-<a name="set" href="#set"># </a>tt.*model*.**set**()
+<a name="lump.add.called" href="#lump.add.called"># </a>tt.*model.lump.add*.**called**(*name*)
 
-<a name="sort" href="#sort"># </a>tt.*model*.**calc**()
+<a name="lump.add.does" href="#lump.add.does"># </a>tt.*model.lump.add*.**does**(*func*)
 
-<a name="transform" href="#transform"># </a>tt.model().*transform*()
+<a name="lump.groupby" href="#lump.groupby"># </a>tt.*model.lump*.**groupBy**(*property1, ..., propertyN*)
+
+<a name="select" href="#select"># </a>tt.*model*.**select**(*property1, ... propertyN*)
+
+<a name="sort" href="#sort"># </a>tt.*model*.**sort**()
+
+<a name="sort.inc" href="#sort.inc"># </a>tt.*model.sort*.**inc**(*property*)
+
+<a name="sort.dec" href="#sort.dec"># </a>tt.*model.sort*.**dec**(*property*)
+
+<a name="transform" href="#transform"># </a>tt.*model*.**transform**(*func*)
 
 
 
