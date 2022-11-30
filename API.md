@@ -67,7 +67,7 @@ In this example a column will be added giving rainfall in millimetres, calculate
 const result4 = tt.model()
   .calc()
   .called('millimetres')
-  .formula((r) => r.inches * 25.4)
+  .does((r) => r.inches * 25.4)
   .end()
   .data(rainfall);
   
@@ -111,7 +111,7 @@ Construction of models that apply multiple transformations is done by *chaining*
 const result5 = tt.model()
   .calc()
   .called('millimetres')
-  .formula((r) => r.inches * 25.4)
+  .does((r) => r.inches * 25.4)
   .end()
   .sort()
   .inc('millimetres')

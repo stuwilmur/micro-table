@@ -2,9 +2,9 @@ import {identity} from '../../util';
 import {Aggregator} from '../types';
 
 export const subAggregatorBuilderPrototype = {
-  func: identity,
-  formula(func) {
-    this.func = func;
+  f: identity,
+  does(f) {
+    this.f = f;
     return this;
   },
   called(name) {
@@ -12,6 +12,6 @@ export const subAggregatorBuilderPrototype = {
     return this;
   },
   end() {
-    return this.parent._addAggregator(new Aggregator(this.name, this.func));
+    return this.parent._addAggregator(new Aggregator(this.name, this.f));
   },
 };
