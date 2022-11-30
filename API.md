@@ -208,6 +208,9 @@ const model = tt.model()
 
 ## API
 ### <a name="model" href = "#model"># </a>tt.*model*()
+#### Syntax
+#### Parameters
+#### Description
 ### <a name="data" href = "#data"># </a>tt.model.*data*()
 ### <a name="calc" href="#calc"># </a>tt.model.*calc*()
 ### <a name="drop" href="#calc"># </a>tt.model.*drop*()
