@@ -222,7 +222,7 @@ Returns the result of applying a model created using `tt.model()` to some data, 
 
 <a name="calc" href="#calc"># </a>tt.*model*.**calc**()
 
-Starts the definition of a calc transformation, whose behaviour is further defined by [calc.called()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#calc.called) and [calc.does()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#calc.does).
+Adds a calc transformation, whose behaviour is further defined by [calc.called()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#calc.called) and [calc.does()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#calc.does).
 
 The calc transformation adds a variable (column) to the data table (i.e. to each object in the list, it adds a given property) which is calculated from data in the table. A calculated columnn may depend on data in the original table, or values of the newly-calculated column in previous rows.
 
@@ -251,17 +251,29 @@ No checking is performed on the value of *n*.
 
 <a name="calc.end" href="#calc.end"># </a>tt.*model.calc*.**end**()
 
+Ends the definition of the transformation.
+
 <a name="const" href="#const"># </a>tt.*model*.**const**()
+
+Adds a const transformation, whose behaviour is further defined by [const.called()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#const.called) and [const.value()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#const.value).
+
+The const transformation adds a variable (column) to the data table (i.e. to each object in the list, it adds a given property) with a single constant value.
 
 <a name="const.called" href="#const.called"># </a>tt.*model.const*.**called**(*name*)
 
+Takes a string *name* used to specify the name of the variable (column) being added.
+
 <a name="const.value" href="#const.value"># </a>tt.*model.const*.**value**(*value*)
+
+Takes a value *value* used to specify the constant value.
 
 <a name="const.end" href="#const.end"># </a>tt.*model.const*.**end**()
 
+Ends the definition of the transformation.
+
 <a name="drop" href="#drop"># </a>tt.*model*.**drop**(*property1, ... , propertyN*)
 
-Deletes all variables (columns) specified by the parameters *property1, ..., propertyN*.
+Drops columns (i.e. deletes variables) specified by the parameters *property1, ..., propertyN*.
 
 <a name="group" href="#group"># </a>tt.*model*.**group**(*property1, ..., propertyN*)
 
@@ -269,7 +281,7 @@ Reorders rows of the table such that they are grouped by *property1*, these grou
 
 <a name="interp" href="#interp"># </a>tt.*model*.**interp**()
 
-Starts the definition of an *interp* transformation, whose behaviour is further defined by [interp.x()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#interp.x), [interp.y()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#interp.y) and [interp().groupBy()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#interp.groupby).
+Adds an *interp* transformation, whose behaviour is further defined by [interp.x()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#interp.x), [interp.y()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#interp.y) and [interp().groupBy()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#interp.groupby).
 
 The interp transformation interpolates missing values, whose table entries are either `NaN` or `null`. Simple linear interpolation is used between two extant data points, while linear extrapolation is used beyond the range of available data.
 
@@ -287,7 +299,7 @@ To interpolate population for the missing year 2010, the index property specifie
 
 <a name="interp.y" href="#interp.y"># </a>tt.*model.interp*.**y**(*property1, ..., propertyN*)
 
-Specificy the result properties (i.e. the *y*-values) to interpolate, using the parameters *property1, ..., propertyN*. For example, consider some simple time series data:
+Specificies the result properties (i.e. the *y*-values) to interpolate, using the parameters *property1, ..., propertyN*. For example, consider some simple time series data:
 ```javascript
 const series = [
   {year:2000, population: 100000},
@@ -299,7 +311,7 @@ To interpolate population for the missing year 2010, the property specified as a
 
 <a name="interp.groupby" href="#interp.groupby"># </a>tt.*model.interp*.**groupBy**(*property1, ..., propertyN*)
 
-Specify grouping properties, *property1, ..., propertyN* by which the data will be grouped ready for interpolation. This is useful for flat data which otherwise describes nested groups of series. As an example, consider the following time series data, typical of the sort of flat data structure that may be encountered:
+Specifies grouping properties, *property1, ..., propertyN* by which the data will be grouped ready for interpolation. This is useful for flat data which otherwise describes nested groups of series. As an example, consider the following time series data, typical of the sort of flat data structure that may be encountered:
 ```javascript
 const series = [
   {year:2000, country = 'Brazil', gdp: 655.4},
@@ -314,7 +326,11 @@ The data defines a time series for each country. To interpolate correctly within
 
 <a name="interp.end" href="#interp.end"># </a>tt.*model.interp*.**end**()
 
+Ends the definition of the transformation.
+
 <a name="lump" href="#lump"># </a>tt.*model*.**lump**()
+
+Adds a lump transformation, whose behaviour is further defined by [lump.add()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#lump.add), [lump.add.called()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#lump.add.called), [lump.add.does()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#lump.add.does) and [lump.add.groupBy()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#lump.add.groupBy).
 
 <a name="lump.add" href="#lump.add"># </a>tt.*model.lump*.**add**()
 
@@ -330,15 +346,35 @@ The data defines a time series for each country. To interpolate correctly within
 
 <a name="select" href="#select"># </a>tt.*model*.**select**(*property1, ... propertyN*)
 
+Selects columns specified by the parameters *property1, ..., propertyN* from the table. The resulting table will feature the selected columns in the order that they are specified, rather than their order in the input table.
+
 <a name="sort" href="#sort"># </a>tt.*model*.**sort**()
+
+Adds a *sort* transformation, whose behaviour is further defined by [sort.inc()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#sort.inc) and [sort.dec()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#sort.dec). 
+
+- Sorts are built up in stages, at each stage specifying the property (column) on which to sort and whether the sort is *increasing* or *decreasing*. As many stages may be added as there are properties.
+- Sorting is done in the order that columns are specified.
+- The sort is guaranteed to be stable: the order of rows with eqaul values in the column being sorted will be maintained.
 
 <a name="sort.inc" href="#sort.inc"># </a>tt.*model.sort*.**inc**(*property*)
 
+Adds a sort transformation, sorting by *increasing* value of the specified *property.
+
 <a name="sort.dec" href="#sort.dec"># </a>tt.*model.sort*.**dec**(*property*)
+
+Adds a sort transformation, sorting by *decreaseing* value of the specified *property.
 
 <a name="sort.end" href="#sort.end"># </a>tt.*model.sort*.**end**()
 
+Ends the definition of the transformation.
+
 <a name="transform" href="#transform"># </a>tt.*model*.**transform**(*func*)
+
+Adds a user-defined transformation which will be applied to the table, specified by the function *func*, which has the form
+```javascript
+function func(table)
+```
+where `table` is the table object (a JavaScript array of simple objects).
 
 
 
