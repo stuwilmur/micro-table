@@ -20,6 +20,9 @@ const modelPrototype = {
   calc() {
     return new CalcVarBuilder(this.data, modelmaker);
   },
+  const() {
+    return new SetVarBuilder(this.data, modelmaker);
+  },
   drop(...args) {
     return transformModel(this.data, deleteVariables, ...args);
   },
@@ -29,17 +32,15 @@ const modelPrototype = {
   interp() {
     return new InterpolateBuilder(this.data, modelmaker);
   },
-  lump() {
-    return new AggregatorBuilder(this.data, modelmaker);
-  },
   select(...args) {
     return transformModel(this.data, selectVariables, ...args);
   },
-  const() {
-    return new SetVarBuilder(this.data, modelmaker);
-  },
+
   sort() {
     return new SortBuilder(this.data, modelmaker);
+  },
+  tele() {
+    return new AggregatorBuilder(this.data, modelmaker);
   },
   transform(transform) {
     return transformModel(this.data, transform);

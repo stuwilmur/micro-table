@@ -178,7 +178,7 @@ Some transformation methods such as [drop](https://github.com/stuwilmur/Tiny-tab
 ```javascript
 const result = tt.model().select('x', 'y',).data(dataIn); // Selects columns 'x' and 'y'
 ```
-Other transformations such as [calc](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#calc), [interp](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#interp), [lump](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#lump), [const](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#const) and [sort](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#sort) do not take arguments; instead, their definition is built up in stages, where at each stage one piece of information is added to their specification. As an example, the [const](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#const) transformation will create a new column with a single fixed value in each row. The transformation requires:
+Other transformations such as [calc](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#calc), [interp](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#interp), [tele](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#tele), [const](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#const) and [sort](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#sort) do not take arguments; instead, their definition is built up in stages, where at each stage one piece of information is added to their specification. As an example, the [const](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#const) transformation will create a new column with a single fixed value in each row. The transformation requires:
 - the column name
 - the value
 These are specified using two sub-methods of `const()`: `const().called()` and `const().value()`, respectively:
@@ -206,7 +206,7 @@ const model = tt.model()
 * [drop](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#drop)
 * [group](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#group)
 * [interp](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#interp)
-* [lump](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#lump)
+* [tele](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#tele)
 * [select](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#select)
 * [sort](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#sort)
 * [transform](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#transform)
@@ -328,22 +328,6 @@ The data defines a time series for each country. To interpolate correctly within
 
 Ends the definition of the transformation.
 
-<a name="lump" href="#lump"># </a>tt.*model*.**lump**()
-
-Adds a lump transformation, whose behaviour is further defined by [lump.add()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#lump.add), [lump.add.called()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#lump.add.called), [lump.add.does()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#lump.add.does) and [lump.add.groupBy()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#lump.add.groupBy).
-
-<a name="lump.add" href="#lump.add"># </a>tt.*model.lump*.**add**()
-
-<a name="lump.add.called" href="#lump.add.called"># </a>tt.*model.lump.add*.**called**(*name*)
-
-<a name="lump.add.does" href="#lump.add.does"># </a>tt.*model.lump.add*.**does**(*func*)
-
-<a name="lump.add.end" href="#lump.add.end"># </a>tt.*model.lump.add*.**end**()
-
-<a name="lump.groupby" href="#lump.groupby"># </a>tt.*model.lump*.**groupBy**(*property1, ..., propertyN*)
-
-<a name="lump.end" href="#lump.end"># </a>tt.*model.lump*.**end**()
-
 <a name="select" href="#select"># </a>tt.*model*.**select**(*property1, ... propertyN*)
 
 Selects columns specified by the parameters *property1, ..., propertyN* from the table. The resulting table will feature the selected columns in the order that they are specified, rather than their order in the input table.
@@ -367,6 +351,22 @@ Adds a sort transformation, sorting by *decreaseing* value of the specified *pro
 <a name="sort.end" href="#sort.end"># </a>tt.*model.sort*.**end**()
 
 Ends the definition of the transformation.
+
+<a name="tele" href="#tele"># </a>tt.*model*.**tele**()
+
+Adds a tele transformation, whose behaviour is further defined by [tele.add()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#tele.add), [tele.add.called()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#tele.add.called), [tele.add.does()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#tele.add.does) and [tele.add.groupBy()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#tele.add.groupBy).
+
+<a name="tele.add" href="#tele.add"># </a>tt.*model.tele*.**add**()
+
+<a name="tele.add.called" href="#tele.add.called"># </a>tt.*model.tele.add*.**called**(*name*)
+
+<a name="tele.add.does" href="#tele.add.does"># </a>tt.*model.tele.add*.**does**(*func*)
+
+<a name="tele.add.end" href="#tele.add.end"># </a>tt.*model.tele.add*.**end**()
+
+<a name="tele.groupby" href="#tele.groupby"># </a>tt.*model.tele*.**groupBy**(*property1, ..., propertyN*)
+
+<a name="tele.end" href="#tele.end"># </a>tt.*model.tele*.**end**()
 
 <a name="transform" href="#transform"># </a>tt.*model*.**transform**(*func*)
 
