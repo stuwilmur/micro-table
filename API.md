@@ -171,7 +171,7 @@ const model = tt.model().drop('x') // will delete the 'x' column
 Combining transformations is done by *chaining* method calls:
 ```javascript
 const model = tt.model().drop('x').group('z') // delete 'x' column, group by 'z' value
-const mode2 = model.drop('z') // adds a further transformation to delete 'z'
+const model2 = model.drop('z') // adds a further transformation to delete 'z'
 ```
 
 Some transformation methods such as [drop](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#drop), [group](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#group), [select](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#select) and [transform](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#transform) take one or more arguments to specify how they work. For example, `select()` takes the name of each column to be selected:
@@ -190,7 +190,7 @@ const model = tt.model()
                 .end();
 ```
 The statement above defines a model which adds a new column `w` with the value -1 in every row. There are two things to note:
-1. When transformations are built up in stages like this, the end of the information supplied is marked with a call to `end()`. 
+1. When transformations are built up in stages like this, the end of the stage is marked with a call to `end()`. 
 2. The order of the stages is always unimportant. For example:
 ```javascript
 const model = tt.model()
@@ -347,9 +347,9 @@ Takes a string *name* used to specify the property name of the aggregate propert
 <a name="reduce.add.does" href="#reduce.add.does"># </a>tt.*model.reduce.add*.**does**(*func*)
 
 Takes a function *func* to be used to reduce the data to the aggregate value. The function takes the form
-```javascript
-function func(*group*)
-``` 
+
+**func**(*group*)
+
 where *group*. is an array comprising the current group being aggregated. If no grouping is being performed, *group* will be the entire table.
 
 <a name="reduce.add.end" href="#reduce.add.end"># </a>tt.*model.reduce.add*.**end**()
@@ -391,9 +391,9 @@ Ends the definition of the transformation.
 <a name="transform" href="#transform"># </a>tt.*model*.**transform**(*func*)
 
 Adds a user-defined transformation which will be applied to the table, specified by the function *func*, which has the form
-```javascript
-function func(table)
-```
+
+**func**(*table*)
+
 where `table` is the table object (a JavaScript array of simple objects).
 
 
