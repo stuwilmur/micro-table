@@ -178,7 +178,7 @@ Some transformation methods such as [drop](https://github.com/stuwilmur/Tiny-tab
 ```javascript
 const result = tt.model().select('x', 'y',).data(dataIn); // Selects columns 'x' and 'y'
 ```
-Other transformations such as [calc](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#calc), [interp](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#interp), [tele](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#tele), [const](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#const) and [sort](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#sort) do not take arguments; instead, their definition is built up in stages, where at each stage one piece of information is added to their specification. As an example, the [const](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#const) transformation will create a new column with a single fixed value in each row. The transformation requires:
+Other transformations such as [calc](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#calc), [interp](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#interp), [const](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#const), [reduce](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#reduce) and [sort](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#sort) do not take arguments; instead, their definition is built up in stages, where at each stage one piece of information is added to their specification. As an example, the [const](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#const) transformation will create a new column with a single fixed value in each row. The transformation requires:
 - the column name
 - the value
 These are specified using two sub-methods of `const()`: `const().called()` and `const().value()`, respectively:
@@ -206,7 +206,7 @@ const model = tt.model()
 * [drop](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#drop)
 * [group](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#group)
 * [interp](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#interp)
-* [tele](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#tele)
+* [reduce](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#reduce)
 * [select](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#select)
 * [sort](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#sort)
 * [transform](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#transform)
@@ -222,7 +222,7 @@ Returns the result of applying a model created using `tt.model()` to some data, 
 
 <a name="calc" href="#calc"># </a>tt.*model*.**calc**()
 
-Adds a calc transformation, whose behaviour is further defined by [calc.called()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#calc.called) and [calc.does()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#calc.does).
+Adds a *calc* transformation, whose behaviour is further defined by [calc.called()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#calc.called) and [calc.does()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#calc.does).
 
 The calc transformation adds a variable (column) to the data table (i.e. to each object in the list, it adds a given property) which is calculated from data in the table. A calculated columnn may depend on data in the original table, or values of the newly-calculated column in previous rows.
 
@@ -255,7 +255,7 @@ Ends the definition of the transformation.
 
 <a name="const" href="#const"># </a>tt.*model*.**const**()
 
-Adds a const transformation, whose behaviour is further defined by [const.called()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#const.called) and [const.value()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#const.value).
+Adds a *const* transformation, whose behaviour is further defined by [const.called()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#const.called) and [const.value()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#const.value).
 
 The const transformation adds a variable (column) to the data table (i.e. to each object in the list, it adds a given property) with a single constant value.
 
@@ -283,7 +283,7 @@ Reorders rows of the table such that they are grouped by *property1*, these grou
 
 Adds an *interp* transformation, whose behaviour is further defined by [interp.x()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#interp.x), [interp.y()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#interp.y) and [interp().groupBy()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#interp.groupby).
 
-The interp transformation interpolates missing values, whose table entries are either `NaN` or `null`. Simple linear interpolation is used between two extant data points, while linear extrapolation is used beyond the range of available data.
+The *interp* transformation interpolates missing values, whose table entries are either `NaN` or `null`. Simple linear interpolation is used between two extant data points, while linear extrapolation is used beyond the range of available data.
 
 <a name="interp.x" href="#interp.x"># </a>tt.*model.interp*.**x**(*property*)
 
@@ -311,7 +311,7 @@ To interpolate population for the missing year 2010, the property specified as a
 
 <a name="interp.groupby" href="#interp.groupby"># </a>tt.*model.interp*.**groupBy**(*property1, ..., propertyN*)
 
-Specifies grouping properties, *property1, ..., propertyN* by which the data will be grouped ready for interpolation. This is useful for flat data which otherwise describes nested groups of series. As an example, consider the following time series data, typical of the sort of flat data structure that may be encountered:
+Specifies grouping properties, *property1, ..., propertyN* by which the data will be grouped ready for interpolation. This is useful for flat data which otherwise describes nested series. As an example, consider the following time series data, typical of the sort of flat data structure that may be encountered:
 ```javascript
 const series = [
   {year:2000, country = 'Brazil', gdp: 655.4},
@@ -328,6 +328,42 @@ The data defines a time series for each country. To interpolate correctly within
 
 Ends the definition of the transformation.
 
+<a name="reduce" href="#reduce"># </a>tt.*model*.**reduce**()
+
+Adds a reduce transformation, whose behaviour is further defined by [reduce.add()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#reduce.add), [reduce.add.called()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#reduce.add.called), [reduce.add.does()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#reduce.add.does) and [reduce.add.groupBy()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#reduce.add.groupBy).
+
+A *reduce* transformation is used to reduce the data to a set of aggregate properties. Examples of aggregate properties would be a sum or an average of a column. Aggregate properties may be calculated across all rows of the table, or alternatively, the data may be grouped and individual aggregates calculated for each group.
+
+<a name="reduce.add" href="#reduce.add"># </a>tt.*model.reduce*.**add**()
+
+Adds a new aggregate property, which is further specified by [reduce.add.called()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#reduce.add.called) and [reduce.add.does()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#reduce.add.does).
+
+Multiple aggregate properties may be defined: the result of the *reduce* transformation will be an array of objects, whose properties are the aggregate properties.
+
+<a name="reduce.add.called" href="#reduce.add.called"># </a>tt.*model.reduce.add*.**called**(*name*)
+
+Takes a string *name* used to specify the property name of the aggregate property.
+
+<a name="reduce.add.does" href="#reduce.add.does"># </a>tt.*model.reduce.add*.**does**(*func*)
+
+Takes a function *func* to be used to reduce the data to the aggregate value. The function takes the form
+```javascript
+function func(*group*)
+``` 
+where *group*. is an array comprising the current group being aggregated. If no grouping is being performed, *group* will be the entire table.
+
+<a name="reduce.add.end" href="#reduce.add.end"># </a>tt.*model.reduce.add*.**end**()
+
+Ends specification of the aggregator.
+
+<a name="reduce.groupby" href="#reduce.groupby"># </a>tt.*model.reduce*.**groupBy**(*property1, ..., propertyN*)
+
+Specifies grouping properties, *property1, ..., propertyN* by which the data will be grouped prior to reduction. This is useful for flat data which otherwise describes nested series. An aggregate object will be created for each group.
+
+<a name="reduce.end" href="#reduce.end"># </a>tt.*model.reduce*.**end**()
+
+End specification of the reduce transformation.
+
 <a name="select" href="#select"># </a>tt.*model*.**select**(*property1, ... propertyN*)
 
 Selects columns specified by the parameters *property1, ..., propertyN* from the table. The resulting table will feature the selected columns in the order that they are specified, rather than their order in the input table.
@@ -342,31 +378,15 @@ Adds a *sort* transformation, whose behaviour is further defined by [sort.inc()]
 
 <a name="sort.inc" href="#sort.inc"># </a>tt.*model.sort*.**inc**(*property*)
 
-Adds a sort transformation, sorting by *increasing* value of the specified *property.
+Adds a sort, sorting by *increasing* value of the specified *property.
 
 <a name="sort.dec" href="#sort.dec"># </a>tt.*model.sort*.**dec**(*property*)
 
-Adds a sort transformation, sorting by *decreaseing* value of the specified *property.
+Adds a sort, sorting by *decreasing* value of the specified *property.
 
 <a name="sort.end" href="#sort.end"># </a>tt.*model.sort*.**end**()
 
 Ends the definition of the transformation.
-
-<a name="tele" href="#tele"># </a>tt.*model*.**tele**()
-
-Adds a tele transformation, whose behaviour is further defined by [tele.add()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#tele.add), [tele.add.called()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#tele.add.called), [tele.add.does()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#tele.add.does) and [tele.add.groupBy()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#tele.add.groupBy).
-
-<a name="tele.add" href="#tele.add"># </a>tt.*model.tele*.**add**()
-
-<a name="tele.add.called" href="#tele.add.called"># </a>tt.*model.tele.add*.**called**(*name*)
-
-<a name="tele.add.does" href="#tele.add.does"># </a>tt.*model.tele.add*.**does**(*func*)
-
-<a name="tele.add.end" href="#tele.add.end"># </a>tt.*model.tele.add*.**end**()
-
-<a name="tele.groupby" href="#tele.groupby"># </a>tt.*model.tele*.**groupBy**(*property1, ..., propertyN*)
-
-<a name="tele.end" href="#tele.end"># </a>tt.*model.tele*.**end**()
 
 <a name="transform" href="#transform"># </a>tt.*model*.**transform**(*func*)
 

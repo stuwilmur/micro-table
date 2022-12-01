@@ -32,15 +32,14 @@ const modelPrototype = {
   interp() {
     return new InterpolateBuilder(this.data, modelmaker);
   },
+  reduce() {
+    return new AggregatorBuilder(this.data, modelmaker);
+  },
   select(...args) {
     return transformModel(this.data, selectVariables, ...args);
   },
-
   sort() {
     return new SortBuilder(this.data, modelmaker);
-  },
-  tele() {
-    return new AggregatorBuilder(this.data, modelmaker);
   },
   transform(transform) {
     return transformModel(this.data, transform);
