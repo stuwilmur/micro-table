@@ -1,8 +1,8 @@
 # Tiny-table API reference
 ## Introduction
-Tiny-table is a small JavaScript library for performing data handling tasks on a data table. It is implemented as an ES2015 module. A *data table* (or data frame) comprises a number of *rows* correspondings to *observations*, and *columns* corresponding to variables. Tiny-table works with a data table constructed as an array of objects with consistent properties: all objects in the array must share exactly the same properties. Each object represents an observation; each property of one of these objects represents a variable.
+Tiny-table is a small JavaScript library for data handling using a data table. It is implemented as an ES2015 module. A *data table* (or data frame) comprises a number of *rows* correspondings to *observations*, and *columns* corresponding to variables. Tiny-table works with a data table constructed as an array of objects with consistent properties: all objects in the array must share exactly the same properties. Each object represents an observation; each property of one of these objects represents a variable.
 
-The following array is an example of a data frame/data table that describes the average monthly rainfall for two countries over three months. 
+The following array is an example of a data frame/data table that describes the average monthly rainfall for two countries over two months. 
 ```javascript
 const rainfall = [
   {country: 'England', month: 'Jan', inches: 3.27},
@@ -12,12 +12,13 @@ const rainfall = [
 ];
 ```
 ## Principles
-Tiny-table implements data *transformations*, which may be *applied* to a data table. An example transformation is adding a column of data. One can *add* a column to our `rainfall` table that calculates the average rainfall in units of millimetres from the value in inches. Other examples of transformations are 
-- sorting the table from least to greatest rainfall
+Tiny-table implements data *transformations*, which may be *applied* to a data table. An example transformation is adding a column of data: it is possible to *add* a column to our `rainfall` table that lists the average rainfall in units of millimetres, calculated from the value in inches. Other examples of transformations are 
+- sorting the table from least to greatest rainfall;
 - aggregating  the total rainfall for each country. 
+
 Any of these transformations could be applied to the table above.
 
-In addition to applying transformations to data in individual steps, Tiny-table allows one or more data transformations to be combined to create a *model*, which can then be applied to a data table in a single step. For example, suppose it is desired to apply two data transformations *f* and *g* to a data table in succession; rather than applying *f*, and then taking the result and applying *g*, both transformations can be combined into a single model, and applied to our data in a single step. This model may be retained for use, and applied to other data.
+In addition to applying transformations to data in individual steps, Tiny-table allows one or more data transformations to be *combined* to create a *model*, which can then be applied to a data table in a single step. For example, suppose it is desired to apply two data transformations *f* and *g* to a data table in succession; rather than applying *f*, and then taking the result and applying *g*, both transformations can be combined into a single model, and applied to our data in a single step. This model may be retained for use, and applied to other data. This is analogous to the way in which two mathematical functions $$f(x)$$ and $$g(x)$$ may be *composed* to give a single function $$h(x)$$ such that $$h(x) = g(f(x))$$.
 
 Tiny table uses some idea functional programming that may be familiar. For example, a model will never mutate the data that is passed to it: it will return a new copy with the necessary transformations applied.
 
