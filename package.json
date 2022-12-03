@@ -1,12 +1,15 @@
 {
   "name": "micro-table",
   "type": "module",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A micro dataframe implemented in JavaScript. Not inspired by, but by accident similar to Arquero.",
   "source": "src/index.js",
   "main": "dist/main.js",
   "module": "dist/moudle.js",
-  "files":["dist/main.js", "dist/module.js"],
+  "files": [
+    "dist/main.js",
+    "dist/module.js"
+  ],
   "scripts": {
     "test": "jest --coverage",
     "make-badges": "istanbul-badges-readme",
@@ -14,7 +17,6 @@
     "build": "parcel build",
     "lint": "eslint src/*.js",
     "clean": "rm -rf dist/*",
-
     "prepublish": "npm run build",
     "prebuild": "npm run test && npm run clean",
     "pretest": "npm run lint",
@@ -22,7 +24,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stuwilmur/Tiny-table.git"
+    "url": "git+https://github.com/stuwilmur/micro-table.git"
   },
   "keywords": [
     "database",
@@ -38,9 +40,9 @@
   "author": "Stu Murray",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/stuwilmur/Tiny-table/issues"
+    "url": "https://github.com/stuwilmur/micro-table/issues"
   },
-  "homepage": "https://github.com/stuwilmur/Tiny-table#readme",
+  "homepage": "https://github.com/stuwilmur/micro-table#readme",
   "devDependencies": {
     "@babel/eslint-parser": "^7.19.1",
     "@babel/plugin-transform-modules-commonjs": "^7.19.6",
