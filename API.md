@@ -18,9 +18,9 @@ Tiny-table implements data *transformations*, which may be *applied* to a data t
 
 Any of these transformations could be applied to the table above.
 
-In addition to applying transformations to data in individual steps, Tiny-table allows one or more data transformations to be *combined* to create a *model*, which can then be applied to a data table in a single step. For example, suppose it is desired to apply two data transformations *f* and *g* to a data table in succession; rather than applying *f*, and then taking the result and applying *g*, both transformations can be combined into a single model, and applied to our data in a single step. This model may be retained for use, and applied to other data. This is analogous to the way in which two mathematical functions $$f(x)$$ and $$g(x)$$ may be *composed* to give a single function $$h(x)$$ such that $$h(x) = g(f(x))$$.
+In addition to applying transformations to data in individual steps, Tiny-table allows one or more data transformations to be *combined* to create a *model*, which can then be applied to a data table in a single step. For example, suppose it is desired to apply two data transformations *f* and *g* to a data table in succession; rather than applying *f*, and then taking the result and applying *g*, both transformations can be combined into a single model, and applied to our data in a single step. This model may be retained for use, and applied to other data. This is analogous to the way in which two mathematical functions $f(x)$ and $g(x)$ may be *composed* to give a single function $h(x) = g(f(x))$.
 
-Tiny table uses some idea functional programming that may be familiar. For example, a model will never mutate the data that is passed to it: it will return a new copy with the necessary transformations applied.
+Tiny table uses some ideas from *functional programming* (such as this idea of composing functions) which may be familiar. Another is the guarantee that a model will never mutate the data that is passed to it: it will return a new copy with the necessary transformations applied.
 
 ## Some simple examples
 ### One transformation: sorting by one column
