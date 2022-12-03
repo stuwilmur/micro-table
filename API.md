@@ -24,11 +24,12 @@ Tiny table uses some ideas from *functional programming* (such as this idea of c
 
 ## Some simple examples
 ### One transformation: sorting by one column
-Suppose it is desired to sort the data by rainfall, from least to greatest. A model may be created which implements a single [sort](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#sort) transformation like so:
+Note: `tt` is used as the name of the imported Tiny-table module throughout.
+In this example the data is to be sorted by the values in the inches column, from least to greatest. A model may be created which implements a single [sort](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#sort) transformation like so:
 ```javascript
 const m = tt.model().sort().inc('inches').end(); // Creates a model, m, sorting on 'inches'
 ```
-This model is applied to the data by calling its method, [data](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#data), passing in our data to be transformed as an argument:
+This model is applied to the data by calling one of its methods, [data](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#data), which accepts the data to be transformed as an argument:
 ```javascript
 const result1 = m.data(rainfall);
 
@@ -63,12 +64,12 @@ If the model is not needed again, then the construction and processing of data m
 const result3 = tt.model().sort().inc('inches').end().data(rainfall); // gives same as result1
 ```
 ### One transformation: adding one calculated column
-In this example a column will be added giving rainfall in millimetres, calculated for each row from the value of rainfall in inches. To do this the [calc](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#calc) transformation method is called:
+In this example a column will be added which lists rainfall in millimetres, calculated from the value of rainfall in inches. To do this the [calc](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#calc) transformation may be used:
 ```javascript
 const result4 = tt.model()
   .calc()
   .called('millimetres')
-  .does((r) => r.inches * 25.4)
+  .does((r) => r.inches * 25.4) // 1 inch = 25.4 mm
   .end()
   .data(rainfall);
   
@@ -103,11 +104,11 @@ const result4 = tt.model()
 ```
 
 ### Two transformations: adding one calculated column and sorting by one column
-This example applies two data transformations already seen:
+This example applies two data transformations already demonstrated:
 1. add a column for rainfall calculated in millimetres;
 2. sort the data by the new value of rainfall in millimetres.
 
-Construction of models that apply multiple transformations is done by *chaining* transformations when defining a model:
+Such a model that applies multiple transformations may be defined by *chaining* methods:
 ```javascript
 const result5 = tt.model()
   .calc()
@@ -147,7 +148,7 @@ const result5 = tt.model()
   }
 ]*/
 ```
-Transformations are applied in the order that they are specified when defining a model: in this case, the new column is added first, and then the resulting table is sorted by this new column. In this example, reversing the order would not work, as the `millimetres` column must exist before it can be used to sort the data. Remember, the input data is left unchanged by any model transformations.
+Transformations are applied in the order that they are specified when defining a model: in this case, the new column is added first, and then the resulting table is sorted by this new column. In this example, reversing the order in which the transformations are added to construct the model would not work, as the `millimetres` column must exist before it can be used to sort the data. Remember, the input data is left unchanged by any model transformations.
 
 Note: it is permissible to define a model without *any* transformations: such a model will apply the identity transformation, which returns the input data unchanged.
 
@@ -155,34 +156,36 @@ Note: it is permissible to define a model without *any* transformations: such a 
 As discussed, a model is created with [model](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#model) and applied using [data](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#data):
 ```javascript
 const dataIn = [
-  {x: 1, y = 4, z = 1}, // Some simple data
-  {x: 2, y = 3, z = 0}, 
-  {x: 3, y = 2, z = 1}, 
-  {x: 4, y = 1, z = 0}
+  {x: 1, y: 4, z: 1}, // Some simple data
+  {x: 2, y: 3, z: 0},
+  {x: 3, y: 2, z: 1},
+  {x: 4, y: 1, z: 0},
   ]; 
 const model = tt.model(); // Constructed without transformations: will do nothing
 const dataOut = model.data(rainfall); // returns copy of dataIn
 ```
-This model simply returns a copy of the input data left unchanged.
+This model simply returns a copy of the input data unchanged.
 
-Adding a transformation to the model is done by calling the transformation method of the model object:
+A transformation is added to the model by calling the relevant transformation method of the model object:
 ```javascript
-const model = tt.model().drop('x') // will delete the 'x' column
+const model = tt.model().drop('x') // will drop (delete) the 'x' column
 ```
 Combining transformations is done by *chaining* method calls:
 ```javascript
-const model = tt.model().drop('x').group('z') // delete 'x' column, group by 'z' value
+const model1 = tt.model().drop('x').group('z') // delete 'x' column, group by 'z' value
 const model2 = model.drop('z') // adds a further transformation to delete 'z'
 ```
+Transfromation methods do not mutate the model; they return a new model with the updated model. This means that in the previous example, `model` is left unchanged by the call to `drop()` in the definition of `model2`.
 
 Some transformation methods such as [drop](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#drop), [group](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#group), [select](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#select) and [transform](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#transform) take one or more arguments to specify how they work. For example, `select()` takes the name of each column to be selected:
 ```javascript
 const result = tt.model().select('x', 'y',).data(dataIn); // Selects columns 'x' and 'y'
 ```
-Other transformations such as [calc](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#calc), [interp](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#interp), [const](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#const), [reduce](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#reduce) and [sort](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#sort) do not take arguments; instead, their definition is built up in stages, where at each stage one piece of information is added to their specification. As an example, the [const](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#const) transformation will create a new column with a single fixed value in each row. The transformation requires:
+Other transformations such as [calc](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#calc), [interp](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#interp), [const](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#const), [reduce](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#reduce) and [sort](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#sort) do not take arguments; instead, their definition is built up in stages, where at each stage one piece of information is added to their definition. As an example, the [const](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#const) transformation will create a new column with a single fixed value in each row. The transformation requires:
 - the column name
-- the value
-These are specified using two sub-methods of `const()`: `const().called()` and `const().value()`, respectively:
+- the constant value
+
+These are specified using two sub-methods [const.called](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#const.called) and [const.value](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#const.value):
 ```javascript
 const model = tt.model()
                 .const()
@@ -199,6 +202,14 @@ const model = tt.model()
                 .value(-1)
                 .called('w')
                 .end(); // defines exactly the same model as the previous example
+/* result6 = 
+[
+  { x: 1, y: 4, z: 1, w: -1 },
+  { x: 2, y: 3, z: 0, w: -1 },
+  { x: 3, y: 2, z: 1, w: -1 },
+  { x: 4, y: 1, z: 0, w: -1 }
+]
+*/
 ```
 
 ## Data transformations
