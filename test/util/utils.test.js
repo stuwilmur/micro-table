@@ -1,4 +1,11 @@
-import {areObjectsEqual, clone, purge, pick, compareBy} from '../../src/util';
+import {
+  areObjectsEqual,
+  clone,
+  purge,
+  pick,
+  compareBy,
+  groupAndFlatten,
+} from '../../src/util';
 
 // Test data
 
@@ -23,6 +30,227 @@ const listSortedOnB = [
   {a: 3, b: 1},
   {a: 0, b: 2},
   {a: 1, b: 3},
+];
+const athletes = [
+  {
+    name: 'Floyd Mayweather',
+    sport: 'Boxing',
+    nation: 'United States',
+    earnings: 285,
+  },
+  {name: 'Lionel Messi', sport: 'Soccer', nation: 'Argentina', earnings: 111},
+  {
+    name: 'Cristiano Ronaldo',
+    sport: 'Soccer',
+    nation: 'Portugal',
+    earnings: 108,
+  },
+  {name: 'Conor McGregor', sport: 'MMA', nation: 'Ireland', earnings: 99},
+  {name: 'Neymar', sport: 'Soccer', nation: 'Brazil', earnings: 90},
+  {
+    name: 'LeBron James',
+    sport: 'Basketball',
+    nation: 'United States',
+    earnings: 85.5,
+  },
+  {
+    name: 'Roger Federer',
+    sport: 'Tennis',
+    nation: 'Switzerland',
+    earnings: 77.2,
+  },
+  {
+    name: 'Stephen Curry',
+    sport: 'Basketball',
+    nation: 'United States',
+    earnings: 76.9,
+  },
+  {
+    name: 'Matt Ryan',
+    sport: 'Football',
+    nation: 'United States',
+    earnings: 67.3,
+  },
+  {
+    name: 'Matthew Stafford',
+    sport: 'Football',
+    nation: 'United States',
+    earnings: 59.5,
+  },
+];
+const atheletesByNation = [
+  [
+    'United States',
+    [
+      {
+        name: 'Floyd Mayweather',
+        sport: 'Boxing',
+        nation: 'United States',
+        earnings: 285,
+      },
+      {
+        name: 'LeBron James',
+        sport: 'Basketball',
+        nation: 'United States',
+        earnings: 85.5,
+      },
+      {
+        name: 'Stephen Curry',
+        sport: 'Basketball',
+        nation: 'United States',
+        earnings: 76.9,
+      },
+      {
+        name: 'Matt Ryan',
+        sport: 'Football',
+        nation: 'United States',
+        earnings: 67.3,
+      },
+      {
+        name: 'Matthew Stafford',
+        sport: 'Football',
+        nation: 'United States',
+        earnings: 59.5,
+      },
+    ],
+  ],
+  [
+    'Argentina',
+    [
+      {
+        name: 'Lionel Messi',
+        sport: 'Soccer',
+        nation: 'Argentina',
+        earnings: 111,
+      },
+    ],
+  ],
+  [
+    'Portugal',
+    [
+      {
+        name: 'Cristiano Ronaldo',
+        sport: 'Soccer',
+        nation: 'Portugal',
+        earnings: 108,
+      },
+    ],
+  ],
+  [
+    'Ireland',
+    [{name: 'Conor McGregor', sport: 'MMA', nation: 'Ireland', earnings: 99}],
+  ],
+  [
+    'Brazil',
+    [{name: 'Neymar', sport: 'Soccer', nation: 'Brazil', earnings: 90}],
+  ],
+  [
+    'Switzerland',
+    [
+      {
+        name: 'Roger Federer',
+        sport: 'Tennis',
+        nation: 'Switzerland',
+        earnings: 77.2,
+      },
+    ],
+  ],
+];
+const athletesByNationAndSport = [
+  [
+    'United States',
+    'Boxing',
+    [
+      {
+        name: 'Floyd Mayweather',
+        sport: 'Boxing',
+        nation: 'United States',
+        earnings: 285,
+      },
+    ],
+  ],
+  [
+    'United States',
+    'Basketball',
+    [
+      {
+        name: 'LeBron James',
+        sport: 'Basketball',
+        nation: 'United States',
+        earnings: 85.5,
+      },
+      {
+        name: 'Stephen Curry',
+        sport: 'Basketball',
+        nation: 'United States',
+        earnings: 76.9,
+      },
+    ],
+  ],
+  [
+    'United States',
+    'Football',
+    [
+      {
+        name: 'Matt Ryan',
+        sport: 'Football',
+        nation: 'United States',
+        earnings: 67.3,
+      },
+      {
+        name: 'Matthew Stafford',
+        sport: 'Football',
+        nation: 'United States',
+        earnings: 59.5,
+      },
+    ],
+  ],
+  [
+    'Argentina',
+    'Soccer',
+    [
+      {
+        name: 'Lionel Messi',
+        sport: 'Soccer',
+        nation: 'Argentina',
+        earnings: 111,
+      },
+    ],
+  ],
+  [
+    'Portugal',
+    'Soccer',
+    [
+      {
+        name: 'Cristiano Ronaldo',
+        sport: 'Soccer',
+        nation: 'Portugal',
+        earnings: 108,
+      },
+    ],
+  ],
+  [
+    'Ireland',
+    'MMA',
+    [{name: 'Conor McGregor', sport: 'MMA', nation: 'Ireland', earnings: 99}],
+  ],
+  [
+    'Brazil',
+    'Soccer',
+    [{name: 'Neymar', sport: 'Soccer', nation: 'Brazil', earnings: 90}],
+  ],
+  [
+    'Switzerland',
+    'Tennis',
+    [
+      {
+        name: 'Roger Federer',
+        sport: 'Tennis',
+        nation: 'Switzerland',
+        earnings: 77.2,
+      },
+    ],
+  ],
 ];
 
 // Tests
@@ -113,5 +341,23 @@ test('checks sorting a list on property "a" using compareBy', () => {
 test('checks sorting a list on property "b" using compareBy', () => {
   expect(
     areObjectsEqual(listSortedOnB, listToSort.sort(compareBy('b'))),
+  ).toBeTruthy();
+});
+
+/*
+groupAnFlatten
+*/
+test('Test group by one property', () => {
+  expect(
+    areObjectsEqual(groupAndFlatten(athletes, 'nation'), atheletesByNation),
+  ).toBeTruthy();
+});
+
+test('Test group by two properties', () => {
+  expect(
+    areObjectsEqual(
+      groupAndFlatten(athletes, 'nation', 'sport'),
+      athletesByNationAndSport,
+    ),
   ).toBeTruthy();
 });

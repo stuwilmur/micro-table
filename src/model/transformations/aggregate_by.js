@@ -1,4 +1,5 @@
 import {flatRollup} from 'd3';
+import {keyFunctions} from '../../util';
 
 function aggregate(v, listOfAggregators) {
   const obj = {};
@@ -21,8 +22,11 @@ function mergeRolledUpList(list, keys) {
 
 export function aggregateBy(data, listOfAggregators, ...keys) {
   const curriedAggregators = (v) => aggregate(v, listOfAggregators);
-  const keyFunctions = keys.map((key) => (d) => d[key]);
-  const rolledUpData = flatRollup(data, curriedAggregators, ...keyFunctions);
+  const rolledUpData = flatRollup(
+    data,
+    curriedAggregators,
+    ...keyFunctions(keys),
+  );
 
   const listOfRowObjects = rolledUpData.map((element) =>
     mergeRolledUpList(element, keys),
