@@ -326,12 +326,12 @@ To interpolate population for the missing year 2010, the property specified as a
 Specifies grouping properties, *property1, ..., propertyN* by which the data will be grouped ready for interpolation. This is useful for flat data which otherwise describes nested series. As an example, consider the following time series data, typical of the sort of flat data structure that may be encountered:
 ```javascript
 const series = [
-  {year:2000, country = 'Brazil', gdp: 655.4},
-  {year:2000, country = 'China',  gdp: 1211},
-  {year:2001, country = 'Brazil', gdp: NaN},
-  {year:2001, country = 'China',  gdp: 1339},
-  {year:2002, country = 'Brazil', gdp: 509.8},
-  {year:2002, country = 'China',  gdp: 1471},
+  {year:2000, country : 'Brazil', gdp: 655.4},
+  {year:2000, country : 'China',  gdp: 1211},
+  {year:2001, country : 'Brazil', gdp: NaN},
+  {year:2001, country : 'China',  gdp: 1339},
+  {year:2002, country : 'Brazil', gdp: 509.8},
+  {year:2002, country : 'China',  gdp: 1471},
 ]
 ```
 The data defines a time series for each country. To interpolate correctly within each time series, interp.*groupBy()* must be called with the parameter `'country'`.
@@ -345,6 +345,8 @@ Ends the definition of the interp transformation.
 Adds a reduce transformation, whose behaviour is further defined by [reduce.add()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#reduce.add), [reduce.add.called()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#reduce.add.called), [reduce.add.does()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#reduce.add.does) and [reduce.add.groupBy()](https://github.com/stuwilmur/Tiny-table/blob/main/API.md#reduce.add.groupBy).
 
 A reduce transformation is used to reduce the data to a set of aggregate properties. Examples of aggregate properties would be a sum or an average of a column. Aggregate properties may be calculated across all rows of the table, or alternatively, the data may be grouped and individual aggregates calculated for each group.
+
+The transformation returns an array comprising an object for each group; each object has a property for each aggregator defined, as well as properties for each key that was used to group the data.
 
 <a name="reduce.add" href="#reduce.add"># </a>tt.*model.reduce*.**add**()
 
