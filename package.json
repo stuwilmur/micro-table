@@ -1,14 +1,13 @@
 {
   "name": "micro-table",
   "type": "module",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A micro dataframe implemented in JavaScript. Not inspired by, but by accident similar to Arquero.",
   "source": "src/index.js",
   "main": "dist/main.js",
   "module": "dist/moudle.js",
   "files": [
-    "dist/main.js",
-    "dist/module.js"
+    "dist/main.js"
   ],
   "scripts": {
     "test": "jest --coverage",
