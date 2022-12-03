@@ -345,7 +345,7 @@ test('checks sorting a list on property "b" using compareBy', () => {
 });
 
 /*
-groupAnFlatten
+groupAndFlatten
 */
 test('Test group by one property', () => {
   expect(
