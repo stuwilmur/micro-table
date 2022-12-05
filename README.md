@@ -10,7 +10,7 @@ micro-table is a small JavaScript library for performing data handling tasks on 
 
 It was not inspired by, but by accident has some similarities with Arquero.
 
-Be aware that bad input will result in undefined or unexpected output!
+Be aware that bad input may result in undefined or unexpected output!
 
 ## Resources
 * [API Reference](https://github.com/stuwilmur/micro-table/blob/main/API.md)
