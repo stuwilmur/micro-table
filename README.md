@@ -1,6 +1,6 @@
 # micro-table 
 
-https://img.shields.io/npm/v/micro-table
+![npm](https://img.shields.io/npm/v/micro-table)
 
 | Statements                  | Branches                | Functions                 | Lines             |
 | --------------------------- | ----------------------- | ------------------------- | ----------------- |
