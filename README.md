@@ -17,4 +17,4 @@ Be aware that bad input may result in undefined or unexpected output!
 * [API Reference](https://github.com/stuwilmur/micro-table/blob/main/API.md)
 
 ## Installing
-Using npm, run `npm install micro-table`.
+Using npm, run `npm i micro-table`.
