@@ -1,4 +1,6 @@
-# micro-table
+# micro-table 
+
+https://img.shields.io/npm/v/micro-table
 
 | Statements                  | Branches                | Functions                 | Lines             |
 | --------------------------- | ----------------------- | ------------------------- | ----------------- |
