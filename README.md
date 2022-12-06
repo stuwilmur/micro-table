@@ -13,7 +13,7 @@ It was not inspired by, but by accident has some similarities with Arquero.
 Be aware that bad input may result in undefined or unexpected output!
 
 ## Resources
-* [Examples](https://observablehq.com/@stuwilmur/first-steps-with-micro-table)
+* User guide [part I](https://observablehq.com/@stuwilmur/first-steps-with-micro-table) & [part II](https://observablehq.com/@stuwilmur/micro-table-user-guide-part-ii)
 * [API Reference](https://github.com/stuwilmur/micro-table/blob/main/API.md)
 
 ## Installing
