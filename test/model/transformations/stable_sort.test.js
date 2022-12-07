@@ -134,12 +134,3 @@ test('Test sort on three properties', () => {
 test('Test sort on nothing', () => {
   expect(areObjectsEqual(stableSort(athletes), athletes)).toBeTruthy();
 });
-
-test('Test sorting keys are order-independent', () => {
-  expect(
-    areObjectsEqual(
-      stableSort(athletes, makeSortKey('sport'), makeSortKey('nation')),
-      stableSort(athletes, makeSortKey('nation'), makeSortKey('sport')),
-    ),
-  ).toBeTruthy();
-});
