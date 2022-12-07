@@ -1,11 +1,19 @@
 import {identity, compose, curry} from '../util';
-import {deleteVariables, groupBy, selectVariables} from './transformations';
+
+import {
+  deleteVariables,
+  filterRows,
+  groupBy,
+  selectVariables,
+} from './transformations';
+
 import {
   CalcVarBuilder,
   AggregatorBuilder,
   InterpolateBuilder,
   SetVarBuilder,
 } from './builders';
+
 import {SortBuilder} from './builders/sort_builder';
 
 function Model(data) {
@@ -25,6 +33,9 @@ const modelPrototype = {
   },
   drop(...args) {
     return transformModel(this.data, deleteVariables, ...args);
+  },
+  filter(arg) {
+    return transformModel(this.data, filterRows, arg);
   },
   group(...args) {
     return transformModel(this.data, groupBy, ...args);
