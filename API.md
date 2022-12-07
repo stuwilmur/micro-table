@@ -177,7 +177,7 @@ const model2 = model.drop('z') // adds a further transformation to delete 'z'
 ```
 Transfromation methods do not mutate the model; they return a new model with the updated model. This means that in the previous example, `model` is left unchanged by the call to `drop()` in the definition of `model2`.
 
-Some transformation methods such as [drop()](https://github.com/stuwilmur/micro-table/blob/main/API.md#drop), [group()](https://github.com/stuwilmur/micro-table/blob/main/API.md#group), [select()](https://github.com/stuwilmur/micro-table/blob/main/API.md#select) and [transform()](https://github.com/stuwilmur/micro-table/blob/main/API.md#transform) take one or more arguments to specify how they work. For example, `select()` takes the name of each column to be selected:
+Some transformation methods such as [drop()](https://github.com/stuwilmur/micro-table/blob/main/API.md#drop), [filter()](https://github.com/stuwilmur/micro-table/blob/main/API.md#filter), [group()](https://github.com/stuwilmur/micro-table/blob/main/API.md#group), [select()](https://github.com/stuwilmur/micro-table/blob/main/API.md#select) and [transform()](https://github.com/stuwilmur/micro-table/blob/main/API.md#transform) take one or more arguments to specify how they work. For example, `select()` takes the name of each column to be selected:
 ```javascript
 const result = mt.model().select('x', 'y',).data(dataIn); // Selects columns 'x' and 'y'
 ```
@@ -216,6 +216,7 @@ const model = mt.model()
 * [calc()](https://github.com/stuwilmur/micro-table/blob/main/API.md#calc)
 * [const()](https://github.com/stuwilmur/micro-table/blob/main/API.md#const)
 * [drop()](https://github.com/stuwilmur/micro-table/blob/main/API.md#drop)
+* [filter()](https://github.com/stuwilmur/micro-table/blob/main/API.md#filter)
 * [group()](https://github.com/stuwilmur/micro-table/blob/main/API.md#group)
 * [interp()](https://github.com/stuwilmur/micro-table/blob/main/API.md#interp)
 * [reduce()](https://github.com/stuwilmur/micro-table/blob/main/API.md#reduce)
@@ -286,6 +287,10 @@ Ends the definition of the const transformation.
 <a name="drop" href="#drop"># </a>mt.*model*.**drop**(*property1, ... , propertyN*)
 
 Drops columns (i.e. deletes variables) specified by the parameters *property1, ..., propertyN*.
+
+<a name="filter" href="#filter"># </a>mt.*model*.**filter**(*func*)
+
+Filters rows using the callback filtering function *func*. Essentially, this simply applies the standard Array.func() method to the underlying data array.
 
 <a name="group" href="#group"># </a>mt.*model*.**group**(*property1, ..., propertyN*)
 
