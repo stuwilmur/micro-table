@@ -18,7 +18,8 @@
     "prepublish": "npm run build",
     "prebuild": "npm run test && npm run clean",
     "pretest": "npm run lint",
-    "posttest": "npm run make-badges"
+    "posttest": "npm run make-badges",
+    "mypublish": "npm install && npm version patch && npm publish"
   },
   "repository": {
     "type": "git",
