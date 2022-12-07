@@ -16,5 +16,5 @@ function compareKeys(a, b, ...keys) {
 }
 
 export function stableSort(data, ...keys) {
-  return data.sort((a, b) => compareKeys(a, b, ...keys));
+  return data.slice().sort((a, b) => compareKeys(a, b, ...keys));
 }
