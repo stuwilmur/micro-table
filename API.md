@@ -323,7 +323,7 @@ To interpolate population for the missing year 2010, the property specified as a
 
 <a name="interp.groupby" href="#interp.groupby"># </a>mt.*model.interp*.**groupBy**(*property1, ..., propertyN*)
 
-Specifies grouping properties, *property1, ..., propertyN* by which the data will be grouped ready for interpolation. This is useful for flat data which otherwise describes nested series. As an example, consider the following time series data, typical of the sort of flat data structure that may be encountered:
+Specifies grouping properties, *property1, ..., propertyN* by which the data will be grouped ready for interpolation. This is useful for flat data which otherwise describes nested series. As an example, consider the following time series data, typical of the flat data structure often encountered:
 ```javascript
 const series = [
   {year:2000, country : 'Brazil', gdp: 655.4},
@@ -386,9 +386,37 @@ Selects columns specified by the parameters *property1, ..., propertyN* from the
 
 Adds a sort transformation, whose behaviour is further defined by [sort.inc()](https://github.com/stuwilmur/micro-table/blob/main/API.md#sort.inc) and [sort.dec()](https://github.com/stuwilmur/micro-table/blob/main/API.md#sort.dec). 
 
-- Sorts are built up in stages, at each stage specifying the property (column) on which to sort and whether the sort is *increasing* or *decreasing*. As many stages may be added as there are properties.
-- Sorting is done in the order that columns are specified.
-- The sort is guaranteed to be stable: the order of rows with eqaul values in the column being sorted will be maintained.
+- Sorts are built up in stages, at each stage specifying the property (column) on which to sort and whether the sort is *increasing* or *decreasing*. As many stages may be added as there are properties. Subsequent sort stages will apply a sort **within each group that the previous sort considered equal***. As an example, consider the following data:
+```javascript
+const unsorted = [
+    {n: 1, a: 2, b: 2},
+    {n: 2, a: 3, b: 2},
+    {n: 3, a: 1, b: 2},
+    {n: 4, a: 2, b: 3},
+    {n: 5, a: 3, b: 3},
+    {n: 6, a: 1, b: 3},
+    {n: 7, a: 2, b: 1},
+    {n: 8, a: 3, b: 1},
+    {n: 9, a: 1, b: 1},
+  ];
+```
+Sorting by `a` then `b` will sort by column a, then sort *within each of these groups* by `b`:
+```javascript
+const sorted = mt.model().sort().inc('a').end().data(data);
+/*
+sorted = [
+  { n: 9, a: 1, b: 1 },
+  { n: 3, a: 1, b: 2 },
+  { n: 6, a: 1, b: 3 },
+  { n: 7, a: 2, b: 1 },
+  { n: 1, a: 2, b: 2 },
+  { n: 4, a: 2, b: 3 },
+  { n: 8, a: 3, b: 1 },
+  { n: 2, a: 3, b: 2 },
+  { n: 5, a: 3, b: 3 }
+];
+*/
+```
 
 <a name="sort.inc" href="#sort.inc"># </a>mt.*model.sort*.**inc**(*property*)
 
