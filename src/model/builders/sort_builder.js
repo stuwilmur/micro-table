@@ -2,6 +2,7 @@ import {SortBuilderPrototype} from './sort_builder_prototype';
 import {Builder} from './builder';
 
 export function SortBuilder(...args) {
+  this.sortKeyList = [];
   Builder.call(this, ...args);
 }
 

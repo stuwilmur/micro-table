@@ -8,9 +8,6 @@ const transform =
       aggregateBy(data, aggregators, ...keys);
 
 export const aggregatorBuilderPrototype = {
-  aggregators: [],
-  keys: [null],
-
   add() {
     return new SubAggregatorBuilder(this);
   },

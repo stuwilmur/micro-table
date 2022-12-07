@@ -4,8 +4,6 @@ const transform = (name, value) => (data) =>
   setVariableValue(data, name, value);
 
 export const SetVarBuilderPrototype = {
-  varValue: null,
-
   called(name) {
     this.name = name;
     return this;

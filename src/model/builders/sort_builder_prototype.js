@@ -8,8 +8,6 @@ const transform =
       stableSort(data, ...sortKeys);
 
 export const SortBuilderPrototype = {
-  sortKeyList: [],
-
   inc(property) {
     this.sortKeyList.push(makeSortKey(property, true));
     return this;

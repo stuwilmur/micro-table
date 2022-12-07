@@ -2,6 +2,8 @@ import {SetVarBuilderPrototype} from './set_var_builder_prototype';
 import {Builder} from './builder';
 
 export function SetVarBuilder(...args) {
+  this.varValue = null;
+
   Builder.call(this, ...args);
 }
 

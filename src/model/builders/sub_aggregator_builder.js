@@ -3,8 +3,11 @@ import {
   subAggregatorBuilderPrototype,
 } from './sub_aggregator_builder_prototype';
 import {SubBuilder} from './sub_builder';
+import {identity} from '../../util';
 
 export function SubAggregatorBuilder(...args) {
+  this.f = identity;
+
   SubBuilder.call(this, ...args);
 }
 
