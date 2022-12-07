@@ -1,7 +1,7 @@
 {
   "name": "micro-table",
   "type": "module",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A micro dataframe implemented in JavaScript. Not inspired by, but by accident similar to Arquero.",
   "source": "src/index.js",
   "module": "dist/module.js",
