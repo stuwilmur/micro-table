@@ -21,7 +21,7 @@
     "posttest": "npm run make-badges",
     "publish_patch": "npm install && npm version patch && npm publish",
     "publish_minor": "npm install && npm version minor && npm publish",
-    "publish_major": "npm install && npm version major && npm publish",
+    "publish_major": "npm install && npm version major && npm publish"
   },
   "repository": {
     "type": "git",
