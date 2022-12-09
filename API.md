@@ -18,16 +18,17 @@ micro-table implements data *transformations*, which may be *applied* to a data 
 
 Any of these transformations could be applied to the table above.
 
+The module exports a single function, *model()*, which is used to create a model.
+
 In addition to applying transformations to data in individual steps, micro-table allows one or more data transformations to be *combined* to create a *model*, which can then be applied to a data table in a single step. For example, suppose it is desired to apply two data transformations *f* and *g* to a data table in succession; rather than applying *f*, and then taking the result and applying *g*, both transformations can be combined into a single model, and applied to our data in a single step. This model may be retained for use, and applied to other data. This is analogous to the way in which two mathematical functions $f(x)$ and $g(x)$ may be *composed* to give a single function $h(x) = g(f(x))$.
 
 micro table uses some ideas from *functional programming* (such as this idea of composing functions) which may be familiar. Another is the guarantee that a model will never mutate the data that is passed to it: it will return a new copy with the necessary transformations applied.
 
 ## Some simple examples
 ### One transformation: sorting by one column
-Note: `tt` is used as the name of the imported micro-table module throughout.
 In this example the data is to be sorted by the values in the inches column, from least to greatest. A model may be created which implements a single [sort()](https://github.com/stuwilmur/micro-table/blob/main/API.md#sort) transformation like so:
 ```javascript
-const m = mt.model().sort().inc('inches').end(); // Creates a model, m, sorting on 'inches'
+const m = model().sort().inc('inches').end(); // Creates a model, m, sorting on 'inches'
 ```
 This model is applied to the data by calling one of its methods, [data()](https://github.com/stuwilmur/micro-table/blob/main/API.md#data), which accepts the data to be transformed as an argument:
 ```javascript
@@ -61,12 +62,12 @@ result2 = [
 ```
 If the model is not needed again, then the construction and processing of data may be combined into a single statement:
 ```javascript
-const result3 = mt.model().sort().inc('inches').end().data(rainfall); // gives same as result1
+const result3 = model().sort().inc('inches').end().data(rainfall); // gives same as result1
 ```
 ### One transformation: adding one calculated column
 In this example a column will be added which lists rainfall in millimetres, calculated from the value of rainfall in inches. To do this the [calc()](https://github.com/stuwilmur/micro-table/blob/main/API.md#calc) transformation may be used:
 ```javascript
-const result4 = mt.model()
+const result4 = model()
   .calc()
   .called('millimetres')
   .does((r) => r.inches * 25.4) // 1 inch = 25.4 mm
@@ -110,7 +111,7 @@ This example applies two data transformations already demonstrated:
 
 Such a model that applies multiple transformations may be defined by *chaining* methods:
 ```javascript
-const result5 = mt.model()
+const result5 = model()
   .calc()
   .called('millimetres')
   .does((r) => r.inches * 25.4)
@@ -161,25 +162,25 @@ const dataIn = [
   {x: 3, y: 2, z: 1},
   {x: 4, y: 1, z: 0},
   ]; 
-const model = mt.model(); // Constructed without transformations: will do nothing
+const model = model(); // Constructed without transformations: will do nothing
 const dataOut = model.data(rainfall); // returns copy of dataIn
 ```
 This model simply returns a copy of the input data unchanged.
 
 A transformation is added to the model by calling the relevant transformation method of the model object:
 ```javascript
-const model = mt.model().drop('x') // will drop (delete) the 'x' column
+const model = model().drop('x') // will drop (delete) the 'x' column
 ```
 Combining transformations is done by *chaining* method calls:
 ```javascript
-const model1 = mt.model().drop('x').group('z') // delete 'x' column, group by 'z' value
+const model1 = model().drop('x').group('z') // delete 'x' column, group by 'z' value
 const model2 = model.drop('z') // adds a further transformation to delete 'z'
 ```
 Transfromation methods do not mutate the model; they return a new model with the updated model. This means that in the previous example, `model` is left unchanged by the call to *drop()* in the definition of `model2`.
 
 Some transformation methods such as [drop()](https://github.com/stuwilmur/micro-table/blob/main/API.md#drop), [filter()](https://github.com/stuwilmur/micro-table/blob/main/API.md#filter), [group()](https://github.com/stuwilmur/micro-table/blob/main/API.md#group), [merge()](https://github.com/stuwilmur/micro-table/blob/main/API.md#merge), [select()](https://github.com/stuwilmur/micro-table/blob/main/API.md#select) and [transform()](https://github.com/stuwilmur/micro-table/blob/main/API.md#transform) take one or more arguments to specify how they work. For example, *select()* takes the name of each column to be selected:
 ```javascript
-const result = mt.model().select('x', 'y',).data(dataIn); // Selects columns 'x' and 'y'
+const result = model().select('x', 'y',).data(dataIn); // Selects columns 'x' and 'y'
 ```
 Other transformations such as [calc()](https://github.com/stuwilmur/micro-table/blob/main/API.md#calc), [interp()](https://github.com/stuwilmur/micro-table/blob/main/API.md#interp), [const()](https://github.com/stuwilmur/micro-table/blob/main/API.md#const), [reduce()](https://github.com/stuwilmur/micro-table/blob/main/API.md#reduce) and [sort()](https://github.com/stuwilmur/micro-table/blob/main/API.md#sort) do not take arguments; instead, their definition is built up in stages, where at each stage one piece of information is added to their definition. As an example, the [const()](https://github.com/stuwilmur/micro-table/blob/main/API.md#const) transformation will create a new column with a single fixed value in each row. The transformation requires:
 - the column name
@@ -187,7 +188,7 @@ Other transformations such as [calc()](https://github.com/stuwilmur/micro-table/
 
 These are specified using two sub-methods [const.called()](https://github.com/stuwilmur/micro-table/blob/main/API.md#const.called) and [const.value()](https://github.com/stuwilmur/micro-table/blob/main/API.md#const.value):
 ```javascript
-const model = mt.model()
+const model = model()
                 .const()
                 .called('w')
                 .value(-1)
@@ -197,7 +198,7 @@ The statement above defines a model which adds a new column `w` with the value -
 1. When transformations are built up in stages like this, the end of the stage is marked with a call to *end()*. 
 2. The order of the stages is always unimportant. For example:
 ```javascript
-const model = mt.model()
+const model = model()
                 .const()
                 .value(-1)
                 .called('w')
@@ -226,25 +227,25 @@ const model = mt.model()
 * [transform()](https://github.com/stuwilmur/micro-table/blob/main/API.md#transform)
 
 ## API
-<a name="model" href = "#model"># </a>mt.**model**()
+<a name="model" href = "#model"># </a>**model**()
 
 Returns a new model object, which implements the identity transformation (i.e., when applied to some data, returns a copy of the data unchanged).
 
-<a name="data" href = "#data"># </a>mt.*model*.**data**(table)
+<a name="data" href = "#data"># </a>*model*.**data**(table)
 
 Returns the result of applying a model created using [model()](https://github.com/stuwilmur/micro-table/blob/main/API.md#model) to a data array, *table*. The input data in *table* is not mutated.
 
-<a name="calc" href="#calc"># </a>mt.*model*.**calc**()
+<a name="calc" href="#calc"># </a>*model*.**calc**()
 
 Adds a calc transformation, whose behaviour is further defined by [calc.called()](https://github.com/stuwilmur/micro-table/blob/main/API.md#calc.called) and [calc.does()](https://github.com/stuwilmur/micro-table/blob/main/API.md#calc.does).
 
 The calc transformation adds a variable (column) to the data table (i.e. to each object in the list, it adds a given property) which is calculated from data in the table. A calculated columnn may depend on data in the original table, or values of the newly-calculated column in previous rows.
 
-<a name="calc.called" href="#calc.called"># </a>mt.*model.calc*.**called**(*name*)
+<a name="calc.called" href="#calc.called"># </a>*model.calc*.**called**(*name*)
 
 Takes a string *name* used to specify the name of the variable (column) being added.
 
-<a name="calc.does" href="#calc.does"># </a>mt.*model.calc*.**does**(*func*)
+<a name="calc.does" href="#calc.does"># </a>*model.calc*.**does**(*func*)
 
 Defines the callback function *func*, used to calculate the value of the new variable. This callback is applied to each row consecutively, starting from the beginning of the table. The callback is of the form
 
@@ -263,41 +264,41 @@ The parameter *n* specifies the row to return by its position: a postive\[negati
 
 No checking is performed on the value of *n*.
 
-<a name="calc.end" href="#calc.end"># </a>mt.*model.calc*.**end**()
+<a name="calc.end" href="#calc.end"># </a>*model.calc*.**end**()
 
 Ends the definition of the calc transformation.
 
-<a name="const" href="#const"># </a>mt.*model*.**const**()
+<a name="const" href="#const"># </a>*model*.**const**()
 
 Adds a const transformation, whose behaviour is further defined by [const.called()](https://github.com/stuwilmur/micro-table/blob/main/API.md#const.called) and [const.value()](https://github.com/stuwilmur/micro-table/blob/main/API.md#const.value).
 
 The const transformation adds a variable (column) to the data table (i.e. to each object in the list, it adds a given property) with a single constant value.
 
-<a name="const.called" href="#const.called"># </a>mt.*model.const*.**called**(*name*)
+<a name="const.called" href="#const.called"># </a>*model.const*.**called**(*name*)
 
 Takes a string *name* used to specify the name of the variable (column) being added.
 
-<a name="const.value" href="#const.value"># </a>mt.*model.const*.**value**(*value*)
+<a name="const.value" href="#const.value"># </a>*model.const*.**value**(*value*)
 
 Takes a parameter *value* used to specify the constant value.
 
-<a name="const.end" href="#const.end"># </a>mt.*model.const*.**end**()
+<a name="const.end" href="#const.end"># </a>*model.const*.**end**()
 
 Ends the definition of the const transformation.
 
-<a name="drop" href="#drop"># </a>mt.*model*.**drop**(*property1, ... , propertyN*)
+<a name="drop" href="#drop"># </a>*model*.**drop**(*property1, ... , propertyN*)
 
 Drops columns (i.e. deletes variables) specified by the parameters *property1, ..., propertyN*.
 
-<a name="filter" href="#filter"># </a>mt.*model*.**filter**(*func*)
+<a name="filter" href="#filter"># </a>*model*.**filter**(*func*)
 
 Adds a filter transformation, which filters rows using the callback filtering function *func*. Essentially, this simply applies the standard Array.func() method to the underlying data array.
 
-<a name="group" href="#group"># </a>mt.*model*.**group**(*property1, ..., propertyN*)
+<a name="group" href="#group"># </a>*model*.**group**(*property1, ..., propertyN*)
 
 Reorders rows of the table such that they are grouped by *property1*, these groups being futher subgrouped by *property2* and so on. Note that groups are arranged in the order that order that each unique property value appears in the table.
 
-<a name="merge" href="#merge"># </a>mt.*model*.**merge**(*newColumns*)
+<a name="merge" href="#merge"># </a>*model*.**merge**(*newColumns*)
 
 Adds a merge transformation, which will merge the incoming data specified by *newColumns* (itself a data table) into the existing table. This is equivalent to adding the columns of *newColumns* into the current table. 
 
@@ -312,7 +313,7 @@ const incoming = [
   {b: 1}, 
   {b: 2}
   ];
-const result = mt.model().merge(incoming).data(existing);
+const result = model().merge(incoming).data(existing);
 /*
 result = [ 
   { a: 1, b: 1 }, 
@@ -331,7 +332,7 @@ const incoming = [
   {c: 3, b:4}, 
   {c: 3, b:4}
   ];
-const result = mt.model().merge(incoming).data(existing);
+const result = model().merge(incoming).data(existing);
 /*
 result = [ 
   { a: 1, b: 4, c: 3 }, 
@@ -340,13 +341,13 @@ result = [
 */
 ```
 
-<a name="interp" href="#interp"># </a>mt.*model*.**interp**()
+<a name="interp" href="#interp"># </a>*model*.**interp**()
 
 Adds an interp transformation, whose behaviour is further defined by [interp.x()](https://github.com/stuwilmur/micro-table/blob/main/API.md#interp.x), [interp.y()](https://github.com/stuwilmur/micro-table/blob/main/API.md#interp.y) and [interp.groupBy()](https://github.com/stuwilmur/micro-table/blob/main/API.md#interp.groupby).
 
 The interp transformation interpolates missing values, being entries that are `NaN` or `null`. Simple linear interpolation is used between two extant data points, whereas linear extrapolation is used beyond the range of available data.
 
-<a name="interp.x" href="#interp.x"># </a>mt.*model.interp*.**x**(*property*)
+<a name="interp.x" href="#interp.x"># </a>*model.interp*.**x**(*property*)
 
 Specificies the index property (i.e. the *x*-value) on which to interpolate, using the parameter *property*. For example, consider some simple time series data:
 ```javascript
@@ -358,7 +359,7 @@ const series = [
 ```
 To interpolate population for the missing year 2010, the index property specified as a parameter would be `'year'`.
 
-<a name="interp.y" href="#interp.y"># </a>mt.*model.interp*.**y**(*property1, ..., propertyN*)
+<a name="interp.y" href="#interp.y"># </a>*model.interp*.**y**(*property1, ..., propertyN*)
 
 Specificies the result properties (i.e. the *y*-values) to interpolate, using the parameters *property1, ..., propertyN*. For example, consider some simple time series data:
 ```javascript
@@ -370,7 +371,7 @@ const series = [
 ```
 To interpolate population for the missing year 2010, the property specified as a parameter would be `'population'`.
 
-<a name="interp.groupby" href="#interp.groupby"># </a>mt.*model.interp*.**groupBy**(*property1, ..., propertyN*)
+<a name="interp.groupby" href="#interp.groupby"># </a>*model.interp*.**groupBy**(*property1, ..., propertyN*)
 
 Specifies grouping properties, *property1, ..., propertyN* by which the data will be grouped ready for interpolation. This is useful for flat data which otherwise describes nested series. As an example, consider the following time series data, typical of the flat data structure often encountered:
 ```javascript
@@ -385,11 +386,11 @@ const series = [
 ```
 The data defines a time series for each country. To interpolate correctly within each time series, interp.*groupBy()* must be called with the parameter `'country'`.
 
-<a name="interp.end" href="#interp.end"># </a>mt.*model.interp*.**end**()
+<a name="interp.end" href="#interp.end"># </a>*model.interp*.**end**()
 
 Ends the definition of the interp transformation.
 
-<a name="reduce" href="#reduce"># </a>mt.*model*.**reduce**()
+<a name="reduce" href="#reduce"># </a>*model*.**reduce**()
 
 Adds a reduce transformation, whose behaviour is further defined by [reduce.add()](https://github.com/stuwilmur/micro-table/blob/main/API.md#reduce.add), [reduce.add.called()](https://github.com/stuwilmur/micro-table/blob/main/API.md#reduce.add.called), [reduce.add.does()](https://github.com/stuwilmur/micro-table/blob/main/API.md#reduce.add.does) and [reduce.add.groupBy()](https://github.com/stuwilmur/micro-table/blob/main/API.md#reduce.add.groupBy).
 
@@ -397,17 +398,17 @@ A reduce transformation is used to reduce the data to a set of aggregate propert
 
 The transformation returns an array comprising an object for each group; each object has a property for each aggregator defined, as well as properties for each key that was used to group the data.
 
-<a name="reduce.add" href="#reduce.add"># </a>mt.*model.reduce*.**add**()
+<a name="reduce.add" href="#reduce.add"># </a>*model.reduce*.**add**()
 
 Adds a new aggregate property, which is further specified by [reduce.add.called()](https://github.com/stuwilmur/micro-table/blob/main/API.md#reduce.add.called) and [reduce.add.does()](https://github.com/stuwilmur/micro-table/blob/main/API.md#reduce.add.does).
 
 Multiple aggregate properties may be defined: the result of the reduce transformation will be an array of objects, whose properties are the aggregate properties.
 
-<a name="reduce.add.called" href="#reduce.add.called"># </a>mt.*model.reduce.add*.**called**(*name*)
+<a name="reduce.add.called" href="#reduce.add.called"># </a>*model.reduce.add*.**called**(*name*)
 
 Takes a string *name* used to specify the property name of the aggregate property.
 
-<a name="reduce.add.does" href="#reduce.add.does"># </a>mt.*model.reduce.add*.**does**(*func*)
+<a name="reduce.add.does" href="#reduce.add.does"># </a>*model.reduce.add*.**does**(*func*)
 
 Takes a function *func* to be used to reduce the data to the aggregate value. The function takes the form
 
@@ -415,23 +416,23 @@ Takes a function *func* to be used to reduce the data to the aggregate value. Th
 
 where *group*. is an array comprising the current group being aggregated. If no grouping is being performed, *group* will be the entire table.
 
-<a name="reduce.add.end" href="#reduce.add.end"># </a>mt.*model.reduce.add*.**end**()
+<a name="reduce.add.end" href="#reduce.add.end"># </a>*model.reduce.add*.**end**()
 
 Ends specification of the aggregator.
 
-<a name="reduce.groupby" href="#reduce.groupby"># </a>mt.*model.reduce*.**groupBy**(*property1, ..., propertyN*)
+<a name="reduce.groupby" href="#reduce.groupby"># </a>*model.reduce*.**groupBy**(*property1, ..., propertyN*)
 
 Specifies grouping properties, *property1, ..., propertyN* by which the data will be grouped prior to reduction. This is useful for flat data which otherwise describes nested series. An aggregate object will be created for each group.
 
-<a name="reduce.end" href="#reduce.end"># </a>mt.*model.reduce*.**end**()
+<a name="reduce.end" href="#reduce.end"># </a>*model.reduce*.**end**()
 
 End specification of the reduce transformation.
 
-<a name="select" href="#select"># </a>mt.*model*.**select**(*property1, ... propertyN*)
+<a name="select" href="#select"># </a>*model*.**select**(*property1, ... propertyN*)
 
 Selects columns specified by the parameters *property1, ..., propertyN* from the table. The resulting table will feature the selected columns in the order that they are specified, rather than their order in the input table.
 
-<a name="sort" href="#sort"># </a>mt.*model*.**sort**()
+<a name="sort" href="#sort"># </a>*model*.**sort**()
 
 Adds a sort transformation, whose behaviour is further defined by [sort.inc()](https://github.com/stuwilmur/micro-table/blob/main/API.md#sort.inc) and [sort.dec()](https://github.com/stuwilmur/micro-table/blob/main/API.md#sort.dec). 
 
@@ -451,7 +452,7 @@ const unsorted = [
 ```
 Sorting by `a` then `b` will sort by column a, then sort *within each of these groups* by `b`:
 ```javascript
-const sorted = mt.model().sort().inc('a').inc('b').end().data(data);
+const sorted = model().sort().inc('a').inc('b').end().data(data);
 /*
 sorted = [
   { n: 9, a: 1, b: 1 },
@@ -467,19 +468,19 @@ sorted = [
 */
 ```
 
-<a name="sort.inc" href="#sort.inc"># </a>mt.*model.sort*.**inc**(*property*)
+<a name="sort.inc" href="#sort.inc"># </a>*model.sort*.**inc**(*property*)
 
 Adds a sort, sorting by *increasing* value of the specified *property*.
 
-<a name="sort.dec" href="#sort.dec"># </a>mt.*model.sort*.**dec**(*property*)
+<a name="sort.dec" href="#sort.dec"># </a>*model.sort*.**dec**(*property*)
 
 Adds a sort, sorting by *decreasing* value of the specified *property*.
 
-<a name="sort.end" href="#sort.end"># </a>mt.*model.sort*.**end**()
+<a name="sort.end" href="#sort.end"># </a>*model.sort*.**end**()
 
 Ends the definition of the sort transformation.
 
-<a name="transform" href="#transform"># </a>mt.*model*.**transform**(*func*)
+<a name="transform" href="#transform"># </a>*model*.**transform**(*func*)
 
 Adds a user-defined transformation which will be applied to the table, specified by the function *func*, which has the form
 

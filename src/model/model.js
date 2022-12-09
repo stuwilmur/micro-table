@@ -67,4 +67,6 @@ function modelmaker(f) {
   return new Model(f);
 }
 
-export const model = () => modelmaker(identity);
+export default function model() {
+  return modelmaker(identity);
+}
