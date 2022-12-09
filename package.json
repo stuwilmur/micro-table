@@ -19,7 +19,8 @@
     "prebuild": "npm run test && npm run clean",
     "pretest": "npm run lint",
     "posttest": "npm run make-badges",
-    "mypublish": "npm install && npm version patch && npm publish"
+    "mypublish": "npm install && npm version $process.env.npm_config_version && npm publish",
+    "demo": "echo $process.env.npm_config_i"
   },
   "repository": {
     "type": "git",
