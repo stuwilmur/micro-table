@@ -175,9 +175,9 @@ Combining transformations is done by *chaining* method calls:
 const model1 = mt.model().drop('x').group('z') // delete 'x' column, group by 'z' value
 const model2 = model.drop('z') // adds a further transformation to delete 'z'
 ```
-Transfromation methods do not mutate the model; they return a new model with the updated model. This means that in the previous example, `model` is left unchanged by the call to `drop()` in the definition of `model2`.
+Transfromation methods do not mutate the model; they return a new model with the updated model. This means that in the previous example, `model` is left unchanged by the call to *drop()* in the definition of `model2`.
 
-Some transformation methods such as [drop()](https://github.com/stuwilmur/micro-table/blob/main/API.md#drop), [filter()](https://github.com/stuwilmur/micro-table/blob/main/API.md#filter), [group()](https://github.com/stuwilmur/micro-table/blob/main/API.md#group), [select()](https://github.com/stuwilmur/micro-table/blob/main/API.md#select) and [transform()](https://github.com/stuwilmur/micro-table/blob/main/API.md#transform) take one or more arguments to specify how they work. For example, `select()` takes the name of each column to be selected:
+Some transformation methods such as [drop()](https://github.com/stuwilmur/micro-table/blob/main/API.md#drop), [filter()](https://github.com/stuwilmur/micro-table/blob/main/API.md#filter), [group()](https://github.com/stuwilmur/micro-table/blob/main/API.md#group), [merge()](https://github.com/stuwilmur/micro-table/blob/main/API.md#merge), [select()](https://github.com/stuwilmur/micro-table/blob/main/API.md#select) and [transform()](https://github.com/stuwilmur/micro-table/blob/main/API.md#transform) take one or more arguments to specify how they work. For example, *select()* takes the name of each column to be selected:
 ```javascript
 const result = mt.model().select('x', 'y',).data(dataIn); // Selects columns 'x' and 'y'
 ```
@@ -194,7 +194,7 @@ const model = mt.model()
                 .end();
 ```
 The statement above defines a model which adds a new column `w` with the value -1 in every row. There are two things to note:
-1. When transformations are built up in stages like this, the end of the stage is marked with a call to `end()`. 
+1. When transformations are built up in stages like this, the end of the stage is marked with a call to *end()*. 
 2. The order of the stages is always unimportant. For example:
 ```javascript
 const model = mt.model()
@@ -219,6 +219,7 @@ const model = mt.model()
 * [filter()](https://github.com/stuwilmur/micro-table/blob/main/API.md#filter)
 * [group()](https://github.com/stuwilmur/micro-table/blob/main/API.md#group)
 * [interp()](https://github.com/stuwilmur/micro-table/blob/main/API.md#interp)
+* [merge()](https://github.com/stuwilmur/micro-table/blob/main/API.md#merge)
 * [reduce()](https://github.com/stuwilmur/micro-table/blob/main/API.md#reduce)
 * [select()](https://github.com/stuwilmur/micro-table/blob/main/API.md#select)
 * [sort()](https://github.com/stuwilmur/micro-table/blob/main/API.md#sort)
@@ -290,7 +291,7 @@ Drops columns (i.e. deletes variables) specified by the parameters *property1, .
 
 <a name="filter" href="#filter"># </a>mt.*model*.**filter**(*func*)
 
-Filters rows using the callback filtering function *func*. Essentially, this simply applies the standard Array.func() method to the underlying data array.
+Adds a filter transformation, which filters rows using the callback filtering function *func*. Essentially, this simply applies the standard Array.func() method to the underlying data array.
 
 <a name="group" href="#group"># </a>mt.*model*.**group**(*property1, ..., propertyN*)
 
@@ -301,6 +302,49 @@ Reorders rows of the table such that they are grouped by *property1*, these grou
 Adds an interp transformation, whose behaviour is further defined by [interp.x()](https://github.com/stuwilmur/micro-table/blob/main/API.md#interp.x), [interp.y()](https://github.com/stuwilmur/micro-table/blob/main/API.md#interp.y) and [interp.groupBy()](https://github.com/stuwilmur/micro-table/blob/main/API.md#interp.groupby).
 
 The interp transformation interpolates missing values, being entries that are `NaN` or `null`. Simple linear interpolation is used between two extant data points, whereas linear extrapolation is used beyond the range of available data.
+
+<a name="merge" href="#merge"># </a>mt.*model*.**merge**(*newColumns*)
+
+Adds a merge transformation, which will merge the incoming data specified by *newColumns* (itself a data table) into the existing table. This is equivalent to adding the columns of *newColumns* into the current table. 
+
+Merging is done row by row: if either table has more rows than the other, then these additional rows are ignored. For example, consider the following merge, where the exisiting and incoming tables have three and two rows, respectively:
+```javascript
+const existing = [
+  {a: 1}, 
+  {a: 2}, 
+  {a: 3}
+  ];
+const incoming = [
+  {b: 1}, 
+  {b: 2}
+  ];
+const result = mt.model().merge(incoming).data(existing);
+/*
+result = [ 
+  { a: 1, b: 1 }, 
+  { a: 2, b: 2 } ];
+*/
+```
+If the incoming table has columns that share names with those the existing table, then the values in the incoming columns 'win', i.e. they replace those in the existing table. Consider the following merge, where both tables share the column *c*:
+```javascript
+const existing = [
+  {a: 1, b:2}, 
+  {a: 1, b:2}, 
+  {a: 1, b:2}
+  ];
+const incoming = [
+  {c: 3, b:4}, 
+  {c: 3, b:4}, 
+  {c: 3, b:4}
+  ];
+const result = mt.model().merge(incoming).data(existing);
+/*
+result = [ 
+  { a: 1, b: 4, c: 3 }, 
+  { a: 1, b: 4, c: 3 }, 
+  { a: 1, b: 4, c: 3 } ];
+*/
+```
 
 <a name="interp.x" href="#interp.x"># </a>mt.*model.interp*.**x**(*property*)
 
@@ -407,7 +451,7 @@ const unsorted = [
 ```
 Sorting by `a` then `b` will sort by column a, then sort *within each of these groups* by `b`:
 ```javascript
-const sorted = mt.model().sort().inc('a').end().data(data);
+const sorted = mt.model().sort().inc('a').inc('b').end().data(data);
 /*
 sorted = [
   { n: 9, a: 1, b: 1 },
@@ -441,7 +485,7 @@ Adds a user-defined transformation which will be applied to the table, specified
 
 **func**(*table*)
 
-where `table` is the table object (a JavaScript array of simple objects).
+where *table* is the table object (a JavaScript array of simple objects).
 
 
 
