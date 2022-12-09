@@ -1,6 +1,6 @@
 # micro-table 
 
-![npm](https://img.shields.io/npm/v/micro-table)
+![npm](https://img.shields.io/npm/v/micro-table)[![](https://data.jsdelivr.com/v1/package/npm/micro-table/badge)](https://www.jsdelivr.com/package/npm/micro-table)
 
 | Statements                  | Branches                | Functions                 | Lines             |
 | --------------------------- | ----------------------- | ------------------------- | ----------------- |

@@ -5,6 +5,7 @@
   "description": "A micro dataframe implemented in JavaScript. Not inspired by, but by accident similar to Arquero.",
   "source": "src/index.js",
   "module": "dist/module.js",
+  "jsdelivr": "dist/module.js",
   "files": [
     "dist/module.js"
   ],
