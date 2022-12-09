@@ -297,12 +297,6 @@ Adds a filter transformation, which filters rows using the callback filtering fu
 
 Reorders rows of the table such that they are grouped by *property1*, these groups being futher subgrouped by *property2* and so on. Note that groups are arranged in the order that order that each unique property value appears in the table.
 
-<a name="interp" href="#interp"># </a>mt.*model*.**interp**()
-
-Adds an interp transformation, whose behaviour is further defined by [interp.x()](https://github.com/stuwilmur/micro-table/blob/main/API.md#interp.x), [interp.y()](https://github.com/stuwilmur/micro-table/blob/main/API.md#interp.y) and [interp.groupBy()](https://github.com/stuwilmur/micro-table/blob/main/API.md#interp.groupby).
-
-The interp transformation interpolates missing values, being entries that are `NaN` or `null`. Simple linear interpolation is used between two extant data points, whereas linear extrapolation is used beyond the range of available data.
-
 <a name="merge" href="#merge"># </a>mt.*model*.**merge**(*newColumns*)
 
 Adds a merge transformation, which will merge the incoming data specified by *newColumns* (itself a data table) into the existing table. This is equivalent to adding the columns of *newColumns* into the current table. 
@@ -345,6 +339,12 @@ result = [
   { a: 1, b: 4, c: 3 } ];
 */
 ```
+
+<a name="interp" href="#interp"># </a>mt.*model*.**interp**()
+
+Adds an interp transformation, whose behaviour is further defined by [interp.x()](https://github.com/stuwilmur/micro-table/blob/main/API.md#interp.x), [interp.y()](https://github.com/stuwilmur/micro-table/blob/main/API.md#interp.y) and [interp.groupBy()](https://github.com/stuwilmur/micro-table/blob/main/API.md#interp.groupby).
+
+The interp transformation interpolates missing values, being entries that are `NaN` or `null`. Simple linear interpolation is used between two extant data points, whereas linear extrapolation is used beyond the range of available data.
 
 <a name="interp.x" href="#interp.x"># </a>mt.*model.interp*.**x**(*property*)
 
