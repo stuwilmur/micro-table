@@ -4,6 +4,7 @@ import {
   deleteVariables,
   filterRows,
   groupBy,
+  mergeTables,
   selectVariables,
 } from './transformations';
 
@@ -42,6 +43,9 @@ const modelPrototype = {
   },
   interp() {
     return new InterpolateBuilder(this.data, modelmaker);
+  },
+  merge(arg) {
+    return transformModel(this.data, mergeTables, arg);
   },
   reduce() {
     return new AggregatorBuilder(this.data, modelmaker);

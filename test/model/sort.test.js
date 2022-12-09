@@ -109,7 +109,34 @@ const athletesSortedByNationAndEarnings = [
   },
 ];
 
+const athletesSortedByEarnings = [
+  'Matthew Stafford',
+  'Matt Ryan',
+  'Stephen Curry',
+  'Roger Federer',
+  'LeBron James',
+  'Neymar',
+  'Conor McGregor',
+  'Cristiano Ronaldo',
+  'Lionel Messi',
+  'Floyd Mayweather',
+];
+
 // Tests
+
+test('Test sort by one key', () => {
+  expect(
+    areObjectsEqual(
+      model()
+        .sort()
+        .inc('earnings')
+        .end()
+        .data(athletes)
+        .map((x) => x.name),
+      athletesSortedByEarnings,
+    ),
+  ).toBeTruthy();
+});
 
 test('Test sort by two keys, different directions', () => {
   expect(
