@@ -1,4 +1,4 @@
-import model from '../../src/model/model';
+import {model} from '../../src/model/model';
 import {areObjectsEqual} from '../../src/util';
 
 // Test data
