@@ -21,3 +21,4 @@ Using npm, run `npm i micro-table`.
 
 ## CDN
 `import {model} from 'https://cdn.jsdelivr.net/npm/micro-table/+esm'`
+[JSFiddle](https://jsfiddle.net/4w01ughb/)
