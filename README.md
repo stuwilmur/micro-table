@@ -1,6 +1,6 @@
 # micro-table 
 
-![npm](https://img.shields.io/npm/v/micro-table) [![](https://data.jsdelivr.com/v1/package/npm/micro-table/badge)](https://www.jsdelivr.com/package/npm/micro-table)
+[![npm](https://img.shields.io/npm/v/micro-table)](https://www.npmjs.com/package/micro-table) [![](https://data.jsdelivr.com/v1/package/npm/micro-table/badge)](https://www.jsdelivr.com/package/npm/micro-table)
 
 | Statements                  | Branches                | Functions                 | Lines             |
 | --------------------------- | ----------------------- | ------------------------- | ----------------- |
@@ -10,7 +10,7 @@ micro-table is a small JavaScript library for performing data handling tasks on 
 
 It was not inspired by, but by accident has some similarities with Arquero.
 
-Be aware that bad input may result in undefined or unexpected output!
+Users should be advised that bad input may result in undefined or unexpected output!
 
 ## Resources
 * Examples: [part I](https://observablehq.com/@stuwilmur/first-steps-with-micro-table) & [part II](https://observablehq.com/@stuwilmur/micro-table-user-guide-part-ii)
