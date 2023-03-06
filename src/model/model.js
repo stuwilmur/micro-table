@@ -13,9 +13,9 @@ import {
   AggregatorBuilder,
   InterpolateBuilder,
   SetVarBuilder,
+  SortBuilder,
+  TidyBuilder,
 } from './builders';
-
-import {SortBuilder} from './builders/sort_builder';
 
 function Model(data) {
   this.data = data;
@@ -56,6 +56,11 @@ const modelPrototype = {
   sort() {
     return new SortBuilder(this.data, modelmaker);
   },
+
+  tidy() {
+    return new TidyBuilder(this.data, modelmaker);
+  },
+
   transform(transform) {
     return transformModel(this.data, transform);
   },

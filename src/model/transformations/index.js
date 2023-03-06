@@ -8,3 +8,4 @@ export * from './merge_tables';
 export * from './select_variables';
 export * from './set_variable_value';
 export * from './stable_sort';
+export * from './tidy_observations';
