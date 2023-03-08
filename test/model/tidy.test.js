@@ -19,24 +19,24 @@ const data = [
 ];
 
 const collapse3 = [
-  {year: 2000, money: 100, person: 'alice'},
-  {year: 2001, money: 101, person: 'alice'},
-  {year: 2000, money: 200, person: 'bob'},
-  {year: 2001, money: 202, person: 'bob'},
-  {year: 2000, money: 300, person: 'charlie'},
-  {year: 2001, money: 303, person: 'charlie'},
+  {year: 2000, person: 'alice', money: 100},
+  {year: 2001, person: 'alice', money: 101},
+  {year: 2000, person: 'bob', money: 200},
+  {year: 2001, person: 'bob', money: 202},
+  {year: 2000, person: 'charlie', money: 300},
+  {year: 2001, person: 'charlie', money: 303},
 ];
 
 const collapse2 = [
-  {year: 2000, charlie: 300, money: 100, person: 'alice'},
-  {year: 2001, charlie: 303, money: 101, person: 'alice'},
-  {year: 2000, charlie: 300, money: 200, person: 'bob'},
-  {year: 2001, charlie: 303, money: 202, person: 'bob'},
+  {year: 2000, charlie: 300, person: 'alice', money: 100},
+  {year: 2001, charlie: 303, person: 'alice', money: 101},
+  {year: 2000, charlie: 300, person: 'bob', money: 200},
+  {year: 2001, charlie: 303, person: 'bob', money: 202},
 ];
 
 const collapse1 = [
-  {year: 2000, bob: 200, charlie: 300, money: 100, person: 'alice'},
-  {year: 2001, bob: 202, charlie: 303, money: 101, person: 'alice'},
+  {year: 2000, bob: 200, charlie: 300, person: 'alice', money: 100},
+  {year: 2001, bob: 202, charlie: 303, person: 'alice', money: 101},
 ];
 
 // Tests
@@ -44,8 +44,8 @@ const collapse1 = [
 test('Test collapse 0', () => {
   expect(
     areObjectsEqual(
-      model().tidy().to('person').quantity('money').end().data(data),
-      data,
+      model().tidy().to('person').quantity('money').end().data(data).length,
+      0,
     ),
   ).toBeTruthy();
 });

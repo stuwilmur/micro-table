@@ -1,10 +1,4 @@
-import {clone} from '../../util';
-
 export function tidyObservations(data, observations, descriptor, quantity) {
-  if (observations.length < 1) {
-    return clone(data);
-  }
-
   const nestedArray = [];
 
   observations.forEach((keyToKeep) => {
@@ -17,14 +11,10 @@ export function tidyObservations(data, observations, descriptor, quantity) {
         }
       });
 
-      Object.defineProperty(
-        obj,
-        quantity,
-        Object.getOwnPropertyDescriptor(obj, keyToKeep),
-      );
-
+      const valueToKeep = obj[keyToKeep];
       delete obj[keyToKeep];
       obj[descriptor] = keyToKeep;
+      obj[quantity] = valueToKeep;
       return obj;
     });
 
