@@ -176,7 +176,7 @@ Combining transformations is done by *chaining* method calls:
 const model1 = model().drop('x').group('z') // delete 'x' column, group by 'z' value
 const model2 = model.drop('z') // adds a further transformation to delete 'z'
 ```
-Transfromation methods do not mutate the model; they return a new model with the updated model. This means that in the previous example, `model` is left unchanged by the call to *drop()* in the definition of `model2`.
+Transfromation methods do not mutate the model; they return a new model with the updated model. This means that in the previous example, `model1` is left unchanged by the call to *drop()* in the definition of `model2`.
 
 Some transformation methods such as [drop()](https://github.com/stuwilmur/micro-table/blob/main/API.md#drop), [filter()](https://github.com/stuwilmur/micro-table/blob/main/API.md#filter), [group()](https://github.com/stuwilmur/micro-table/blob/main/API.md#group), [merge()](https://github.com/stuwilmur/micro-table/blob/main/API.md#merge), [select()](https://github.com/stuwilmur/micro-table/blob/main/API.md#select) and [transform()](https://github.com/stuwilmur/micro-table/blob/main/API.md#transform) take one or more arguments to specify how they work. For example, *select()* takes the name of each column to be selected:
 ```javascript
@@ -224,6 +224,7 @@ const model = model()
 * [reduce()](https://github.com/stuwilmur/micro-table/blob/main/API.md#reduce)
 * [select()](https://github.com/stuwilmur/micro-table/blob/main/API.md#select)
 * [sort()](https://github.com/stuwilmur/micro-table/blob/main/API.md#sort)
+* [tidy()](https://github.com/stuwilmur/micro-table/blob/main/API.md#tidy)
 * [transform()](https://github.com/stuwilmur/micro-table/blob/main/API.md#transform)
 
 ## API
@@ -468,6 +469,7 @@ sorted = [
 */
 ```
 
+
 <a name="sort.inc" href="#sort.inc"># </a>*model.sort*.**inc**(*property*)
 
 Adds a sort, sorting by *increasing* value of the specified *property*.
@@ -479,6 +481,41 @@ Adds a sort, sorting by *decreasing* value of the specified *property*.
 <a name="sort.end" href="#sort.end"># </a>*model.sort*.**end**()
 
 Ends the definition of the sort transformation.
+
+<a name="tidy" href="#tidy"># </a>*model*.**tidy**()
+
+Adds a tidy transformation, whose behaviour is further defined by [tidy.collapse()](https://github.com/stuwilmur/micro-table/blob/main/API.md#tidy.collapse), [tidy.to()](https://github.com/stuwilmur/micro-table/blob/main/API.md#tidy.to) and [tidy.quantity()](https://github.com/stuwilmur/micro-table/blob/main/API.md#tidy.quantity).
+
+The tidy transformation is used to transform data that includes more than one observation per row, into *tidy* data featuring a single observation row. For example, consider the following data describing the GDP of two countries across several years:
+```javascript
+const untidy = [
+  {year:2000, 'Brazil' : 655.4, 'China': 1211},
+  {year:2001, 'Brazil' : NaN, 'China' : 1339},
+  {year:2002, 'Brazil' : 509.8, 'China' : 1471},
+];
+```
+This data is untidy since each row includes two observations. The tidy transformation may be used as follows with this data:
+```javascript
+const tidy = model().tidy().collapse('Brazil').collapse('China').to('country').quantity('gdp').end().data(untidy)
+/*
+tidy = [
+  {year:2000, country : 'Brazil', gdp: 655.4},
+  {year:2000, country : 'China',  gdp: 1211},
+  {year:2001, country : 'Brazil', gdp: NaN},
+  {year:2001, country : 'China',  gdp: 1339},
+  {year:2002, country : 'Brazil', gdp: 509.8},
+  {year:2002, country : 'China',  gdp: 1471},
+]
+*/
+```
+<a name="tidy.collapse" href="#tidy.collapse"># </a>*model.tidy*.**collapse**(*property*)
+Collapses a column, specified by *property*. Multiple columns may be collapsed by applying the function multiple times.
+
+<a name="tidy.to" href="#tidy.to"># </a>*model.tidy*.**to**(*name*)
+Specifies the new column name used to identify the collapsed columns.
+
+<a name="tidy.quantity" href="#tidy.quantity"># </a>*model.tidy*.**quantity**(*name*)
+Specifies the column name for the quantity that is described by the observations.
 
 <a name="transform" href="#transform"># </a>*model*.**transform**(*func*)
 
