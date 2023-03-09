@@ -496,7 +496,13 @@ const untidy = [
 ```
 This data is untidy since each row includes two observations. The tidy transformation may be used as follows with this data:
 ```javascript
-const tidy = model().tidy().collapse('Brazil').collapse('China').to('country').quantity('gdp').end().data(untidy)
+const tidy = model()
+             .tidy()
+             .collapse('Brazil', 'China')
+             .to('country')
+             .quantity('gdp')
+             .end()
+             .data(untidy)
 /*
 tidy = [
   {year:2000, country : 'Brazil', gdp: 655.4},
@@ -508,13 +514,16 @@ tidy = [
 ]
 */
 ```
-<a name="tidy.collapse" href="#tidy.collapse"># </a>*model.tidy*.**collapse**(*property*)
-Collapses a column, specified by *property*. Multiple columns may be collapsed by applying the function multiple times.
+<a name="tidy.collapse" href="#tidy.collapse"># </a>*model.tidy*.**collapse**(*property1, ..., propertyN*)
+
+Collapses a column or columns, specified by *property1*, ..., *propertyN*.
 
 <a name="tidy.to" href="#tidy.to"># </a>*model.tidy*.**to**(*name*)
+
 Specifies the new column name used to identify the collapsed columns.
 
 <a name="tidy.quantity" href="#tidy.quantity"># </a>*model.tidy*.**quantity**(*name*)
+
 Specifies the column name for the quantity that is described by the observations.
 
 <a name="transform" href="#transform"># </a>*model*.**transform**(*func*)

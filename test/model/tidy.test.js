@@ -70,8 +70,7 @@ test('Test collapse 2', () => {
     areObjectsEqual(
       model()
         .tidy()
-        .collapse('alice')
-        .collapse('bob')
+        .collapse('alice', 'bob')
         .to('person')
         .quantity('money')
         .end()
@@ -86,9 +85,7 @@ test('Test collapse 3', () => {
     areObjectsEqual(
       model()
         .tidy()
-        .collapse('alice')
-        .collapse('bob')
-        .collapse('charlie')
+        .collapse('alice', 'bob', 'charlie')
         .to('person')
         .quantity('money')
         .end()

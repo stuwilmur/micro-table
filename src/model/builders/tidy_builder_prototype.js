@@ -4,8 +4,8 @@ const transform = (observations, descriptor, quantity) => (data) =>
   tidyObservations(data, observations, descriptor, quantity);
 
 export const TidyBuilderPrototype = {
-  collapse(observation) {
-    this.observations.push(observation);
+  collapse(...observationKeys) {
+    this.observations = observationKeys;
     return this;
   },
 
