@@ -1,5 +1,4 @@
-import linearInterpolator from 'linear-interpolator';
-import {clone, groupAndFlatten} from '../../util';
+import {clone, groupAndFlatten, linearInterpolator} from '../../util';
 
 function getSeriesFromObjectList(list, indexProperty, valueProperty) {
   return list.map((obj) => [obj[indexProperty], obj[valueProperty]]);
