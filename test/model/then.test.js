@@ -15,6 +15,6 @@ const expectedResult = [
 
 test('Add model B to model A', () => {
   expect(
-    areObjectsEqual(modelA.add(modelB).data(data), expectedResult),
+    areObjectsEqual(modelA.then(modelB).data(data), expectedResult),
   ).toBeTruthy();
 });
