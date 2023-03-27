@@ -194,6 +194,7 @@ const model = model()
                 .value(-1)
                 .end();
 ```
+
 The statement above defines a model which adds a new column `w` with the value -1 in every row. There are two things to note:
 1. When transformations are built up in stages like this, the end of the stage is marked with a call to *end()*. 
 2. The order of the stages is always unimportant. For example:
@@ -213,6 +214,33 @@ const model = model()
 */
 ```
 
+As well as chaining transformations within a model, we can chain whole models to create a new model which will apply each model in turn. This is done using the [then()](https://github.com/stuwilmur/micro-table/blob/main/API.md#then) method. For example, consider the following simple models modelA which adds a constant column, and modelB which calculates a new column based on the new column:
+```javascript
+const modelA = model().const().called('b').value(1).end();
+const modelB = model()
+  .calc()
+  .called('c')
+  .does((r) => r.b * 2)
+  .end();
+```
+The result of applying modelA then modelB may be calculated directly:
+```javascript
+const x = [{a:1}, {a:2}]
+const result1 = modelB.data(modelA.data());
+/*
+result1 = 
+[ { a: 1, b: 1, c: 2 }, { a: 3, b: 1, c: 2 } ]
+*/
+```
+or instead by using [then()](https://github.com/stuwilmur/micro-table/blob/main/API.md#then) method as follows:
+```javascript
+const modelC = modelA.then(modelB);
+const result2 = modelC.data(x);
+/*
+result2 = [ { a: 1, b: 1, c: 2 }, { a: 3, b: 1, c: 2 } ]
+*/
+``` 
+
 ## Data transformations
 * [calc()](https://github.com/stuwilmur/micro-table/blob/main/API.md#calc)
 * [const()](https://github.com/stuwilmur/micro-table/blob/main/API.md#const)
@@ -226,6 +254,9 @@ const model = model()
 * [sort()](https://github.com/stuwilmur/micro-table/blob/main/API.md#sort)
 * [tidy()](https://github.com/stuwilmur/micro-table/blob/main/API.md#tidy)
 * [transform()](https://github.com/stuwilmur/micro-table/blob/main/API.md#transform)
+
+## Model transformations
+* [then()](https://github.com/stuwilmur/micro-table/blob/main/API.md#then)
 
 ## API
 <a name="model" href = "#model"># </a>**model**()
@@ -534,5 +565,8 @@ Adds a user-defined transformation which will be applied to the table, specified
 
 where *table* is the table object (a JavaScript array of simple objects).
 
+<a name="then" href="#then"># </a>*modelA*.**then**(*modelB*)
+
+Returns a new model, whose data transformation is the composition of the transformation of *modelB* with that of *modelA*. The result of `modelB.data(modelA.data(x))` will be equivalent to `modelA.then(modelB).data(x)`.
 
 

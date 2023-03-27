@@ -56,11 +56,12 @@ const modelPrototype = {
   sort() {
     return new SortBuilder(this.data, modelmaker);
   },
-
   tidy() {
     return new TidyBuilder(this.data, modelmaker);
   },
-
+  then(subsequentModel) {
+    return new Model(compose(subsequentModel.data, this.data));
+  },
   transform(transform) {
     return transformModel(this.data, transform);
   },
