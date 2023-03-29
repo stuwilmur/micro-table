@@ -62,21 +62,22 @@ const interpYZgroup2 = [
 
 test('interpolate one variable, no grouping', () => {
   expect(
-    areObjectsEqual(interpolate(dataframe, 'x', ['y']), interpY),
+    areObjectsEqual(interpolate(dataframe, 'x', ['y']), interpY, true),
   ).toBeTruthy();
 });
 
 test('interpolate two variables, no grouping', () => {
   expect(
-    areObjectsEqual(interpolate(dataframe, 'x', ['y', 'z']), interpYandZ),
+    areObjectsEqual(interpolate(dataframe, 'x', ['y', 'z']), interpYandZ, true),
   ).toBeTruthy();
 });
 
 test('interpolate two variables, group by one', () => {
   expect(
     areObjectsEqual(
-      interpolate(dataframe, 'x', ['y', 'z'], 'id1'),
+      interpolate(dataframe, 'x', ['y', 'z'], true, 'id1'),
       interpYZgroup1,
+      true,
     ),
   ).toBeTruthy();
 });
@@ -84,8 +85,9 @@ test('interpolate two variables, group by one', () => {
 test('interpolate two variables, group by two', () => {
   expect(
     areObjectsEqual(
-      interpolate(dataframe, 'x', ['y', 'z'], 'id1', 'id2'),
+      interpolate(dataframe, 'x', ['y', 'z'], true, 'id1', 'id2'),
       interpYZgroup2,
+      true,
     ),
   ).toBeTruthy();
 });

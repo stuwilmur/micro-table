@@ -377,7 +377,7 @@ result = [
 
 Adds an interp transformation, whose behaviour is further defined by [interp.x()](https://github.com/stuwilmur/micro-table/blob/main/API.md#interp.x), [interp.y()](https://github.com/stuwilmur/micro-table/blob/main/API.md#interp.y) and [interp.groupBy()](https://github.com/stuwilmur/micro-table/blob/main/API.md#interp.groupby).
 
-The interp transformation interpolates missing values, being entries that are `NaN` or `null`. Simple linear interpolation is used between two extant data points, whereas linear extrapolation is used beyond the range of available data.
+The interp transformation interpolates missing values, being entries that are `NaN` or `null`. Simple linear interpolation is used between two extant data points, whereas linear extrapolation is used beyond the range of available data by default.
 
 <a name="interp.x" href="#interp.x"># </a>*model.interp*.**x**(*property*)
 
@@ -417,6 +417,10 @@ const series = [
 ]
 ```
 The data defines a time series for each country. To interpolate correctly within each time series, interp.*groupBy()* must be called with the parameter `'country'`.
+
+<a name="interp.noExtrap" href="#interp.noExtrap"># </a>*model.interp*.**noExtrap**()
+
+Specifies that extrapolation should *not* be used beyond the range of the available data.
 
 <a name="interp.end" href="#interp.end"># </a>*model.interp*.**end**()
 

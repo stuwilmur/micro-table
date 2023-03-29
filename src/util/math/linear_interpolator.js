@@ -1,6 +1,6 @@
 // Adapated from linear-interpolator by F. Klee, https://github.com/feklee/linear-interpolator (MIT License)
 
-export function linearInterpolator(points) {
+export function linearInterpolator(points, extrapolate = true) {
   const n = points.length - 1;
 
   if (points.length === 0) {
@@ -38,14 +38,14 @@ export function linearInterpolator(points) {
   }
 
   return (x) => {
-    if (x <= first[0]) {
-      return leftExtrapolated(x);
+    if (x < first[0]) {
+      return extrapolate ? leftExtrapolated(x) : null;
     }
     for (let i = 0; i < n; i += 1) {
-      if (x > points[i][0] && x <= points[i + 1][0]) {
+      if (x >= points[i][0] && x <= points[i + 1][0]) {
         return interpolated(x, points[i], points[i + 1]);
       }
     }
-    return rightExtrapolated(x);
+    return extrapolate ? rightExtrapolated(x) : null;
   };
 }

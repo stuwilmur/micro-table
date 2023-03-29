@@ -2,10 +2,11 @@ import {interpolate} from '../transformations';
 
 // prettier-ignore
 const transform =
-  (indexProperty, interpolatedProperty, ...groupProperties) =>
+  (indexProperty, interpolatedProperty, extrapolate, ...groupProperties) =>
     (data) => interpolate(data,
       indexProperty,
       interpolatedProperty,
+      extrapolate,
       ...groupProperties);
 
 export const InterpolateBuilderPrototype = {
@@ -24,10 +25,16 @@ export const InterpolateBuilderPrototype = {
     return this;
   },
 
+  noExtrap() {
+    this.extrapolate = false;
+    return this;
+  },
+
   _do() {
     return transform(
       this.indexProperty,
       this.interpolatedPropertyList,
+      this.extrapolate,
       ...this.groupProperties,
     );
   },

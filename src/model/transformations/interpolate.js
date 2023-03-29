@@ -12,12 +12,18 @@ function removeBlanksFromSeries(series) {
   return series.filter((d) => !isNullOrNaN(d[1]));
 }
 
-function interpolateGroup(group, indexProperty, interpolatedPropertyList) {
+function interpolateGroup(
+  group,
+  indexProperty,
+  interpolatedPropertyList,
+  extrapolate,
+) {
   const interpolators = interpolatedPropertyList.map((interpolatedProperty) =>
     linearInterpolator(
       removeBlanksFromSeries(
         getSeriesFromObjectList(group, indexProperty, interpolatedProperty),
       ),
+      extrapolate,
     ),
   );
   return group.map((d) => {
@@ -34,6 +40,7 @@ export function interpolate(
   data,
   indexProperty,
   interpolatedPropertyList,
+  extrapolate,
   ...groupProperties
 ) {
   const groupedInterpolated = groupAndFlatten(data, ...groupProperties).map(
@@ -42,6 +49,7 @@ export function interpolate(
         d[groupProperties.length],
         indexProperty,
         interpolatedPropertyList,
+        extrapolate,
       ),
   );
 

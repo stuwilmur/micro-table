@@ -3,6 +3,7 @@ import {Builder} from './builder';
 
 export function InterpolateBuilder(...args) {
   this.interpolatedPropertyList = [];
+  this.extrapolate = true;
 
   Builder.call(this, ...args);
 }
