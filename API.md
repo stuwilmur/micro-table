@@ -375,7 +375,7 @@ result = [
 
 <a name="interp" href="#interp"># </a>*model*.**interp**()
 
-Adds an interp transformation, whose behaviour is further defined by [interp.x()](https://github.com/stuwilmur/micro-table/blob/main/API.md#interp.x), [interp.y()](https://github.com/stuwilmur/micro-table/blob/main/API.md#interp.y), [interp.groupBy()](https://github.com/stuwilmur/micro-table/blob/main/API.md#interp.groupby) and [interp.extrapNo()](https://github.com/stuwilmur/micro-table/blob/main/API.md#interp.extrapNo).
+Adds an interp transformation, whose behaviour is further defined by [interp.x()](https://github.com/stuwilmur/micro-table/blob/main/API.md#interp.x), [interp.y()](https://github.com/stuwilmur/micro-table/blob/main/API.md#interp.y), [interp.groupBy()](https://github.com/stuwilmur/micro-table/blob/main/API.md#interp.groupby) and [interp.noExtrap()](https://github.com/stuwilmur/micro-table/blob/main/API.md#interp.noExtrap).
 
 The interp transformation interpolates missing values, being entries that are `NaN` or `null`. Simple linear interpolation is used between two extant data points, whereas linear extrapolation is used beyond the range of available data by default.
 
