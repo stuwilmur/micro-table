@@ -352,7 +352,7 @@ result = [
   { a: 2, b: 2 } ];
 */
 ```
-If the incoming table has columns that share names with those the existing table, then the values in the incoming columns 'win', i.e. they replace those in the existing table. Consider the following merge, where both tables share the column *c*:
+If the incoming table has columns that share names with those the existing table, then the values in the incoming columns 'win', i.e. they replace those in the existing table. Consider the following merge, where both tables share the column *b*:
 ```javascript
 const existing = [
   {a: 1, b:2}, 
