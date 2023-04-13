@@ -11,19 +11,19 @@ const modelB = model()
 const data = [{a: 1}, {a: 3}];
 
 // Tests
-test('Compose model A then model B', () => {
+test('Compose model A and model B', () => {
   expect(
     areObjectsEqual(
-      modelA.then(modelB).data(data),
+      modelA.add(modelB).data(data),
       modelB.data(modelA.data(data)),
     ),
   ).toBeTruthy();
 });
 
-test('Compose model B then model A', () => {
+test('Compose model B and model A', () => {
   expect(
     areObjectsEqual(
-      modelB.then(modelA).data(data),
+      modelB.add(modelA).data(data),
       modelA.data(modelB.data(data)),
     ),
   ).toBeTruthy();

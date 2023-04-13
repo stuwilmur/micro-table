@@ -26,6 +26,9 @@ function transformModel(model, transform, ...args) {
 }
 
 const modelPrototype = {
+  add(subsequentModel) {
+    return new Model(compose(subsequentModel.data, this.data));
+  },
   calc() {
     return new CalcVarBuilder(this.data, modelmaker);
   },
@@ -58,9 +61,6 @@ const modelPrototype = {
   },
   tidy() {
     return new TidyBuilder(this.data, modelmaker);
-  },
-  then(subsequentModel) {
-    return new Model(compose(subsequentModel.data, this.data));
   },
   transform(transform) {
     return transformModel(this.data, transform);
