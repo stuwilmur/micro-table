@@ -33,11 +33,11 @@ micro table uses some ideas from *functional programming* (such as this idea of 
 
 ## <a name="some-simple-examples" href = "#some-simple-examples"></a>Some simple examples
 ### One transformation: sorting by one column
-In this example the data is to be sorted by the values in the inches column, from least to greatest. A model may be created which implements a single [sort()](https://github.com/stuwilmur/micro-table/blob/main/API.md#sort) transformation like so:
+In this example the data is to be sorted by the values in the inches column, from least to greatest. A model may be created which implements a single [sort()](#sort) transformation like so:
 ```javascript
 const m = model().sort().inc('inches').end(); // Creates a model, m, sorting on 'inches'
 ```
-This model is applied to the data by calling one of its methods, [data()](https://github.com/stuwilmur/micro-table/blob/main/API.md#data), which accepts the data to be transformed as an argument:
+This model is applied to the data by calling one of its methods, [data()](#data), which accepts the data to be transformed as an argument:
 ```javascript
 const result1 = m.data(rainfall);
 
@@ -72,7 +72,7 @@ If the model is not needed again, then the construction and processing of data m
 const result3 = model().sort().inc('inches').end().data(rainfall); // gives same as result1
 ```
 ### One transformation: adding one calculated column
-In this example a column will be added which lists rainfall in millimetres, calculated from the value of rainfall in inches. To do this the [calc()](https://github.com/stuwilmur/micro-table/blob/main/API.md#calc) transformation may be used:
+In this example a column will be added which lists rainfall in millimetres, calculated from the value of rainfall in inches. To do this the [calc()](#calc) transformation may be used:
 ```javascript
 const result4 = model()
   .calc()
@@ -161,7 +161,7 @@ Transformations are applied in the order that they are specified when defining a
 Note: it is permissible to define a model without *any* transformations: such a model will apply the identity transformation, which returns the input data unchanged.
 
 ## <a name="model-building-syntax" href = "#model-building-syntax"></a>Model building syntax
-As discussed, a model is created with [model()](https://github.com/stuwilmur/micro-table/blob/main/API.md#model) and applied using [data()](https://github.com/stuwilmur/micro-table/blob/main/API.md#data):
+As discussed, a model is created with [model()](#model) and applied using [data()](#data):
 ```javascript
 const dataIn = [
   {x: 1, y: 4, z: 1}, // Some simple data
@@ -185,15 +185,15 @@ const model2 = model.drop('z') // adds a further transformation to delete 'z'
 ```
 Transfromation methods do not mutate the model; they return a new model with the updated model. This means that in the previous example, `model1` is left unchanged by the call to *drop()* in the definition of `model2`.
 
-Some transformation methods such as [drop()](https://github.com/stuwilmur/micro-table/blob/main/API.md#drop), [filter()](https://github.com/stuwilmur/micro-table/blob/main/API.md#filter), [group()](https://github.com/stuwilmur/micro-table/blob/main/API.md#group), [merge()](https://github.com/stuwilmur/micro-table/blob/main/API.md#merge), [select()](https://github.com/stuwilmur/micro-table/blob/main/API.md#select) and [transform()](https://github.com/stuwilmur/micro-table/blob/main/API.md#transform) take one or more arguments to specify how they work. For example, *select()* takes the name of each column to be selected:
+Some transformation methods such as [drop()](#drop), [filter()](#filter), [group()](#group), [merge()](#merge), [select()](#select) and [transform()](#transform) take one or more arguments to specify how they work. For example, *select()* takes the name of each column to be selected:
 ```javascript
 const result = model().select('x', 'y',).data(dataIn); // Selects columns 'x' and 'y'
 ```
-Other transformations such as [calc()](https://github.com/stuwilmur/micro-table/blob/main/API.md#calc), [interp()](https://github.com/stuwilmur/micro-table/blob/main/API.md#interp), [const()](https://github.com/stuwilmur/micro-table/blob/main/API.md#const), [knit()](https://github.com/stuwilmur/micro-table/blob/main/API.md#knit), [reduce()](https://github.com/stuwilmur/micro-table/blob/main/API.md#reduce) and [sort()](https://github.com/stuwilmur/micro-table/blob/main/API.md#sort) do not take arguments; instead, their definition is built up in stages, where at each stage one piece of information is added to their definition. As an example, the [const()](https://github.com/stuwilmur/micro-table/blob/main/API.md#const) transformation will create a new column with a single fixed value in each row. The transformation requires:
+Other transformations such as [calc()](#calc), [interp()](#interp), [const()](#const), [knit()](#knit), [reduce()](#reduce) and [sort()](#sort) do not take arguments; instead, their definition is built up in stages, where at each stage one piece of information is added to their definition. As an example, the [const()](#const) transformation will create a new column with a single fixed value in each row. The transformation requires:
 - the column name
 - the constant value
 
-These are specified using two sub-methods [const.called()](https://github.com/stuwilmur/micro-table/blob/main/API.md#const.called) and [const.value()](https://github.com/stuwilmur/micro-table/blob/main/API.md#const.value):
+These are specified using two sub-methods [const.called()](#const.called) and [const.value()](#const.value):
 ```javascript
 const model = model()
                 .const()
@@ -221,7 +221,7 @@ const model = model()
 */
 ```
 
-As well as chaining transformations within a model, we can chain whole models to create a new model which will apply each model in turn. This is done using the [add()](https://github.com/stuwilmur/micro-table/blob/main/API.md#add) method. For example, consider the following simple models: modelA which adds a constant column, and modelB which calculates a new column based on the new column:
+As well as chaining transformations within a model, we can chain whole models to create a new model which will apply each model in turn. This is done using the [add()](#add) method. For example, consider the following simple models: modelA which adds a constant column, and modelB which calculates a new column based on the new column:
 ```javascript
 const modelA = model().const().called('b').value(1).end();
 const modelB = model()
@@ -239,7 +239,7 @@ result1 =
 [ { a: 1, b: 1, c: 2 }, { a: 3, b: 1, c: 2 } ]
 */
 ```
-or instead by using [add()](https://github.com/stuwilmur/micro-table/blob/main/API.md#add) method as follows:
+or instead by using [add()](#add) method as follows:
 ```javascript
 const modelC = modelA.add(modelB);
 const result2 = modelC.data(x);
@@ -255,29 +255,29 @@ Returns a new model object, which implements the identity transformation (i.e., 
 
 <a name="data" href = "#data"># </a>*model*.**data**(table)
 
-Returns the result of applying a model created using [model()](https://github.com/stuwilmur/micro-table/blob/main/API.md#model) to a data array, *table*. The input data in *table* is not mutated.
+Returns the result of applying a model created using [model()](#model) to a data array, *table*. The input data in *table* is not mutated.
 
 ### Data transformations
-* [calc()](https://github.com/stuwilmur/micro-table/blob/main/API.md#calc)
-* [const()](https://github.com/stuwilmur/micro-table/blob/main/API.md#const)
-* [drop()](https://github.com/stuwilmur/micro-table/blob/main/API.md#drop)
-* [filter()](https://github.com/stuwilmur/micro-table/blob/main/API.md#filter)
-* [group()](https://github.com/stuwilmur/micro-table/blob/main/API.md#group)
-* [interp()](https://github.com/stuwilmur/micro-table/blob/main/API.md#interp)
-* [knit()](https://github.com/stuwilmur/micro-table/blob/main/API.md#knit)
-* [merge()](https://github.com/stuwilmur/micro-table/blob/main/API.md#merge)
-* [reduce()](https://github.com/stuwilmur/micro-table/blob/main/API.md#reduce)
-* [select()](https://github.com/stuwilmur/micro-table/blob/main/API.md#select)
-* [sort()](https://github.com/stuwilmur/micro-table/blob/main/API.md#sort)
-* [tidy()](https://github.com/stuwilmur/micro-table/blob/main/API.md#tidy)
-* [transform()](https://github.com/stuwilmur/micro-table/blob/main/API.md#transform)
+* [calc()](#calc)
+* [const()](#const)
+* [drop()](#drop)
+* [filter()](#filter)
+* [group()](#group)
+* [interp()](#interp)
+* [knit()](#knit)
+* [merge()](#merge)
+* [reduce()](#reduce)
+* [select()](#select)
+* [sort()](#sort)
+* [tidy()](#tidy)
+* [transform()](#transform)
 
 ### Model transformations
-* [add()](https://github.com/stuwilmur/micro-table/blob/main/API.md#add)
+* [add()](#add)
 
 <a name="calc" href="#calc"># </a>*model*.**calc**()
 
-Adds a calc transformation, whose behaviour is further defined by [calc.called()](https://github.com/stuwilmur/micro-table/blob/main/API.md#calc.called) and [calc.does()](https://github.com/stuwilmur/micro-table/blob/main/API.md#calc.does).
+Adds a calc transformation, whose behaviour is further defined by [calc.called()](#calc.called) and [calc.does()](#calc.does).
 
 The calc transformation adds a variable (column) to the data table (i.e. to each object in the list, it adds a given property) which is calculated from data in the table. A calculated columnn may depend on data in the original table, or values of the newly-calculated column in previous rows.
 
@@ -310,7 +310,7 @@ Ends the definition of the calc transformation.
 
 <a name="const" href="#const"># </a>*model*.**const**()
 
-Adds a const transformation, whose behaviour is further defined by [const.called()](https://github.com/stuwilmur/micro-table/blob/main/API.md#const.called) and [const.value()](https://github.com/stuwilmur/micro-table/blob/main/API.md#const.value).
+Adds a const transformation, whose behaviour is further defined by [const.called()](#const.called) and [const.value()](#const.value).
 
 The const transformation adds a variable (column) to the data table (i.e. to each object in the list, it adds a given property) with a single constant value.
 
@@ -340,7 +340,7 @@ Reorders rows of the table such that they are grouped by *property1*, these grou
 
 <a name="knit" href="#knit"># </a>*model*.**knit**()
 
-Adds a knit transformation, whose behaviour is further defined by [knit.with()](https://github.com/stuwilmur/micro-table/blob/main/API.md#knit.with) and [knit.does()](https://github.com/stuwilmur/micro-table/blob/main/API.md#knit.match).
+Adds a knit transformation, whose behaviour is further defined by [knit.with()](#knit.with) and [knit.does()](#knit.match).
 
 Like the [merge](#merge) transformation, knit is used to combine incoming data (specified as a data table) with an existing table. However, rather than simply performing an operation like merge where additional columns are simply added to the existing table and row order is unchanged, knit allows individual rows of two tables to be spliced together, by matching rows that have a matching property value.
 
@@ -430,7 +430,7 @@ result = [
 
 <a name="interp" href="#interp"># </a>*model*.**interp**()
 
-Adds an interp transformation, whose behaviour is further defined by [interp.x()](https://github.com/stuwilmur/micro-table/blob/main/API.md#interp.x), [interp.y()](https://github.com/stuwilmur/micro-table/blob/main/API.md#interp.y), [interp.groupBy()](https://github.com/stuwilmur/micro-table/blob/main/API.md#interp.groupby) and [interp.noExtrap()](https://github.com/stuwilmur/micro-table/blob/main/API.md#interp.noExtrap).
+Adds an interp transformation, whose behaviour is further defined by [interp.x()](#interp.x), [interp.y()](#interp.y), [interp.groupBy()](#interp.groupby) and [interp.noExtrap()](#interp.noExtrap).
 
 The interp transformation interpolates missing values, being entries that are `NaN` or `null`. Simple linear interpolation is used between two extant data points, whereas linear extrapolation is used beyond the range of available data by default.
 
@@ -483,7 +483,7 @@ Ends the definition of the interp transformation.
 
 <a name="reduce" href="#reduce"># </a>*model*.**reduce**()
 
-Adds a reduce transformation, whose behaviour is further defined by [reduce.add()](https://github.com/stuwilmur/micro-table/blob/main/API.md#reduce.add), [reduce.add.called()](https://github.com/stuwilmur/micro-table/blob/main/API.md#reduce.add.called), [reduce.add.does()](https://github.com/stuwilmur/micro-table/blob/main/API.md#reduce.add.does) and [reduce.add.groupBy()](https://github.com/stuwilmur/micro-table/blob/main/API.md#reduce.add.groupBy).
+Adds a reduce transformation, whose behaviour is further defined by [reduce.add()](#reduce.add), [reduce.add.called()](#reduce.add.called), [reduce.add.does()](#reduce.add.does) and [reduce.add.groupBy()](#reduce.add.groupBy).
 
 A reduce transformation is used to reduce the data to a set of aggregate properties. Examples of aggregate properties would be a sum or an average of a column. Aggregate properties may be calculated across all rows of the table, or alternatively, the data may be grouped and individual aggregates calculated for each group.
 
@@ -491,7 +491,7 @@ The transformation returns an array comprising an object for each group; each ob
 
 <a name="reduce.add" href="#reduce.add"># </a>*model.reduce*.**add**()
 
-Adds a new aggregate property, which is further specified by [reduce.add.called()](https://github.com/stuwilmur/micro-table/blob/main/API.md#reduce.add.called) and [reduce.add.does()](https://github.com/stuwilmur/micro-table/blob/main/API.md#reduce.add.does).
+Adds a new aggregate property, which is further specified by [reduce.add.called()](#reduce.add.called) and [reduce.add.does()](#reduce.add.does).
 
 Multiple aggregate properties may be defined: the result of the reduce transformation will be an array of objects, whose properties are the aggregate properties.
 
@@ -525,7 +525,7 @@ Selects columns specified by the parameters *property1, ..., propertyN* from the
 
 <a name="sort" href="#sort"># </a>*model*.**sort**()
 
-Adds a sort transformation, whose behaviour is further defined by [sort.inc()](https://github.com/stuwilmur/micro-table/blob/main/API.md#sort.inc) and [sort.dec()](https://github.com/stuwilmur/micro-table/blob/main/API.md#sort.dec). 
+Adds a sort transformation, whose behaviour is further defined by [sort.inc()](#sort.inc) and [sort.dec()](#sort.dec). 
 
 - Sorts are built up in stages, at each stage specifying the property (column) on which to sort and whether the sort is *increasing* or *decreasing*. As many stages may be added as there are properties. Subsequent sort stages will apply a sort **within each group that the previous sort considered equal***. As an example, consider the following data:
 ```javascript
@@ -574,7 +574,7 @@ Ends the definition of the sort transformation.
 
 <a name="tidy" href="#tidy"># </a>*model*.**tidy**()
 
-Adds a tidy transformation, whose behaviour is further defined by [tidy.collapse()](https://github.com/stuwilmur/micro-table/blob/main/API.md#tidy.collapse), [tidy.to()](https://github.com/stuwilmur/micro-table/blob/main/API.md#tidy.to) and [tidy.quantity()](https://github.com/stuwilmur/micro-table/blob/main/API.md#tidy.quantity).
+Adds a tidy transformation, whose behaviour is further defined by [tidy.collapse()](#tidy.collapse), [tidy.to()](#tidy.to) and [tidy.quantity()](#tidy.quantity).
 
 The tidy transformation is used to transform data that includes more than one observation per row, into *tidy* data featuring a single observation row. For example, consider the following data describing the GDP of two countries across several years:
 ```javascript
