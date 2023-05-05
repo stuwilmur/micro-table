@@ -15,6 +15,7 @@ import {
   SetVarBuilder,
   SortBuilder,
   TidyBuilder,
+  KnitBuilder,
 } from './builders';
 
 function Model(data) {
@@ -46,6 +47,9 @@ const modelPrototype = {
   },
   interp() {
     return new InterpolateBuilder(this.data, modelmaker);
+  },
+  knit() {
+    return new KnitBuilder(this.data, modelmaker);
   },
   merge(arg) {
     return transformModel(this.data, mergeTables, arg);

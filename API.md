@@ -1,5 +1,12 @@
 # micro-table API reference
-## Introduction
+## Contents
+- [Introduction](#introduction)
+- [Principles](#principles)
+- [Some simple examples](#some-simple-examples)
+- [Model building syntax](#model-building-syntax)
+- [API](#api)
+
+## <a name="introduction" href = "#introduction"></a>Introduction
 micro-table is a small JavaScript library for data handling using a data table. It is implemented as an ES2015 module. A *data table* (or data frame) comprises a number of *rows* correspondings to *observations*, and *columns* corresponding to variables. micro-table works with a data table constructed as an array of objects with consistent properties: all objects in the array must share exactly the same properties. Each object represents an observation; each property of one of these objects represents a variable.
 
 The following array is an example of a data frame/data table that describes the average monthly rainfall for two countries over two months. 
@@ -11,7 +18,7 @@ const rainfall = [
   {country: 'Scotland', month: 'Feb', inches: 5.54},
 ];
 ```
-## Principles
+## <a name="principles" href = "#principles"></a>Principles
 micro-table implements data *transformations*, which may be *applied* to a data table. An example transformation is adding a column of data: it is possible to *add* a column to our `rainfall` table that lists the average rainfall in units of millimetres, calculated from the value in inches. Other examples of transformations are 
 - sorting the table from least to greatest rainfall;
 - aggregating  the total rainfall for each country. 
@@ -24,7 +31,7 @@ In addition to applying transformations to data in individual steps, micro-table
 
 micro table uses some ideas from *functional programming* (such as this idea of composing functions) which may be familiar. Another is the guarantee that a model will never mutate the data that is passed to it: it will return a new copy with the necessary transformations applied.
 
-## Some simple examples
+## <a name="some-simple-examples" href = "#some-simple-examples"></a>Some simple examples
 ### One transformation: sorting by one column
 In this example the data is to be sorted by the values in the inches column, from least to greatest. A model may be created which implements a single [sort()](https://github.com/stuwilmur/micro-table/blob/main/API.md#sort) transformation like so:
 ```javascript
@@ -153,7 +160,7 @@ Transformations are applied in the order that they are specified when defining a
 
 Note: it is permissible to define a model without *any* transformations: such a model will apply the identity transformation, which returns the input data unchanged.
 
-## Model building syntax
+## <a name="model-building-syntax" href = "#model-building-syntax"></a>Model building syntax
 As discussed, a model is created with [model()](https://github.com/stuwilmur/micro-table/blob/main/API.md#model) and applied using [data()](https://github.com/stuwilmur/micro-table/blob/main/API.md#data):
 ```javascript
 const dataIn = [
@@ -182,7 +189,7 @@ Some transformation methods such as [drop()](https://github.com/stuwilmur/micro-
 ```javascript
 const result = model().select('x', 'y',).data(dataIn); // Selects columns 'x' and 'y'
 ```
-Other transformations such as [calc()](https://github.com/stuwilmur/micro-table/blob/main/API.md#calc), [interp()](https://github.com/stuwilmur/micro-table/blob/main/API.md#interp), [const()](https://github.com/stuwilmur/micro-table/blob/main/API.md#const), [reduce()](https://github.com/stuwilmur/micro-table/blob/main/API.md#reduce) and [sort()](https://github.com/stuwilmur/micro-table/blob/main/API.md#sort) do not take arguments; instead, their definition is built up in stages, where at each stage one piece of information is added to their definition. As an example, the [const()](https://github.com/stuwilmur/micro-table/blob/main/API.md#const) transformation will create a new column with a single fixed value in each row. The transformation requires:
+Other transformations such as [calc()](https://github.com/stuwilmur/micro-table/blob/main/API.md#calc), [interp()](https://github.com/stuwilmur/micro-table/blob/main/API.md#interp), [const()](https://github.com/stuwilmur/micro-table/blob/main/API.md#const), [knit()](https://github.com/stuwilmur/micro-table/blob/main/API.md#knit), [reduce()](https://github.com/stuwilmur/micro-table/blob/main/API.md#reduce) and [sort()](https://github.com/stuwilmur/micro-table/blob/main/API.md#sort) do not take arguments; instead, their definition is built up in stages, where at each stage one piece of information is added to their definition. As an example, the [const()](https://github.com/stuwilmur/micro-table/blob/main/API.md#const) transformation will create a new column with a single fixed value in each row. The transformation requires:
 - the column name
 - the constant value
 
@@ -240,25 +247,8 @@ const result2 = modelC.data(x);
 result2 = [ { a: 1, b: 1, c: 2 }, { a: 3, b: 1, c: 2 } ]
 */
 ``` 
-
-## Data transformations
-* [calc()](https://github.com/stuwilmur/micro-table/blob/main/API.md#calc)
-* [const()](https://github.com/stuwilmur/micro-table/blob/main/API.md#const)
-* [drop()](https://github.com/stuwilmur/micro-table/blob/main/API.md#drop)
-* [filter()](https://github.com/stuwilmur/micro-table/blob/main/API.md#filter)
-* [group()](https://github.com/stuwilmur/micro-table/blob/main/API.md#group)
-* [interp()](https://github.com/stuwilmur/micro-table/blob/main/API.md#interp)
-* [merge()](https://github.com/stuwilmur/micro-table/blob/main/API.md#merge)
-* [reduce()](https://github.com/stuwilmur/micro-table/blob/main/API.md#reduce)
-* [select()](https://github.com/stuwilmur/micro-table/blob/main/API.md#select)
-* [sort()](https://github.com/stuwilmur/micro-table/blob/main/API.md#sort)
-* [tidy()](https://github.com/stuwilmur/micro-table/blob/main/API.md#tidy)
-* [transform()](https://github.com/stuwilmur/micro-table/blob/main/API.md#transform)
-
-## Model transformations
-* [add()](https://github.com/stuwilmur/micro-table/blob/main/API.md#add)
-
-## API
+## <a name="api" href = "#api"></a>API
+### Creating models and applying data
 <a name="model" href = "#model"># </a>**model**()
 
 Returns a new model object, which implements the identity transformation (i.e., when applied to some data, returns a copy of the data unchanged).
@@ -266,6 +256,24 @@ Returns a new model object, which implements the identity transformation (i.e., 
 <a name="data" href = "#data"># </a>*model*.**data**(table)
 
 Returns the result of applying a model created using [model()](https://github.com/stuwilmur/micro-table/blob/main/API.md#model) to a data array, *table*. The input data in *table* is not mutated.
+
+### Data transformations
+* [calc()](https://github.com/stuwilmur/micro-table/blob/main/API.md#calc)
+* [const()](https://github.com/stuwilmur/micro-table/blob/main/API.md#const)
+* [drop()](https://github.com/stuwilmur/micro-table/blob/main/API.md#drop)
+* [filter()](https://github.com/stuwilmur/micro-table/blob/main/API.md#filter)
+* [group()](https://github.com/stuwilmur/micro-table/blob/main/API.md#group)
+* [interp()](https://github.com/stuwilmur/micro-table/blob/main/API.md#interp)
+* [knit()](https://github.com/stuwilmur/micro-table/blob/main/API.md#knit)
+* [merge()](https://github.com/stuwilmur/micro-table/blob/main/API.md#merge)
+* [reduce()](https://github.com/stuwilmur/micro-table/blob/main/API.md#reduce)
+* [select()](https://github.com/stuwilmur/micro-table/blob/main/API.md#select)
+* [sort()](https://github.com/stuwilmur/micro-table/blob/main/API.md#sort)
+* [tidy()](https://github.com/stuwilmur/micro-table/blob/main/API.md#tidy)
+* [transform()](https://github.com/stuwilmur/micro-table/blob/main/API.md#transform)
+
+### Model transformations
+* [add()](https://github.com/stuwilmur/micro-table/blob/main/API.md#add)
 
 <a name="calc" href="#calc"># </a>*model*.**calc**()
 
@@ -329,6 +337,53 @@ Adds a filter transformation, which filters rows using the callback filtering fu
 <a name="group" href="#group"># </a>*model*.**group**(*property1, ..., propertyN*)
 
 Reorders rows of the table such that they are grouped by *property1*, these groups being futher subgrouped by *property2* and so on. Note that groups are arranged in the order that order that each unique property value appears in the table.
+
+<a name="knit", href="#knit"># </a>*model*.**knit**()
+
+Adds a knit transformation, whose behaviour is further defined by [knit.with()](https://github.com/stuwilmur/micro-table/blob/main/API.md#knit.with) and [knit.does()](https://github.com/stuwilmur/micro-table/blob/main/API.md#knit.match).
+
+Like the [merge](#merge) transformation, knit is used to combine incoming data (specified as a data table) with an existing table. However, rather than simply performing an operation like merge where additional columns are simply added to the existing table and row order is unchanged, knit allows individual rows of two tables to be spliced together, by matching rows that have a matching property value.
+
+For example, suppose we have the following two tables, containing different data for the same three people:
+
+```javascript
+const forenames = [
+  {id : 0, forename : 'Alice'},
+  {id : 1, forename : 'Alice'},
+  {id : 2, forename : 'Bob'}
+]
+
+const surnames = [
+  {id : 2, surname : 'Singh'},
+  {id : 0, surname : 'Zonn'},
+  {id : 1, surname : 'Jones'}
+]
+```
+
+We can use the knit transormation to combine these two tables by joining together rows which have a matching `id` property:
+
+```javascript
+const combinted = model().knit().with(surnames).match('id').end().data(forenames);
+/*
+combined = [
+  { id: 0, forename: 'Alice', surname: 'Zonn' },
+  { id: 1, forename: 'Alice', surname: 'Jones' },
+  { id: 2, forename: 'Bob', surname: 'Singh' }
+];
+*/
+```
+
+There is a simple process for determining how the knit transformation is applied. For each row in the existing (left) table, the *first* matching row is sought in the incoming (right) table, i.e. the first row with a matching specified property value. If no matching row is found, the current left row is ignored entirely and the knit process moves to the next row in the existing table.
+
+When a pair of matching rows is found, they are merged. If the incoming (right) table has properties that share names with those of the existing (left) table, then the values in the incoming rows 'win', i.e. they replace those in the existing table. 
+
+<a name="knit.with" href="#knit.with"># </a>*model.knit*.**with**(*newColumns*)
+
+Specifies the incoming data table.
+
+<a name="knit.match" href="#knit.match"># </a>*model.knit*.**match**(*property*)
+
+Specifies the property to use to perform the row matching.
 
 <a name="merge" href="#merge"># </a>*model*.**merge**(*newColumns*)
 
