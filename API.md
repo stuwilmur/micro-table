@@ -338,7 +338,7 @@ Adds a filter transformation, which filters rows using the callback filtering fu
 
 Reorders rows of the table such that they are grouped by *property1*, these groups being futher subgrouped by *property2* and so on. Note that groups are arranged in the order that order that each unique property value appears in the table.
 
-<a name="knit", href="#knit"># </a>*model*.**knit**()
+<a name="knit" href="#knit"># </a>*model*.**knit**()
 
 Adds a knit transformation, whose behaviour is further defined by [knit.with()](https://github.com/stuwilmur/micro-table/blob/main/API.md#knit.with) and [knit.does()](https://github.com/stuwilmur/micro-table/blob/main/API.md#knit.match).
 
