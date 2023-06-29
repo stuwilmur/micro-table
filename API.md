@@ -302,7 +302,7 @@ The parameter *n* specifies the row to return by its position: a postive\[negati
 - a value of n=0 returns the current row;
 - a value of n=-1 returns the row immediately below the current row.
 
-No checking is performed on the value of *n*.
+No checking is performed on the value of *n*: if the corresponding row does not exist, then the function returns *undefined*.
 
 <a name="calc.end" href="#calc.end"># </a>*model.calc*.**end**()
 
