@@ -340,7 +340,7 @@ Reorders rows of the table such that they are grouped by *property1*, these grou
 
 <a name="knit" href="#knit"># </a>*model*.**knit**()
 
-Adds a knit transformation, whose behaviour is further defined by [knit.with()](#knit.with) and [knit.does()](#knit.match).
+Adds a knit transformation, whose behaviour is further defined by [knit.with()](#knit.with) and [knit.match()](#knit.match).
 
 Like the [merge](#merge) transformation, knit is used to combine incoming data (specified as a data table) with an existing table. However, rather than simply performing an operation like merge where additional columns are simply added to the existing table and row order is unchanged, knit allows individual rows of two tables to be spliced together, by matching rows that have a matching property value.
 
