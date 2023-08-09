@@ -44,6 +44,14 @@ const dataframeBEqualsRunningTotalOfA = [
   {id: 4, a: 5, b: 15},
 ];
 
+const dataframeBEqualsIndexOfRow = [
+  {id: 0, a: 1, b: 0},
+  {id: 1, a: 2, b: 1},
+  {id: 2, a: 3, b: 2},
+  {id: 3, a: 4, b: 3},
+  {id: 4, a: 5, b: 4},
+];
+
 // Tests
 
 test('checks calculating variable b as the square of variablee a', () => {
@@ -89,6 +97,17 @@ test('checks calculating variable b as running total of a', () => {
         return r.a + prevB;
       }),
       dataframeBEqualsRunningTotalOfA,
+    ),
+  ).toBeTruthy();
+});
+
+test('checks calculating variable b as index of current row', () => {
+  expect(
+    areObjectsEqual(
+      calculateVariable(dataframe, 'b', (r, getPrev, index) => {
+        return index;
+      }),
+      dataframeBEqualsIndexOfRow,
     ),
   ).toBeTruthy();
 });

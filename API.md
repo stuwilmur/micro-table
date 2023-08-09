@@ -289,7 +289,7 @@ Takes a string *name* used to specify the name of the variable (column) being ad
 
 Defines the callback function *func*, used to calculate the value of the new variable. This callback is applied to each row consecutively, starting from the beginning of the table. The callback is of the form
 
-**func**(*r, [getRow]*)
+**func**(*r, [getRow], [index]*)
 
 and should return a value. 
 - The parameter *r* is the current row object;
@@ -303,6 +303,8 @@ The parameter *n* specifies the row to return by its position: a postive\[negati
 - a value of n=-1 returns the row immediately below the current row.
 
 No checking is performed on the value of *n*: if the corresponding row does not exist, then the function returns *undefined*.
+
+- The parameter *index* is the index of the current row.
 
 <a name="calc.end" href="#calc.end"># </a>*model.calc*.**end**()
 

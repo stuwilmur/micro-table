@@ -8,9 +8,13 @@ export function calculateVariable(table, name, func) {
   }
 
   newTable.forEach((row, index) => {
-    row[name] = func(row, (rowsAbove) => {
-      return getRowAboveCurrentIndex(index, rowsAbove);
-    });
+    row[name] = func(
+      row,
+      (rowsAbove) => {
+        return getRowAboveCurrentIndex(index, rowsAbove);
+      },
+      index,
+    );
   });
   return newTable;
 }
