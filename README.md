@@ -1,6 +1,6 @@
 # micro-table 
 
-[![npm](https://img.shields.io/npm/v/micro-table)](https://www.npmjs.com/package/micro-table) [![](https://data.jsdelivr.com/v1/package/npm/micro-table/badge)](https://www.jsdelivr.com/package/npm/micro-table)
+[![npm](https://img.shields.io/npm/v/micro-table)](https://www.npmjs.com/package/micro-table) [![](https://data.jsdelivr.com/v1/package/npm/micro-table/badge)](https://www.jsdelivr.com/package/npm/micro-table) [![DeepScan grade](https://deepscan.io/api/teams/24725/projects/27880/branches/892756/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=24725&pid=27880&bid=892756)
 
 | Statements                  | Branches                | Functions                 | Lines             |
 | --------------------------- | ----------------------- | ------------------------- | ----------------- |
